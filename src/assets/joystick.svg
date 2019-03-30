@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg:svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 192.0433 120.31264"
+   xml:space="preserve"
+   width="50.725395"
+   height="31.778803"
+   sodipodi:docname="joystick1.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"><svg:metadata
+   id="metadata27"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></svg:metadata><svg:defs
+   id="defs25">
+			
+			
+			
+			
+			
+			
+		</svg:defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1016"
+   id="namedview23"
+   showgrid="false"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   showborder="true"
+   inkscape:zoom="7.375"
+   inkscape:cx="78.534174"
+   inkscape:cy="-16.983329"
+   inkscape:window-x="0"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="g16"
+   scale-x="3.78594" /><svg:g
+   id="g20"
+   transform="translate(-53.340466,-55.957863)"><link
+     type="text/css"
+     id="dark-mode"
+     rel="stylesheet"
+     href=""
+     class="active-path"
+     style="fill:#000000" /><style
+     type="text/css"
+     id="dark-mode-custom-style"
+     class="active-path"
+     style="fill:#000000" /><svg:g
+     id="g18">
+	<svg:g
+   id="g16">
+		<svg:path
+   style="fill:#74ba1a;fill-opacity:1;stroke-width:1"
+   d="m 98.118911,55.957863 c -22.403004,0 -40.567019,18.162879 -40.567019,40.565872 0,0.215003 0.02904,0.419859 0.03204,0.632859 -0.005,0.199002 -0.03204,0.36607 -0.03204,0.57907 l -4.211426,59.404506 c 0,10.47101 8.489138,18.95712 18.95714,18.95714 23.420538,2.4341 30.990194,-21.30613 41.891094,-38.69299 h 31.45981 7.43065 31.45981 c 14.05125,18.51551 17.03628,38.69299 41.88995,38.69299 10.471,0 18.95385,-8.48613 18.95485,-18.95714 L 241.1712,97.735664 c 0,-0.211998 -0.0259,-0.382066 -0.0309,-0.57907 0.002,-0.213 0.0309,-0.417838 0.0309,-0.632859 0,-22.402998 -18.16287,-40.565872 -40.56587,-40.565872 -9.288,0 -15.71502,3.156411 -22.55402,8.411409 -8.751,-2.538996 -13.10644,-4.728159 -24.97444,-5.382159 h -7.43065 c -11.869,0.654006 -16.2223,2.843163 -24.9733,5.382159 -6.837,-5.254998 -13.26601,-8.411409 -22.554009,-8.411409 z m 107.601929,22.69936 c 4.86448,-2.82e-4 8.80816,3.942894 8.80851,8.807373 2.9e-4,4.864925 -3.94359,8.808798 -8.80851,8.808516 -4.86448,-3.42e-4 -8.80767,-3.944032 -8.80738,-8.808516 3.5e-4,-4.864037 3.94334,-8.807031 8.80738,-8.807373 z M 81.006559,84.75692 H 93.97386 v 12.320713 h 12.32071 V 110.04493 H 93.97386 V 122.3645 H 81.006559 V 110.04493 H 68.686995 V 97.077633 h 12.319564 z m 110.505291,8.103563 c 4.86404,3.42e-4 8.80704,3.943338 8.80738,8.807377 2.8e-4,4.86448 -3.9429,8.80817 -8.80738,8.80851 -4.86492,2.8e-4 -8.80879,-3.94359 -8.80851,-8.80851 3.4e-4,-4.86448 3.94403,-8.807659 8.80851,-8.807377 z m 28.41797,0.0011 c 4.86448,3.48e-4 8.80766,3.944043 8.80737,8.808527 2.8e-4,4.86448 -3.94289,8.80816 -8.80737,8.80851 -4.86492,2.8e-4 -8.80879,-3.94359 -8.80851,-8.80851 -2.9e-4,-4.864929 3.94358,-8.808809 8.80851,-8.808527 z m -14.21013,14.210137 c 4.86448,3.4e-4 8.80766,3.94403 8.80738,8.80851 -3.4e-4,4.86404 -3.94334,8.80704 -8.80738,8.80738 -4.86449,2.9e-4 -8.80818,-3.94289 -8.80852,-8.80738 -2.8e-4,-4.86493 3.94359,-8.8088 8.80852,-8.80851 z"
+   id="path8"
+   inkscape:connector-curvature="0"
+   sodipodi:nodetypes="ssccccccccccccssccccsccccccccccccccccccccccccccccccccc" />
+	</svg:g>
+</svg:g></svg:g> </svg:svg>
