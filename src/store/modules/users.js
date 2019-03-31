@@ -2,19 +2,11 @@ import * as types from '../mutation-types'
 import userAPI from '@/api/user'
 
 export const state = {
-  showModalUnsubscribe: false,
-  showModalRequestRetirement: false,
-  showModalUpdateNetellerAccounts: false,
   users: [],
   loadingUsers: false,
   showModalDeleteUser: false,
   currentUser: null,
-  loadingCurrentUser: false,
-  purcharsesByUser: [],
-  loadingPurcharsesByUser: false,
-  subscriptionsByUser: [],
-  loadingSubscriptionsByUser: false,
-  userCanTakeMoney: false
+  loadingCurrentUser: false
 }
 
 export const actions = {
@@ -33,18 +25,6 @@ export const actions = {
           reject(error)
         })
     })
-  },
-
-  replaceShowModalUnsubscribe ({ commit }, payload) {
-    commit(types.REPLACE_SHOW_MODAL_UNSUBSCRIBE, payload)
-  },
-
-  replaceShowModalRequestRetirement ({ commit }, payload) {
-    commit(types.REPLACE_SHOW_MODAL_REQUEST_RETIREMENT, payload)
-  },
-
-  replaceShowModalUpdateNetellerAccounts ({ commit }, payload) {
-    commit(types.REPLACE_SHOW_MODAL_UPDATE_NETELLER_ACCOUNTS, payload)
   },
 
   getUsers ({ commit }, payload) {
@@ -208,54 +188,6 @@ export const actions = {
     })
   },
 
-  getPurchasesByUser ({ commit }, payload) {
-    commit(types.REPLACE_LOADING_PURCHASES_BY_USER, { status: true })
-
-    return new Promise((resolve, reject) => {
-      userAPI.getPurchases(payload)
-        .then(response => {
-          const purchases = response.data.data
-
-          purchases.forEach((element, i) => {
-            purchases[i].statusSelected = null
-          })
-
-          commit(types.REPLACE_LOADING_PURCHASES_BY_USER, { status: false })
-          commit(types.REPLACE_PURCHASES_BY_USER, { purchases })
-
-          resolve(response)
-        })
-        .catch(error => {
-          commit(types.REPLACE_LOADING_PURCHASES_BY_USER, { status: false })
-          reject(error)
-        })
-    })
-  },
-
-  getSubscriptionsByUser ({ commit }, payload) {
-    commit(types.REPLACE_LOADING_SUBSCRIPTIONS_BY_USER, { status: true })
-
-    return new Promise((resolve, reject) => {
-      userAPI.getSubscriptions(payload)
-        .then(response => {
-          const subscriptions = response.data.data
-
-          commit(types.REPLACE_LOADING_SUBSCRIPTIONS_BY_USER, { status: false })
-          commit(types.REPLACE_SUBSCRIPTIONS_BY_USER, { subscriptions })
-
-          resolve(response)
-        })
-        .catch(error => {
-          commit(types.REPLACE_LOADING_SUBSCRIPTIONS_BY_USER, { status: false })
-          reject(error)
-        })
-    })
-  },
-
-  replaceUserCanTakeMoney ({ commit }, payload) {
-    commit(types.REPLACE_USER_CAN_TAKE_MONEY, payload)
-  },
-
   sendTokenForResetPassword ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       userAPI.sendTokenForResetPassword(payload)
@@ -291,15 +223,6 @@ export const actions = {
 }
 
 export const mutations = {
-  [types.REPLACE_SHOW_MODAL_UNSUBSCRIBE] (state, { status }) {
-    state.showModalUnsubscribe = status
-  },
-  [types.REPLACE_SHOW_MODAL_REQUEST_RETIREMENT] (state, { status }) {
-    state.showModalRequestRetirement = status
-  },
-  [types.REPLACE_SHOW_MODAL_UPDATE_NETELLER_ACCOUNTS] (state, { status }) {
-    state.showModalUpdateNetellerAccounts = status
-  },
   [types.REPLACE_LOADING_USERS] (state, { status }) {
     state.loadingUsers = status
   },
@@ -314,20 +237,5 @@ export const mutations = {
   },
   [types.REPLACE_LOADING_CURRENT_USER] (state, { status }) {
     state.loadingCurrentUser = status
-  },
-  [types.REPLACE_LOADING_PURCHASES_BY_USER] (state, { status }) {
-    state.loadingPurcharsesByUser = status
-  },
-  [types.REPLACE_PURCHASES_BY_USER] (state, { purchases }) {
-    state.purcharsesByUser = purchases
-  },
-  [types.REPLACE_LOADING_SUBSCRIPTIONS_BY_USER] (state, { status }) {
-    state.loadingSubscriptionsByUser = status
-  },
-  [types.REPLACE_SUBSCRIPTIONS_BY_USER] (state, { subscriptions }) {
-    state.subscriptionsByUser = subscriptions
-  },
-  [types.REPLACE_USER_CAN_TAKE_MONEY] (state, { can }) {
-    state.userCanTakeMoney = can
   }
 }

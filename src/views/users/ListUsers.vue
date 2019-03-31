@@ -222,7 +222,7 @@ export default {
   },
 
   created () {
-    if (!this.$can('list', 'Users')) return false
+    // if (!this.$can('list', 'Users')) return false
 
     this.getUsers()
   },
