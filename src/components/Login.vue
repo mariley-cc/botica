@@ -17,12 +17,14 @@
         >
           <v-card>
             <v-card-title
-              class="text-xs-center"
+              class="text-xs-center primary white--text title"
               primary-title
             >
-              <h2>
+              <v-spacer />
+              <span>
                 Iniciar Sesión
-              </h2>
+              </span>
+              <v-spacer />
             </v-card-title>
             <v-divider />
             <v-card-text

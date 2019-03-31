@@ -3,7 +3,7 @@
     fluid
     grid-list-lg
   >
-    <!-- <NotPermission v-if="!$can('list', 'Dashboard')" /> -->
+    <!-- <NotPermission v-if="!$can('update', 'Profile')" /> -->
     <!-- <template v-else> -->
     <Breadcrumbs
       :routes="[
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   middleware: 'auth',
@@ -54,6 +54,9 @@ export default {
   computed: {
     ...mapState({
       //  showModalLogin: state => state.auth.showModalLogin,
+    }),
+    ...mapGetters({
+      authenticated: 'auth/check'
     })
 
   },
@@ -63,7 +66,7 @@ export default {
   },
 
   created () {
-    // if (!this.$can('list', 'Dashboard')) return false
+    if (!this.$can('update', 'Profile')) return false
     // this.getPlans()
     // const url =
   },

@@ -1,15 +1,21 @@
 export default [
   {
     path: '/',
-    name: 'home',
-    component: () => import('@/views/Home.vue')
+    name: 'welcome',
+    redirect: {
+      name: 'login'
+    }
   },
   {
     path: '/login',
     name: 'login',
     component: () => import('@/components/Login.vue')
   },
-
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/Home.vue')
+  },
   // sgc
   {
     path: '/sgc/dashboard',

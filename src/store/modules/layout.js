@@ -21,39 +21,14 @@ export const getters = {
     if (rootGetters['auth/userIsClient']) {
       items.push(
         {
+          name: 'Inicio',
+          to: { name: 'home' },
+          icon: 'home'
+        },
+        {
           name: 'Perfil',
-          // to: { name: 'sgcProfile' },
-          icon: 'person'
-        },
-        {
-          name: 'GoPlay',
           // to: { name: 'sgcUserGameRoom' },
-          icon: 'videogame_asset'
-        },
-        {
-          name: 'Notificaciones',
-          // to: { name: 'sgcUserNotifications' },
-          icon: 'notifications'
-        },
-        {
-          name: 'Salon de Apuestas',
-          // to: { name: 'sgcUserBettingRoom' },
-          icon: 'details'
-        },
-        {
-          name: 'Monedero',
-          // to: { name: 'sgcUserCoinPurse' },
-          icon: 'attach_money'
-        },
-        {
-          name: 'Subscripción',
-          // to: { name: 'sgcUserSubscriptions' },
-          icon: 'credit_card'
-        },
-        {
-          name: 'Estadísticas',
-          // to: { name: 'sgcUserStatistics' },
-          icon: 'timeline'
+          icon: 'person'
         }
       )
 
@@ -67,36 +42,8 @@ export const getters = {
           to: { name: 'dashboard' }
         },
         {
-          name: 'Banners'
-          // to: { name: 'sgcBannersList' }
-        },
-        {
-          name: 'Planes'
-          // to: { name: 'sgcPlansList' }
-        },
-        {
-          name: 'Servicios'
-          // to: { name: 'sgcServicesList' }
-        },
-        {
-          name: 'Movimientos de créditos'
-          // to: { name: 'sgcCreditMovements' }
-        },
-        {
-          name: 'Apuestas'
-          // to: { name: 'sgcPurchasesList' }
-        },
-        {
           name: 'Usuarios',
           to: { name: 'sgcUsersList' }
-        },
-        {
-          // to: { name: 'sgcNotificationsCreate' },
-          name: 'Notificaciones'
-        },
-        {
-          // to: { name: 'sgcConfigurations' },
-          name: 'Configuración'
         }
       )
 
