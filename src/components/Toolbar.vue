@@ -32,45 +32,6 @@
       <v-spacer />
 
       <v-toolbar-items class="scoped-toolbar-items hidden-sm-and-down">
-        <!-- <template v-for="(item, i) in toolbarItems">
-          <v-btn
-            :key="`btn-${i}`"
-            depressed
-            class="scoped-toolbar-item transparent mx-1 hover"
-            active-class="scoped-btn-active"
-            :ripple="false"
-            :to="item.to"
-            exact
-          >
-            {{ item.name }}
-          </v-btn>
-        </template> -->
-
-        <!-- <template v-if="userIsClient">
-          <v-btn
-            flat
-            depressed
-            color="black"
-            class="scoped-toolbar-item px-1 transparent "
-            :ripple="false"
-          >
-            <JoystickNotification />
-          </v-btn>
-        </template> -->
-
-        <!-- <template v-if="!authenticated">
-          <v-btn
-            depressed
-            class="scoped-toolbar-item transparent"
-            active-class="scoped-btn-active"
-            :ripple="false"
-            @click="replaceShowModalLogin({ status: true })"
-          >
-            <v-icon left>
-              account_circle
-            </v-icon>Iniciar sesión
-          </v-btn>
-        </template> -->
         <template v-if="authenticated">
           <v-btn
             depressed
@@ -85,8 +46,6 @@
           </v-btn>
         </template>
       </v-toolbar-items>
-
-      <v-spacer v-if="$vuetify.breakpoint.width > 959" />
     </v-toolbar>
   </div>
 </template>
@@ -111,8 +70,7 @@ export default {
     ...mapGetters({
       authenticated: 'auth/check',
       user: 'auth/user',
-      userIsClient: 'auth/userIsClient',
-      toolbarItems: 'layout/toolbarItems'
+      userIsClient: 'auth/userIsClient'
     })
   },
 

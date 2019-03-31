@@ -13,9 +13,6 @@
         </slot>
       </transition>
     </v-content>
-
-    <ModalRegister />
-    <ModalForgotPassword />
   </v-app>
 </template>
 
@@ -27,9 +24,7 @@ export default {
 
   components: {
     Toolbar: () => import('@/components/Toolbar.vue'),
-    NavigationDrawer: () => import('@/components/NavigationDrawer.vue'),
-    ModalRegister: () => import('@/components/ModalRegister.vue'),
-    ModalForgotPassword: () => import('@/views/users/ModalForgotPassword.vue')
+    NavigationDrawer: () => import('@/components/NavigationDrawer.vue')
   },
   data: () => ({
     title: 'Welcome to GoPlay!'
@@ -117,50 +112,4 @@ export default {
     }
   }
 
-  .btn-special-purple {
-    &:hover {
-      background: white !important;
-      color: #341069 !important;
-    }
-  }
-
-  .btn-special-purple-reverse {
-    color: #341069 !important;
-
-    &:hover {
-      background: #341069 !important;
-      color: white !important;
-    }
-  }
-
-  .btn-special-green {
-    &:hover {
-      background: white !important;
-      color: #74ba1a !important;
-    }
-  }
-
-  .btn-special-green-reverse {
-    color: #74ba1a !important;
-
-    &:hover {
-      background: #74ba1a !important;
-      color: white !important;
-    }
-  }
-
-  .btn-special-error {
-    &:hover {
-      background: white !important;
-      color: #FF5252 !important;
-    }
-  }
-
-  .headline {
-    font-size: 1.8em !important;
-    font-weight: 300;
-  }
-  .display-3 {
-    font-size: 4.5em !important;
-  }
 </style>

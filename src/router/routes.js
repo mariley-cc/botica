@@ -7,7 +7,7 @@ export default [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/components/Login.vue')
   },
 
   // sgc
@@ -15,18 +15,6 @@ export default [
     path: '/sgc/dashboard',
     name: 'dashboard',
     component: () => import('@/views/dashboard/Dashboard.vue')
-  },
-
-  // sgc user
-  {
-    path: '/profile/password-reset/:token',
-    name: 'sgcPasswordReset',
-    component: () => import('@/views/users/ResetPassword.vue')
-  },
-  {
-    path: '/sgc/user/profile',
-    name: 'sgcProfile',
-    component: () => import('@/views/users/Profile.vue')
   },
 
   // sgc users

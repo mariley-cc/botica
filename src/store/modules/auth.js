@@ -4,7 +4,6 @@ import userAPI from '@/api/user'
 import { ability, defineAbilitiesFor } from '@/config/ability'
 
 export const state = {
-  showModalLogin: false,
   user: null,
   token: Cookies.get('token')
 }
@@ -19,23 +18,11 @@ export const getters = {
   },
 
   userIsClient: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.user_type === 'client'
-  },
-
-  walletIsActive: (state, getters, rootState, rootGetters) => {
-    if (state.user && state.user.user_type === 'admin') return false
-    return state.user && state.user.wallet.state !== 'disabled'
-  },
-
-  userIsActive: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.is_active === 'Si'
+    return state.user && state.user.typeUser
   }
 }
 
 export const actions = {
-  replaceShowModalLogin ({ commit }, payload) {
-    commit(types.REPLACE_SHOW_MODAL_LOGIN, payload)
-  },
 
   saveToken ({ commit }, payload) {
     commit(types.SAVE_TOKEN, payload)
@@ -94,57 +81,10 @@ export const actions = {
           reject(error)
         })
     })
-  },
-
-  // user Google
-  getInfoUserGoogle ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      userAPI.getInfoUserGoogle(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  loginGoogle ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      userAPI.loginGoogle(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: 'GoPlay',
-            message: 'Bienvenido'
-          })
-
-          resolve(response)
-        })
-        .catch(error => reject(error))
-    })
-  },
-
-  loginFacebook ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      userAPI.loginFacebook(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: 'GoPlay',
-            message: 'Bienvenido'
-          })
-
-          resolve(response)
-        })
-        .catch(error => reject(error))
-    })
   }
-
 }
 
 export const mutations = {
-  [types.REPLACE_SHOW_MODAL_LOGIN] (state, { status }) {
-    state.showModalLogin = status
-  },
   [types.SAVE_TOKEN] (state, { token, remember }) {
     state.token = token
     Cookies.set('token', token, { expires: remember ? 365 : null })

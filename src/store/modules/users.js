@@ -1,9 +1,5 @@
 import * as types from '../mutation-types'
 import userAPI from '@/api/user'
-import settingsAPI from '@/api/settings'
-import coinPurseAPI from '@/api/coinPurse'
-import subscriptionAPI from '@/api/subscription'
-import creditsAPI from '@/api/credit'
 
 export const state = {
   showModalUnsubscribe: false,
@@ -178,23 +174,6 @@ export const actions = {
     })
   },
 
-  updatePasswordAsClient ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.updatePassword(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: 'GoPlay',
-            message: 'Su contraseña han sido actualizada con éxito.'
-          })
-
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
   updateUserAsAdmin ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       userAPI.put(payload)
@@ -221,47 +200,6 @@ export const actions = {
             message: 'Su contraseña han sido actualizada con éxito.'
           })
 
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  uploadProfileImage ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.uploadProfileImage(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  updateProfile ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.profile(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: 'GoPlay',
-            message: 'Su Perfil han sido actualizada con éxito.'
-          })
-
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  uploadDniImage ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.uploadDniImage(payload)
-        .then(response => {
           resolve(response)
         })
         .catch(error => {
@@ -309,95 +247,6 @@ export const actions = {
         })
         .catch(error => {
           commit(types.REPLACE_LOADING_SUBSCRIPTIONS_BY_USER, { status: false })
-          reject(error)
-        })
-    })
-  },
-
-  uploadDniBackImage ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.uploadDniBackImage(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  sendTokenForEnterToCoinPurse ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      coinPurseAPI.sendToken(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  verifyTokenForEnterToCoinPurse ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      coinPurseAPI.verifyToken(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  unsubscribe ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      subscriptionAPI.cancellation(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  getNetellerAccounts ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.getNetellerAccounts(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  updateNetellerAccounts ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      settingsAPI.updateNetellerAccounts(payload)
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-
-  retirementMoney ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      creditsAPI.post(payload)
-        .then(response => {
-          this._vm.$notify.success({
-            title: 'GoPlay',
-            message: 'La solicitud de retiro se ha efectuado.'
-          })
-
-          resolve(response)
-        })
-        .catch(error => {
           reject(error)
         })
     })

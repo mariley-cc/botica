@@ -1,138 +1,105 @@
 <template>
-  <v-card
-    dark
+  <v-container
+    fluid
+    grid-list-lg
   >
-    <v-toolbar
-      color="transparent"
-      card
-    >
-      <v-spacer />
-      <v-btn
-        icon
-        dark
-        @click="replaceShowModalLogin({ status: false })"
+    <template v-if="!authenticated">
+      <v-layout
+        row
+        wrap
       >
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-toolbar>
-
-    <v-card-text
-      class="pa-0"
-      style="height: 100%"
-    >
-      <v-container
-        fluid
-        fill-height
-      >
-        <v-layout
-          row
-          wrap
-          align-center
+        <v-flex
+          xs12
+          sm6
+          md4
+          offset-sm3
+          offset-md4
         >
-          <v-flex
-            xs12
-            sm6
-            md4
-            offset-sm3
-            offset-md4
-          >
-            <h2 class="display-2 text-xs-center mb-4">
-              Iniciar Sesión
-            </h2>
-
-            <v-form
-              v-model="validForm"
-              lazy-validation
-              class="font-weight-bold"
-              @submit.prevent="lauchLogin"
+          <v-card>
+            <v-card-title
+              class="text-xs-center"
+              primary-title
             >
-              <v-text-field
-                v-model="form.username"
-                dark
-                :disabled="processingForm"
-                :error="!!validationErrors.username"
-                :error-messages="validationErrors.username"
-                autofocus
-                color="white"
-                outline
-                prepend-inner-icon="email"
-                label="Correo electrónico"
-                @keyup="() => {
-                  validationErrors.username = undefined
-                  delete validationErrors.username
-                }"
-              />
-
-              <v-text-field
-                v-model="form.password"
-                dark
-                :disabled="processingForm"
-                :error="!!validationErrors.password"
-                :error-messages="validationErrors.password"
-                type="password"
-                color="white"
-                outline
-                prepend-inner-icon="lock"
-                label="Contraseña"
-                @keyup="() => {
-                  validationErrors.password = undefined
-                  delete validationErrors.password
-                }"
-              />
-
-              <v-checkbox
-                dark
-                color="white"
-                class="white--text ma-0"
-                label="Recuérdame"
-              />
-              <div class="text-xs-center ">
-                <v-btn
-                  large
-                  type="submit"
-                  color="primary"
-                  class="text-capitalize font-weight-bold subheading btn-special-purple"
-                  :disabled="!validForm || processingForm"
-                  :loading="processingForm"
-                >
-                  Iniciar sesión
-                </v-btn>
-                <p>
-                  <a
-                    class="accent--text font-weight-bold"
-                    @click="onLoadModalForgotPassword()"
-                  >
-                    ¿Olvidaste tu contraseña?
-                  </a>
-                </p>
-              </div>
-            </v-form>
-
-            <div class="text-xs-center mt-4">
-              <p class="white--text font-weight-bold">
-                ¿Aún no tienes cuenta en GoPlay?
-              </p>
-              <v-btn
-                large
-                color="accent"
-                class="text-capitalize font-weight-bold subheading btn-special-green"
-                @click="onLoadModalRegister"
+              <h2>
+                Iniciar Sesión
+              </h2>
+            </v-card-title>
+            <v-divider />
+            <v-card-text
+              class="pa-0"
+            >
+              <v-form
+                v-model="validForm"
+                lazy-validation
+                @submit.prevent="lauchLogin"
               >
-                Regístrate
-              </v-btn>
-              <p class="white--text caption mt-3">
-                Si haces clic en "Iniciar sesion con Facebook o Google" y no eres usuario de GoPlay, quedarás registrado y aceptarás los Términos y Condiciones y la Política de Privacidad de GoPlay.
-              </p>
-            </div>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+                <v-container
+                  fluid
+                  class="pb-0"
+                  grid-list-lg
+                >
+                  <v-text-field
+                    v-model="form.username"
+                    :disabled="processingForm"
+                    :error="!!validationErrors.username"
+                    :error-messages="validationErrors.username"
+                    autofocus
+                    outline
+                    prepend-inner-icon="email"
+                    label="Correo electrónico"
+                    @keyup="() => {
+                      validationErrors.username = undefined
+                      delete validationErrors.username
+                    }"
+                  />
+
+                  <v-text-field
+                    v-model="form.password"
+                    :disabled="processingForm"
+                    :error="!!validationErrors.password"
+                    :error-messages="validationErrors.password"
+                    type="password"
+                    outline
+                    prepend-inner-icon="lock"
+                    label="Contraseña"
+                    @keyup="() => {
+                      validationErrors.password = undefined
+                      delete validationErrors.password
+                    }"
+                  />
+                </v-container>
+                <v-divider />
+                <v-container
+                  fluid
+                  grid-list-lg
+                >
+                  <div class="text-xs-center ">
+                    <v-btn
+                      type="submit"
+                      color="primary"
+                      :disabled="!validForm || processingForm"
+                      :loading="processingForm"
+                    >
+                      Iniciar sesión
+                    </v-btn>
+                    <p class="mb-0">
+                      <a>
+                        ¿Olvidaste tu contraseña?
+                      </a>
+                    </p>
+                  </div>
+                </v-container>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </template>
+  </v-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 
@@ -146,7 +113,7 @@ export default {
       processingForm: false,
       form: {
         username: 'mariley@idw.com.pe',
-        password: '12345678'
+        password: '123456'
       },
       validationErrors: {},
       remember: true,
@@ -166,6 +133,10 @@ export default {
     ...mapState({
       showModalLogin: state => state.auth.showModalLogin,
       primaryDrawer: state => state.layout.primaryDrawer
+    }),
+
+    ...mapGetters({
+      authenticated: 'auth/check'
     })
   },
 
@@ -178,11 +149,12 @@ export default {
     }
   },
 
+  created () {
+    if (this.authenticated) this.$router.push({ name: 'home' })
+  },
+
   methods: {
     ...mapActions({
-      replaceShowModalLogin: 'auth/replaceShowModalLogin',
-      replaceShowModalRegister: 'viewModalsWeb/replaceShowModalRegister',
-      replaceShowModalForgotPassword: 'viewModalsWeb/replaceShowModalForgotPassword',
       login: 'auth/login',
       replacePrimaryDrawer: 'layout/replacePrimaryDrawer'
     }),
@@ -199,7 +171,6 @@ export default {
           })
 
           this.processingForm = false
-          this.replaceShowModalLogin({ status: false })
           this.replacePrimaryDrawerModel()
 
           // Fetch the user.
@@ -230,16 +201,6 @@ export default {
       primaryDrawer.model = true
 
       this.replacePrimaryDrawer({ primaryDrawer })
-    },
-
-    onLoadModalRegister () {
-      this.replaceShowModalLogin({ status: false })
-      this.replaceShowModalRegister({ status: true })
-    },
-
-    onLoadModalForgotPassword () {
-      this.replaceShowModalLogin({ status: false })
-      this.replaceShowModalForgotPassword({ status: true })
     }
   }
 }

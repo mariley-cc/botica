@@ -15,37 +15,6 @@ export const state = {
 }
 
 export const getters = {
-  toolbarItems: (state, getters, rootState, rootGetters) => {
-    let items = [
-      {
-        name: 'Inicio',
-        to: { name: 'home' }
-      }
-    ]
-
-    const plans = rootGetters['plans/plansForToolbar']
-
-    plans.forEach(element => {
-      items.push({
-        name: element.name,
-        to: { name: 'plan', params: { slug: element.tag } }
-      })
-    })
-
-    if (rootGetters['auth/userIsClient']) {
-      items.push(
-        {
-          name: 'Créditos',
-          to: { name: 'credits' }
-        }
-      )
-
-      return items
-    }
-
-    return items
-  },
-
   sidebarItems: (state, getters, rootState, rootGetters) => {
     let items = []
 
