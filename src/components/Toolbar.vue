@@ -10,7 +10,7 @@
       center
     >
       <v-toolbar-side-icon
-        v-if="$vuetify.breakpoint.smAndDown || authenticated && primaryDrawer.type !== 'permanent'"
+        v-if="authenticated && primaryDrawer.type !== 'permanent'"
         @click.stop="replacePrimaryDrawerModel"
       />
 
@@ -23,9 +23,11 @@
           color="black"
           class="transparent "
           :ripple="false"
-          :to="{ name: 'home' }"
         >
-          <img :src="require('@/assets/logo_goplay.png')">
+          <img
+            style="max-height:30px;"
+            :src="require('@/assets/logo.png')"
+          >
         </v-btn>
       </v-toolbar-title>
 

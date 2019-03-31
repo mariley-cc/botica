@@ -108,8 +108,8 @@
         </v-list-tile>
       </template>
       <v-img
-        :src="require('@/assets/logo_goplay.png')"
-        :lazy-src="require('@/assets/logo_goplay.png')"
+        :src="require('@/assets/logo.png')"
+        :lazy-src="require('@/assets/logo.png')"
         contain
         max-height="31"
         class="mt-5"
