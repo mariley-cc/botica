@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import * as types from '../mutation-types'
-import userAPI from '@/api/user'
+import authAPI from '@/api/auth'
 import { ability, defineAbilitiesFor } from '@/config/ability'
 
 export const state = {
@@ -30,7 +30,7 @@ export const actions = {
 
   fetchUser ({ commit, state }) {
     return new Promise((resolve, reject) => {
-      userAPI.user()
+      authAPI.user()
         .then(response => {
           const user = response.data.data
           commit(types.FETCH_USER_SUCCESS, { user })
@@ -49,7 +49,7 @@ export const actions = {
 
   login ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.login(payload)
+      authAPI.login(payload)
         .then(response => {
           this._vm.$notify.success({
             title: 'GoPlay',
@@ -64,7 +64,7 @@ export const actions = {
 
   logout ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      userAPI.logout()
+      authAPI.logout()
         .then(response => {
           commit(types.LOGOUT)
 

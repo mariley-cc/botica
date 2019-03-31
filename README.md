@@ -1,4 +1,4 @@
-# goplay-frontend
+# botica-frontend
 
 ## Project setup
 ```
