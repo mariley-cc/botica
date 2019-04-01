@@ -29,7 +29,18 @@ export const getters = {
           name: 'Perfil',
           // to: { name: 'sgcUserGameRoom' },
           icon: 'person'
+        },
+        {
+          name: 'Places',
+          // to: { name: 'sgcUserGameRoom' },
+          icon: 'person'
+        },
+        {
+          name: 'Perfil',
+          // to: { name: 'sgcUserGameRoom' },
+          icon: 'person'
         }
+
       )
 
       return items
@@ -44,6 +55,35 @@ export const getters = {
         {
           name: 'Usuarios',
           to: { name: 'sgcUsersList' }
+        }
+        {
+          name: 'Places',
+          // to: { name: 'sgcUserGameRoom' },
+        },
+        {
+          name: 'Perfil',
+          // to: { name: 'sgcUserGameRoom' },
+        },
+        {
+          name: 'Products',
+          // to: { name: 'sgcUserGameRoom' },
+        },
+        {
+          name: 'Boxes',
+          // to: { name: 'sgcUserGameRoom' },
+          icon: 'person'
+        },
+        {
+          name: 'Sales',
+          // to: { name: 'sgcUserGameRoom' },
+        },
+        {
+          name: 'Transfers',
+          // to: { name: 'sgcUserGameRoom' },
+        },
+        {
+          name: 'Provider',
+          // to: { name: 'sgcUserGameRoom' },
         }
       )
 

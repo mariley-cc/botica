@@ -5,7 +5,8 @@ export const ability = AbilityBuilder.define((can, cannot) => {
 })
 
 export function defineAbilitiesFor (user = {}) {
-  const roleType = user.user_type || 'guest'
+  // const roleType = user.typeUser.name || 'guest'
+  const roleType = user.typeUser.id === 1 ? 'seller' : 'admin'
 
   switch (roleType) {
     case 'admin':
@@ -15,72 +16,48 @@ export function defineAbilitiesFor (user = {}) {
           actions: ['list']
         },
         {
-          subject: 'Banners',
+          subject: 'Places',
           actions: ['list', 'create', 'update', 'delete']
-        },
-        {
-          subject: 'Plans',
-          actions: ['list', 'create', 'update', 'delete']
-        },
-        {
-          subject: 'Services',
-          actions: ['list', 'create', 'update', 'delete']
-        },
-        {
-          subject: 'CreditMovements',
-          actions: ['list', 'update', 'delete']
         },
         {
           subject: 'Purchases',
-          actions: ['list', 'update', 'delete']
+          actions: ['list', 'create', 'update', 'delete']
+        },
+        {
+          subject: 'Products',
+          actions: ['list', 'create', 'update', 'delete']
+        },
+        {
+          subject: 'Boxes',
+          actions: ['list', 'create', 'update', 'delete']
+        },
+        {
+          subject: 'Sales',
+          actions: ['list', 'create', 'update', 'delete']
         },
         {
           subject: 'Users',
-          actions: ['list', 'update', 'delete']
+          actions: ['list', 'create', 'update', 'delete']
         },
         {
-          subject: 'Notifications',
-          actions: ['create']
+          subject: 'Transfers',
+          actions: ['list', 'create', 'update', 'delete']
         },
         {
-          subject: 'Configurations',
-          actions: ['update']
-        },
-        {
-          subject: 'Profile',
-          actions: ['update']
+          subject: 'Providers',
+          actions: ['list', 'create', 'update', 'delete']
         }
       ]
 
-    case 'client':
+    case 'seller':
       return [
         {
-          subject: 'Profile',
-          actions: ['update']
+          subject: 'Purchases',
+          actions: ['list', 'create', 'update', 'delete']
         },
         {
-          subject: 'GameRoom',
-          actions: ['update']
-        },
-        {
-          subject: 'CoinPurse',
-          actions: ['list', 'update']
-        },
-        {
-          subject: 'Notifications',
-          actions: ['list']
-        },
-        {
-          subject: 'Subscription',
-          actions: ['list', 'update']
-        },
-        {
-          subject: 'Bet',
-          actions: ['list', 'create']
-        },
-        {
-          subject: 'Statistics',
-          actions: ['list']
+          subject: 'Places',
+          actions: ['list', 'create', 'update', 'delete']
         }
       ]
 
