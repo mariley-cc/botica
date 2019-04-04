@@ -10,7 +10,7 @@ export default {
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes`,
+            url: `${HOST}/kairo-laboratories`,
             method: 'post',
             data
           })
@@ -18,12 +18,13 @@ export default {
             .catch(error => reject(error))
         })
       },
-      get (payload = {}) {
+
+    get (payload = {}) {
         const params = payload.params || {}
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes`,
+            url: `${HOST}/kairo-laboratories`,
             method: 'get',
             params
           })
@@ -31,27 +32,29 @@ export default {
             .catch(error => reject(error))
         })
       },
-      getById (payload = {}) {
-        const Id = payload.Id
-    
-        return new Promise((resolve, reject) => {
-          axios({
-            url: `${HOST}/boxes/${Id}`,
-            method: 'get'
-          })
-            .then(response => resolve(response))
-            .catch(error => reject(error))
-        })
-      },
-      put (payload = {}) {
+
+    put (payload = {}) {
         const Id = payload.Id
         const data = payload.data || {}
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes/${Id}`,
+            url: `${HOST}/kairo-laboratories/${Id}`,
             method: 'put',
             data
+          })
+            .then(response => resolve(response))
+            .catch(error => reject(error))
+        })
+      },
+      
+    delete (payload = {}) {
+        const Id = payload.Id
+    
+        return new Promise((resolve, reject) => {
+          axios({
+            url: `${HOST}/kairo-laboratories/${Id}`,
+            method: 'delete'
           })
             .then(response => resolve(response))
             .catch(error => reject(error))

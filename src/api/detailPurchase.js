@@ -10,7 +10,7 @@ export default {
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes`,
+            url: `${HOST}/detail-purchases`,
             method: 'post',
             data
           })
@@ -18,12 +18,13 @@ export default {
             .catch(error => reject(error))
         })
       },
-      get (payload = {}) {
+
+    get (payload = {}) {
         const params = payload.params || {}
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes`,
+            url: `${HOST}/detail-purchases`,
             method: 'get',
             params
           })
@@ -31,12 +32,13 @@ export default {
             .catch(error => reject(error))
         })
       },
-      getById (payload = {}) {
+
+    getById (payload = {}) {
         const Id = payload.Id
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes/${Id}`,
+            url: `${HOST}/detail-purchases/${Id}`,
             method: 'get'
           })
             .then(response => resolve(response))
@@ -49,7 +51,7 @@ export default {
     
         return new Promise((resolve, reject) => {
           axios({
-            url: `${HOST}/boxes/${Id}`,
+            url: `${HOST}/detail-purchases/${Id}`,
             method: 'put',
             data
           })
