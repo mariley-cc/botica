@@ -33,6 +33,11 @@ export default [
     path: '/sgc/users/:id',
     name: 'sgcUsersEdit',
     component: () => import('@/views/users/EditUser.vue')
-  }
-
+  },
+  
+  {
+    path: '/sgc/products',
+    name: 'sgcProductsList',
+    component: () => import('@/views/products/ListProducts.vue')
+  },
 ]
