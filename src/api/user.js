@@ -47,7 +47,7 @@ export default {
     })
   },
 
-  sendEmailForResetPassword (payload = {}) {
+  sendTokenForResetPassword (payload = {}) {
     const data = payload.data || {}
 
     return new Promise((resolve, reject) => {

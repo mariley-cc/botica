@@ -352,7 +352,7 @@ export default {
 
       if (!isJPG) {
         this.$notify.info({
-          title: 'GoPlay',
+          title: 'Botica',
           message: 'La imagen tiene que estar en formato JPG ó PNG'
         })
 
@@ -360,7 +360,7 @@ export default {
       }
       if (!isLt5M) {
         this.$notify.info({
-          title: 'GoPlay',
+          title: 'Botica',
           message: 'La imagen no puede exceder los 5MB de tamaño'
         })
 

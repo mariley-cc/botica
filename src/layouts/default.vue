@@ -27,7 +27,7 @@ export default {
     NavigationDrawer: () => import('@/components/NavigationDrawer.vue')
   },
   data: () => ({
-    title: 'Welcome to GoPlay!'
+    title: 'Welcome to Botica!'
   }),
 
   computed: {

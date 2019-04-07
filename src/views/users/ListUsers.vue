@@ -30,25 +30,6 @@
           row
           wrap
         >
-          <v-flex sm6>
-            <v-radio-group
-              v-model="radioFilterBy"
-              row
-            >
-              <v-radio
-                label="Ver todos"
-                value=""
-              />
-              <v-radio
-                label="Ver administradores"
-                value="admin"
-              />
-              <v-radio
-                label="ver clientes"
-                value="client"
-              />
-            </v-radio-group>
-          </v-flex>
           <v-flex
             v-if="users.length"
             sm6

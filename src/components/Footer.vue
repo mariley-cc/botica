@@ -18,7 +18,7 @@
           offset-sm1
         >
           <h3 class="title">
-            Acerca de GoPlay
+            Acerca de Botica
           </h3>
           <div class="underline" />
           <p>Términos y condiciones</p>
@@ -47,7 +47,7 @@
             fill-height
           >
             <div>
-              <img :src="require('@/assets/logo_goplay.png')">
+              <img :src="require('@/assets/logo_Botica.png')">
             </div>
             <div>
               <p class="caption">
@@ -59,7 +59,7 @@
               >
               <img src="@/assets/instagram-icon.png">
               <p class="py-2 text-xs-center caption">
-                © 2019 GoPlay | Todos los derechos reservados.
+                © 2019 Botica | Todos los derechos reservados.
               </p>
             </div>
           </v-layout>
