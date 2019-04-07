@@ -69,9 +69,8 @@ export const getters = {
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Boxes',
+          name: 'Boxes'
           // to: { name: 'sgcUserGameRoom' },
-          icon: 'person'
         },
         {
           name: 'Sales'

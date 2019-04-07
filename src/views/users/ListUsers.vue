@@ -33,6 +33,7 @@
           <v-flex
             v-if="users.length"
             sm6
+            offset-sm6
           >
             <v-text-field
               v-model="searchUsers"
@@ -49,10 +50,8 @@
               :headers="[
                 { text: 'Nombre', value: 'name' },
                 { text: 'Correo electrónico', value: 'email' },
-                { text: 'Tipo', value: 'user_type' },
-                { text: 'Activo', value: 'is_active' },
-                { text: 'Plan', value: 'plan.name' },
-                { text: 'Créditos', value: '' },
+                { text: 'Tipo', value: 'typeUser' },
+                { text: 'Estado', value: 'state' },
                 { text: 'Acciones', align: 'center', sortable: false, width: '220' }
               ]"
               :items="users"
@@ -64,47 +63,38 @@
                 slot="items"
                 slot-scope="props"
               >
-                <td>{{ props.item.name }}</td>
-                <td>{{ props.item.email }}</td>
-                <td>
+                <td class="px-3">
+                  {{ props.item.name }}
+                </td>
+                <td class="px-3">
+                  {{ props.item.email }}
+                </td>
+                <td class="px-3">
                   <v-chip
-                    v-if="props.item.user_type === 'admin'"
+                    v-if="props.item.typeUser.name === 'admin'"
                     small
                     color="primary"
                     text-color="white"
                   >
-                    {{ props.item.user_type }}
+                    {{ props.item.typeUser.name }}
                   </v-chip>
                   <v-chip
-                    v-else-if="props.item.user_type === 'client'"
+                    v-else-if="props.item.typeUser.name === 'client'"
                     small
                   >
-                    Cliente
+                    Vendedor
                   </v-chip>
                   <v-chip
                     v-else
                     small
                   >
-                    ---
+                    {{ props.item.typeUser.name }}
                   </v-chip>
                 </td>
-                <td>
-                  <v-chip
-                    v-if="props.item.user_type === 'client'"
-                    dark
-                    :color="verifyUserAndWalletIsActive(props.item) ? 'success' : 'error'"
-                    small
-                  >
-                    {{ verifyUserAndWalletIsActive(props.item)? 'Si' : 'No' }}
-                  </v-chip>
-                </td>
-                <td>
-                  <span v-if="props.item.wallet">{{ props.item.wallet.plan ? props.item.wallet.plan.name : '' }}</span>
-                </td>
-                <td>
-                  <span v-if="props.item.wallet">{{ parseFloat(props.item.wallet.amount_credits) }}</span>
-                </td>
-                <td class="text-xs-right">
+                <td class="px-3">
+{{ props.item.state }}
+</td>
+                <td class="text-xs-center px-3">
                   <template v-if="$can('update', 'Users')">
                     <v-btn
                       class="ma-0"
@@ -116,37 +106,7 @@
                     >
                       <v-icon>edit</v-icon>
                     </v-btn>
-
-                    <v-tooltip
-                      v-if="props.item.user_type === 'client'"
-                      bottom
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="ma-0"
-                        small
-                        fab
-                        flat
-                        color="success"
-                        @click="openModalIncreaseDecreaseCreditsForUser(props.item)"
-                      >
-                        <v-icon>attach_money</v-icon>
-                      </v-btn>
-                      <span>Aumentar ó Reducir créditos</span>
-                    </v-tooltip>
                   </template>
-
-                  <v-btn
-                    v-if="$can('delete', 'Users')"
-                    class="ma-0"
-                    small
-                    fab
-                    flat
-                    color="error"
-                    @click="openModalDeleteUser(props.item)"
-                  >
-                    <v-icon>delete</v-icon>
-                  </v-btn>
                 </td>
               </tr>
             </v-data-table>

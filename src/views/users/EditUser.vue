@@ -65,7 +65,7 @@ export default {
   created () {
     if (!this.$can('update', 'Users')) return false
 
-    this.getUser({ userId: this.$route.params.id })
+    // this.getUser({ userId: this.$route.params.id })
   },
 
   methods: {
