@@ -55,17 +55,17 @@ export const getters = {
         {
           name: 'Usuarios',
           to: { name: 'sgcUsersList' }
-        }
+        },
         {
-          name: 'Places',
+          name: 'Places'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Perfil',
+          name: 'Perfil'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Products',
+          name: 'Products'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
@@ -74,15 +74,15 @@ export const getters = {
           icon: 'person'
         },
         {
-          name: 'Sales',
+          name: 'Sales'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Transfers',
+          name: 'Transfers'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Provider',
+          name: 'Provider'
           // to: { name: 'sgcUserGameRoom' },
         }
       )
