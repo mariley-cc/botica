@@ -5,8 +5,8 @@ export const ability = AbilityBuilder.define((can, cannot) => {
 })
 
 export function defineAbilitiesFor (user = {}) {
-  // const roleType = user.typeUser.name || 'guest'
-  const roleType = user.typeUser.id === 1 ? 'seller' : 'admin'
+  const roleType = user.typeUser.type || 'guest'
+  // const roleType = user.typeUser.id === 1 ? 'seller' : 'admin'
 
   switch (roleType) {
     case 'admin':

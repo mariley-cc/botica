@@ -14,11 +14,11 @@ export const getters = {
   check: state => state.user !== null,
 
   userIsAdmin: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.typeUser.id === 2
+    return state.user && state.user.typeUser.type === 'admin'
   },
 
   userIsClient: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.typeUser.id === 1
+    return state.user && state.user.typeUser.type !== 'admin'
   }
 }
 

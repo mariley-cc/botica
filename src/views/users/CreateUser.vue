@@ -3,7 +3,7 @@
     fluid
     grid-list-lg
   >
-    <NotPermission v-if="!$can('update', 'Users')" />
+    <NotPermission v-if="!$can('create', 'Users')" />
 
     <template v-else>
       <Breadcrumbs
@@ -20,13 +20,17 @@
           dark
           card
         >
-          <v-toolbar-title>Editar Usuario</v-toolbar-title>
+          <v-toolbar-title>Nuevo Usuario</v-toolbar-title>
           <v-spacer />
         </v-toolbar>
         <v-card-text
           class="pa-0"
         >
-          <v-form>
+          <v-form
+            ref="form"
+            v-model="validForm"
+            lazy-validation
+          >
             <v-container
               fluid
               grid-list-lg
@@ -171,6 +175,20 @@
                 </v-flex>
               </v-layout>
             </v-container>
+            <v-divider class="mb-3" />
+            <div class="text-xs-center mb-3">
+              <v-btn
+                type="submit"
+                color="success"
+                :disabled="!validForm || processingForm"
+                :loading="processingForm"
+              >
+                Guardar
+              </v-btn>
+              <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+                Cancelar
+              </v-btn>
+            </div>
           </v-form>
         </v-card-text>
       </v-card>
@@ -208,7 +226,10 @@ export default {
         state: 'activo',
         type_user_id: 0,
         place_id: 0
-      }
+      },
+
+      validForm: true,
+      processingForm: false
     }
   },
 
@@ -219,12 +240,12 @@ export default {
   },
 
   created () {
-    if (!this.$can('update', 'Users')) return false
+    if (!this.$can('create', 'Users')) return false
   },
 
   methods: {
     ...mapActions({
-      getUser: 'users/getUser',
+      createUser: 'users/createUser',
       replaceCurrentUser: 'users/replaceCurrentUser'
     })
   }

@@ -65,7 +65,7 @@ export const actions = {
     })
   },
 
-  CreateUser ({ commit }, payload) {
+  createUser ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       userAPI.post(payload)
         .then(response => {
