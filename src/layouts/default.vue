@@ -27,7 +27,7 @@ export default {
     NavigationDrawer: () => import('@/components/NavigationDrawer.vue')
   },
   data: () => ({
-    title: 'Welcome to GoPlay!'
+    title: 'Welcome to Botica!'
   }),
 
   computed: {
@@ -107,6 +107,7 @@ export default {
       overflow: hidden !important;
 
       &:hover {
+        color: white !important;
         background: #74ba1a !important;
       }
     }

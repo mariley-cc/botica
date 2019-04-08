@@ -7,13 +7,12 @@
     :floating="primaryDrawer.floating"
     :mini-variant="primaryDrawer.mini"
     fixed
-    dark
     app
-    class="pa-4 black"
+    class="pa-4"
   >
     <v-list
       v-if="authenticated"
-      class="mb-4 black"
+      class="mb-4"
     >
       <v-list-tile
         v-if="primaryDrawer.mini"
@@ -53,7 +52,7 @@
           </template>
 
           <template v-else>
-            <v-icon class="grey darken-2">
+            <v-icon>
               person
             </v-icon>
           </template>
@@ -67,14 +66,13 @@
       </v-list-tile>
     </v-list>
 
-    <v-list class="pt-0 black">
+    <v-list class="pt-0">
       <template v-if="user">
         <v-list-tile
           v-for="(item, i) in sidebarItems"
           :key="i"
           exact
           ripple
-          color="white"
           active-class="accent"
           class="scoped-list-tile mb-1"
           :to="item.to"
@@ -96,7 +94,6 @@
           v-if="authenticated"
           exact
           ripple
-          color="white"
           active-class="accent"
           class="scoped-list-tile mb-1"
           @click="logout({ router: $router })"
@@ -173,6 +170,7 @@ export default {
   overflow: hidden !important;
 
   &:hover {
+    color: white !important;
     background: #74ba1a !important;
   }
 }

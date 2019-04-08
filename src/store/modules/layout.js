@@ -55,34 +55,33 @@ export const getters = {
         {
           name: 'Usuarios',
           to: { name: 'sgcUsersList' }
-        }
+        },
         {
-          name: 'Places',
+          name: 'Places'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Perfil',
+          name: 'Perfil'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Products',
+          name: 'Products'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Boxes',
-          // to: { name: 'sgcUserGameRoom' },
-          icon: 'person'
-        },
-        {
-          name: 'Sales',
+          name: 'Boxes'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Transfers',
+          name: 'Sales'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Provider',
+          name: 'Transfers'
+          // to: { name: 'sgcUserGameRoom' },
+        },
+        {
+          name: 'Provider'
           // to: { name: 'sgcUserGameRoom' },
         }
       )

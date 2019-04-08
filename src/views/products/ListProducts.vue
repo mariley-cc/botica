@@ -3,179 +3,177 @@
     fluid
     grid-list-lg
   >
-    <!-- <NotPermission v-if="!$can('list', 'Users')" /> -->
+    <NotPermission v-if="!$can('list', 'Users')" />
 
-    <!-- <template v-else> -->
-    <Breadcrumbs
-      :routes="[
-        { name: 'Inicio', to: { name: 'home' } },
-        { name: 'Usuarios' },
-        { name: 'Listado' }
-      ]"
-    />
-    <v-card>
-      <v-toolbar
-        color="grey darken-4"
-        dark
-        card
-      >
-        <v-toolbar-title>Usuarios</v-toolbar-title>
-        <v-spacer />
-      </v-toolbar>
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout
-          row
-          wrap
+    <template v-else>
+      <Breadcrumbs
+        :routes="[
+          { name: 'Inicio', to: { name: 'home' } },
+          { name: 'Usuarios' },
+          { name: 'Listado' }
+        ]"
+      />
+      <v-card>
+        <v-toolbar
+          color="info"
+          dark
+          card
         >
-          <v-flex sm6>
-            <v-radio-group
-              v-model="radioFilterBy"
-              row
-            >
-              <v-radio
-                label="Ver todos"
-                value=""
-              />
-              <v-radio
-                label="Ver administradores"
-                value="admin"
-              />
-              <v-radio
-                label="ver clientes"
-                value="client"
-              />
-            </v-radio-group>
-          </v-flex>
-          <v-flex
-            v-if="users.length"
-            sm6
+          <v-toolbar-title>Usuarios</v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
+        <v-container
+          fluid
+          grid-list-lg
+        >
+          <v-layout
+            row
+            wrap
           >
-            <v-text-field
-              v-model="searchUsers"
-              :disabled="loadingUsers"
-              box
-              append-icon="search"
-              label="Buscar"
-              clearable
-              hide-details
-            />
-          </v-flex>
-          <v-flex xs12>
-            <v-data-table
-              :headers="[
-                { text: 'Nombre', value: 'name' },
-                { text: 'Correo electrónico', value: 'email' },
-                { text: 'Tipo', value: 'user_type' },
-                { text: 'Activo', value: 'is_active' },
-                { text: 'Plan', value: 'plan.name' },
-                { text: 'Créditos', value: '' },
-                { text: 'Acciones', align: 'center', sortable: false, width: '220' }
-              ]"
-              :items="users"
-              :search="searchUsers"
-              :loading="loadingUsers"
-              class="elevation-1"
-            >
-              <tr
-                slot="items"
-                slot-scope="props"
+            <v-flex sm6>
+              <v-radio-group
+                v-model="radioFilterBy"
+                row
               >
-                <td>{{ props.item.name }}</td>
-                <td>{{ props.item.email }}</td>
-                <td>
-                  <v-chip
-                    v-if="props.item.user_type === 'admin'"
-                    small
-                    color="primary"
-                    text-color="white"
-                  >
-                    {{ props.item.user_type }}
-                  </v-chip>
-                  <v-chip
-                    v-else-if="props.item.user_type === 'client'"
-                    small
-                  >
-                    Cliente
-                  </v-chip>
-                  <v-chip
-                    v-else
-                    small
-                  >
-                    ---
-                  </v-chip>
-                </td>
-                <td>
-                  <v-chip
-                    v-if="props.item.user_type === 'client'"
-                    dark
-                    :color="verifyUserAndWalletIsActive(props.item) ? 'success' : 'error'"
-                    small
-                  >
-                    {{ verifyUserAndWalletIsActive(props.item)? 'Si' : 'No' }}
-                  </v-chip>
-                </td>
-                <td>
-                  <span v-if="props.item.wallet">{{ props.item.wallet.plan ? props.item.wallet.plan.name : '' }}</span>
-                </td>
-                <td>
-                  <span v-if="props.item.wallet">{{ parseFloat(props.item.wallet.amount_credits) }}</span>
-                </td>
-                <td class="text-xs-right">
-                  <template v-if="$can('update', 'Users')">
-                    <v-btn
-                      class="ma-0"
-                      :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
+                <v-radio
+                  label="Ver todos"
+                  value=""
+                />
+                <v-radio
+                  label="Ver administradores"
+                  value="admin"
+                />
+                <v-radio
+                  label="ver clientes"
+                  value="client"
+                />
+              </v-radio-group>
+            </v-flex>
+            <v-flex
+              v-if="users.length"
+              sm6
+            >
+              <v-text-field
+                v-model="searchUsers"
+                :disabled="loadingUsers"
+                box
+                append-icon="search"
+                label="Buscar"
+                clearable
+                hide-details
+              />
+            </v-flex>
+            <v-flex xs12>
+              <v-data-table
+                :headers="[
+                  { text: 'Nombre', value: 'name' },
+                  { text: 'Correo electrónico', value: 'email' },
+                  { text: 'Tipo', value: 'user_type' },
+                  { text: 'Activo', value: 'is_active' },
+                  { text: 'Plan', value: 'plan.name' },
+                  { text: 'Créditos', value: '' },
+                  { text: 'Acciones', align: 'center', sortable: false, width: '220' }
+                ]"
+                :items="users"
+                :search="searchUsers"
+                :loading="loadingUsers"
+                class="elevation-1"
+              >
+                <tr
+                  slot="items"
+                  slot-scope="props"
+                >
+                  <td>{{ props.item.name }}</td>
+                  <td>{{ props.item.email }}</td>
+                  <td>
+                    <v-chip
+                      v-if="props.item.user_type === 'admin'"
                       small
-                      fab
-                      flat
-                      color="info"
+                      color="primary"
+                      text-color="white"
                     >
-                      <v-icon>edit</v-icon>
-                    </v-btn>
-
-                    <v-tooltip
+                      {{ props.item.user_type }}
+                    </v-chip>
+                    <v-chip
+                      v-else-if="props.item.user_type === 'client'"
+                      small
+                    >
+                      Cliente
+                    </v-chip>
+                    <v-chip
+                      v-else
+                      small
+                    >
+                      ---
+                    </v-chip>
+                  </td>
+                  <td>
+                    <v-chip
                       v-if="props.item.user_type === 'client'"
-                      bottom
+                      dark
+                      :color="verifyUserAndWalletIsActive(props.item) ? 'success' : 'error'"
+                      small
                     >
+                      {{ verifyUserAndWalletIsActive(props.item)? 'Si' : 'No' }}
+                    </v-chip>
+                  </td>
+                  <td>
+                    <span v-if="props.item.wallet">{{ props.item.wallet.plan ? props.item.wallet.plan.name : '' }}</span>
+                  </td>
+                  <td>
+                    <span v-if="props.item.wallet">{{ parseFloat(props.item.wallet.amount_credits) }}</span>
+                  </td>
+                  <td class="text-xs-right">
+                    <template v-if="$can('update', 'Users')">
                       <v-btn
-                        slot="activator"
                         class="ma-0"
+                        :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
                         small
                         fab
                         flat
-                        color="success"
-                        @click="openModalIncreaseDecreaseCreditsForUser(props.item)"
+                        color="info"
                       >
-                        <v-icon>attach_money</v-icon>
+                        <v-icon>edit</v-icon>
                       </v-btn>
-                      <span>Aumentar ó Reducir créditos</span>
-                    </v-tooltip>
-                  </template>
 
-                  <v-btn
-                    v-if="$can('delete', 'Users')"
-                    class="ma-0"
-                    small
-                    fab
-                    flat
-                    color="error"
-                    @click="openModalDeleteUser(props.item)"
-                  >
-                    <v-icon>delete</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </v-data-table>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
+                      <v-tooltip
+                        v-if="props.item.user_type === 'client'"
+                        bottom
+                      >
+                        <v-btn
+                          slot="activator"
+                          class="ma-0"
+                          small
+                          fab
+                          flat
+                          color="success"
+                          @click="openModalIncreaseDecreaseCreditsForUser(props.item)"
+                        >
+                          <v-icon>attach_money</v-icon>
+                        </v-btn>
+                        <span>Aumentar ó Reducir créditos</span>
+                      </v-tooltip>
+                    </template>
 
-    <ModalDeleteUser />
-    <!-- </template> -->
+                    <v-btn
+                      v-if="$can('delete', 'Users')"
+                      class="ma-0"
+                      small
+                      fab
+                      flat
+                      color="error"
+                      @click="openModalDeleteUser(props.item)"
+                    >
+                      <v-icon>delete</v-icon>
+                    </v-btn>
+                  </td>
+                </tr>
+              </v-data-table>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
+    </template>
   </v-container>
 </template>
 
@@ -191,8 +189,7 @@ export default {
 
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
-    Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    ModalDeleteUser: () => import('@/views/users/ModalDeleteUser')
+    Breadcrumbs: () => import('@/components/Breadcrumbs')
   },
 
   data () {
