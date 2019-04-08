@@ -28,10 +28,9 @@
           row
           wrap
         >
-          <v-flex sm6>
-          </v-flex>
+          <v-flex sm6 />
           <v-flex
-            v-if="Products.length"
+            v-if="products.length"
             sm6
           >
             <v-text-field
@@ -63,7 +62,7 @@
               >
                 <td>{{ props.item.bar }}</td>
                 <td>{{ props.item.stock }}</td>
-  
+
                 <td class="text-xs-right">
                   <template v-if="$can('update', 'Products')">
                     <v-btn
@@ -97,7 +96,6 @@
       </v-container>
     </v-card>
 
-    <ModalDeleteUser />
     <!-- </template> -->
   </v-container>
 </template>
@@ -114,6 +112,7 @@ export default {
 
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
+    Breadcrumbs: () => import('@/components/Breadcrumbs')
   },
 
   data () {
@@ -129,6 +128,7 @@ export default {
       loadingProducts: state => state.products.loadingProducts
     })
   },
+
   created () {
     this.getProducts()
   },
@@ -139,7 +139,7 @@ export default {
       replaceShowModalDeleteProduct: 'products/replaceShowModalDeleteProduct',
       replaceCurrentProduct: 'products/replaceCurrentProduct',
       replaceProducts: 'products/replaceProducts'
-    }),
+    })
   }
 }
 </script>
