@@ -107,6 +107,7 @@ export default {
       overflow: hidden !important;
 
       &:hover {
+        color: white !important;
         background: #74ba1a !important;
       }
     }

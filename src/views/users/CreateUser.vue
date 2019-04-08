@@ -16,7 +16,7 @@
 
       <v-card>
         <v-toolbar
-          color="grey darken-4"
+          color="info"
           dark
           card
         >
@@ -30,6 +30,7 @@
             ref="form"
             v-model="validForm"
             lazy-validation
+            @submit.prevent="submitCreateUser"
           >
             <v-container
               fluid
@@ -247,7 +248,20 @@ export default {
     ...mapActions({
       createUser: 'users/createUser',
       replaceCurrentUser: 'users/replaceCurrentUser'
-    })
+    }),
+
+    submitCreateUser () {
+      if (!this.$refs.form.validate()) return false
+
+      this.processingForm = true
+      this.createUser({ data: this.form })
+        .then(response => {
+          this.processingForm = false
+        })
+        .catch(() => {
+          this.processingForm = false
+        })
+    }
   }
 
 }

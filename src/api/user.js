@@ -48,8 +48,8 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/user`,
-        method: 'put',
+        url: `${HOST}/users`,
+        method: 'post',
         data
       })
         .then(response => resolve(response))
