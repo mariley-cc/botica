@@ -251,20 +251,23 @@ export default {
       getUser: 'users/getUser',
       updateUser: 'users/updateUser',
       replaceCurrentUser: 'users/replaceCurrentUser'
-    })
-  },
+    }),
 
-  submitUpdateUser () {
-    if (!this.$refs.form.validate()) return false
+    submitUpdateUser () {
+      if (!this.$refs.form.validate()) return false
 
-    this.processingForm = true
-    this.updateUser({ data: this.form })
-      .then(response => {
-        this.processingForm = false
+      this.processingForm = true
+      this.updateUser({
+        userId: this.$route.params.id,
+        data: this.form
       })
-      .catch(() => {
-        this.processingForm = false
-      })
+        .then(response => {
+          this.processingForm = false
+        })
+        .catch(() => {
+          this.processingForm = false
+        })
+    }
   }
 
 }
