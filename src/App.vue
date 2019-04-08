@@ -33,7 +33,7 @@ export default {
   el: '#app',
 
   metaInfo () {
-    const appName = 'GoPlay'
+    const appName = 'Botica'
 
     return {
       title: appName,

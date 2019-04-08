@@ -263,7 +263,7 @@
       Queremos recordarte que cuentas con un plazo
       maximo de 10 días para actualizar tus datos personales y adjuntar
       un documento de identificaciòn (Pasaporte, Documento de identificaciòn o Licencia de Conducir).
-      Durante este plazo el usuario puede hacer uso de los servicios de GoPlay con normalidad,
+      Durante este plazo el usuario puede hacer uso de los servicios de Botica con normalidad,
       pero no realizar retiros de dinero.
     </p>
     <v-container
@@ -437,7 +437,7 @@ export default {
 
       if (!isJPG) {
         this.$notify.info({
-          title: 'GoPlay',
+          title: 'Botica',
           message: 'La imagen tiene que estar en formato JPG ó PNG'
         })
 
@@ -445,7 +445,7 @@ export default {
       }
       if (!isLt5M) {
         this.$notify.info({
-          title: 'GoPlay',
+          title: 'Botica',
           message: 'La imagen no puede exceder los 5MB de tamaño'
         })
 

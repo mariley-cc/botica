@@ -2,11 +2,8 @@
   <div>
     <v-toolbar
       height="78"
-      color="black"
-      flat
       :clipped-left="primaryDrawer.clipped"
       app
-      dark
       center
     >
       <v-toolbar-side-icon
@@ -20,7 +17,6 @@
         <v-btn
           flat
           depressed
-          color="black"
           class="transparent "
           :ripple="false"
         >
@@ -93,13 +89,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.v-toolbar {
-  font-weight: 300;
-  background-color: rgba(0, 0, 0, 0.86);
-  box-shadow: 0px 9px 31px 0px rgba(0, 0, 0, 0.7);
-  background-repeat: repeat-x;
-  background-image: url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/ironpatern.png);
-}
+// .v-toolbar {
+//   font-weight: 300;
+//   background-color: rgba(0, 0, 0, 0.86);
+//   box-shadow: 0px 9px 31px 0px rgba(0, 0, 0, 0.7);
+//   background-repeat: repeat-x;
+//   background-image: url(https://static.parastorage.com/services/skins/2.1229.80/images/wysiwyg/core/themes/base/ironpatern.png);
+// }
 
 .scoped-toolbar-title {
   display: flex;

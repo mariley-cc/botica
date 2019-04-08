@@ -4,28 +4,11 @@ import { baseUrlAPI } from '@/config/api'
 const HOST = baseUrlAPI
 
 export default {
-  register (payload = {}) {
-    const data = payload.data || {}
-
-    return new Promise((resolve, reject) => {
-      axios({
-        url: `${HOST}/register`,
-        method: 'post',
-        data
-      })
-        .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
-  },
-
   get (payload = {}) {
-    const params = payload.params || {}
-
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users`,
-        method: 'get',
-        params
+        method: 'get'
       })
         .then(response => resolve(response))
         .catch(error => reject(error))
@@ -33,7 +16,7 @@ export default {
   },
 
   getById (payload = {}) {
-    const userId = payload.userId
+    const userId = payload.userId || ''
 
     return new Promise((resolve, reject) => {
       axios({
@@ -60,26 +43,12 @@ export default {
     })
   },
 
-  delete (payload = {}) {
-    const userId = payload.userId
-
-    return new Promise((resolve, reject) => {
-      axios({
-        url: `${HOST}/users/${userId}`,
-        method: 'delete'
-      })
-        .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
-  },
-
-  updatePassword (payload = {}) {
-    const id = payload.userId
+  post (payload = {}) {
     const data = payload.data || {}
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/users/${id}/password`,
+        url: `${HOST}/users`,
         method: 'post',
         data
       })

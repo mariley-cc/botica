@@ -14,7 +14,7 @@
 
     <v-card>
       <v-toolbar
-        color="grey darken-4"
+        color="info"
         dark
         card
       >

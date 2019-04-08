@@ -129,13 +129,6 @@ export default {
       loadingProducts: state => state.products.loadingProducts
     })
   },
-
-  watch: {
-    radioFilterBy (newValue, oldValue) {
-        this.products()
-    },
-  },
-
   created () {
     this.getProducts()
   },
@@ -143,8 +136,9 @@ export default {
   methods: {
     ...mapActions({
       getProducts: 'products/getProducts',
-      replaceShowModalDeleteUser: 'products/replaceShowModalDeleteProduct',
+      replaceShowModalDeleteProduct: 'products/replaceShowModalDeleteProduct',
       replaceCurrentProduct: 'products/replaceCurrentProduct',
+      replaceProducts: 'products/replaceProducts'
     }),
   }
 }

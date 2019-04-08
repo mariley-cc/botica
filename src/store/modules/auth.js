@@ -14,11 +14,11 @@ export const getters = {
   check: state => state.user !== null,
 
   userIsAdmin: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.user_type === 'admin'
+    return state.user && state.user.typeUser.type === 'admin'
   },
 
   userIsClient: (state, getters, rootState, rootGetters) => {
-    return state.user && state.user.typeUser
+    return state.user && state.user.typeUser.type !== 'admin'
   }
 }
 
@@ -52,7 +52,7 @@ export const actions = {
       authAPI.login(payload)
         .then(response => {
           this._vm.$notify.success({
-            title: 'GoPlay',
+            title: 'Botica',
             message: 'Bienvenido'
           })
 
@@ -69,7 +69,7 @@ export const actions = {
           commit(types.LOGOUT)
 
           this._vm.$notify.success({
-            title: 'GoPlay',
+            title: 'Botica',
             message: 'Hasta luego'
           })
 
