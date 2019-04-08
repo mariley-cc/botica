@@ -21,6 +21,12 @@
       >
         <v-toolbar-title>Usuarios</v-toolbar-title>
         <v-spacer />
+        <v-btn
+          :to="{ name: 'sgcUsersCreate' }"
+          color="info"
+        >
+          Agregar Nuevo Usuario
+        </v-btn>
       </v-toolbar>
       <v-container
         fluid
@@ -92,8 +98,8 @@
                   </v-chip>
                 </td>
                 <td class="px-3">
-{{ props.item.state }}
-</td>
+                  {{ props.item.state }}
+                </td>
                 <td class="text-xs-center px-3">
                   <template v-if="$can('update', 'Users')">
                     <v-btn
@@ -138,8 +144,7 @@ export default {
 
   data () {
     return {
-      searchUsers: '',
-      radioFilterBy: ''
+      searchUsers: ''
     }
   },
 
@@ -151,15 +156,6 @@ export default {
   },
 
   watch: {
-    radioFilterBy (newValue, oldValue) {
-      if (newValue === 'admin') {
-        this.getUsers({ params: { type: 'admin' } })
-      } else if (newValue === 'client') {
-        this.getUsers({ params: { type: 'client' } })
-      } else {
-        this.getUsers()
-      }
-    }
   },
 
   created () {

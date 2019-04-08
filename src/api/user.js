@@ -5,13 +5,23 @@ const HOST = baseUrlAPI
 
 export default {
   get (payload = {}) {
-    const params = payload.params || {}
-
     return new Promise((resolve, reject) => {
       axios({
         url: `${HOST}/users`,
-        method: 'get',
-        params
+        method: 'get'
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+
+  getById (payload = {}) {
+    const userId = payload.userId || ''
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/users/${userId}`,
+        method: 'get'
       })
         .then(response => resolve(response))
         .catch(error => reject(error))

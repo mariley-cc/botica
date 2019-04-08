@@ -28,6 +28,22 @@ export const actions = {
     })
   },
 
+  getUser ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      userAPI.getById(payload)
+        .then(response => {
+          const user = response.data.data
+
+          commit(types.REPLACE_CURRENT_USER, { user })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+
   replaceCurrentUser ({ commit }, payload) {
     commit(types.REPLACE_CURRENT_USER, payload)
   },
