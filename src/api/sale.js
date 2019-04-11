@@ -4,10 +4,8 @@ import { baseUrlAPI } from '@/config/api'
 const HOST = baseUrlAPI
 
 export default {
-
     post (payload = {}) {
         const data = payload.data || {}
-    
         return new Promise((resolve, reject) => {
           axios({
             url: `${HOST}/sales`,
