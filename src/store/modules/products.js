@@ -77,7 +77,7 @@ export const actions = {
     commit(types.REPLACE_CURRENT_PRODUCT, { product: null })
 
     return new Promise((resolve, reject) => {
-      userAPI.getById(payload)
+      productAPI.getById(payload)
         .then(response => {
           const product = response.data.data
 
