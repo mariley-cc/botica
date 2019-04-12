@@ -25,6 +25,40 @@ export const actions = {
           reject(error)
         })
     })
+  },
+
+  createPlace ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      placeAPI.post(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: 'Botica',
+            message: 'El Lugar ha sido agregado con éxito.'
+          })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+
+  updatePlace ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      placeAPI.put(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: 'Botica',
+            message: 'El usuario ha sido actualizado con éxito.'
+          })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 
 }

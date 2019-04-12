@@ -97,13 +97,13 @@
                     >
                       <v-autocomplete
                         v-model="form.type_user_id"
-                        :items="[]"
+                        :items="typeUsers"
+                        :loading="loadingTipeUsers"
                         dense
-                        deletable-chips
-                        multiple
+                        clearable
                         small-chips
                         label="Seleccionar tipo de usuario"
-                        item-text="name"
+                        item-text="type"
                         item-value="id"
                       />
                     </v-flex>
@@ -113,10 +113,10 @@
                     >
                       <v-autocomplete
                         v-model="form.place_id"
-                        :items="[]"
+                        :items="places"
+                        :loading="loadingPlaces"
                         dense
-                        deletable-chips
-                        multiple
+                        clearable
                         small-chips
                         label="Seleccionar lugar de Trabajo"
                         item-text="name"
@@ -204,20 +204,26 @@ export default {
 
   computed: {
     ...mapState({
-      currentUser: state => state.users.currentUser
+      currentUser: state => state.users.currentUser,
+      places: state => state.places.places,
+      loadingPlaces: state => state.places.loadingPlaces,
+      typeUsers: state => state.typeUsers.typeUsers,
+      loadingTipeUsers: state => state.typeUsers.loadingTipeUsers
     })
   },
 
   created () {
     if (!this.$can('create', 'Users')) return false
     this.getTypeUsers()
+    this.getPlaces()
   },
 
   methods: {
     ...mapActions({
-      createUser: 'users/createUser',
       replaceCurrentUser: 'users/replaceCurrentUser',
-      getTypeUsers: 'typeUsers/getTypeUsers'
+      getTypeUsers: 'typeUsers/getTypeUsers',
+      createUser: 'users/createUser',
+      getPlaces: 'places/getPlaces'
     }),
 
     submitCreateUser () {
