@@ -53,37 +53,45 @@ export const getters = {
           to: { name: 'dashboard' }
         },
         {
-          name: 'Usuarios',
+          name: 'Personal',
           to: { name: 'sgcUsersList' }
         },
         {
-          name: 'Places'
+          name: 'Boticas'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Perfil'
+          name: 'Proveedores'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Products'
+          name: 'Compras'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Boxes'
+          name: 'Ventas'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Sales'
+          name: 'Productos',
+          to: { name: 'sgcProductsList' },
+        },
+        {
+          name: 'Revista Kairos'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Transfers'
+          name: 'Almacen'
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Provider'
+          name: 'Balance Diario'
           // to: { name: 'sgcUserGameRoom' },
-        }
+        },
+        {
+          name: 'Reportes'
+          // to: { name: 'sgcUserGameRoom' },
+        },
       )
 
       return items
