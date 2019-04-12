@@ -62,7 +62,7 @@ export default {
 .avatar-uploader {
   padding-top: 7px;
   .el-upload {
-    border: 3px dashed #d9d9d9;
+    border: 2px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;

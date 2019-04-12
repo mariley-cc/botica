@@ -22,11 +22,10 @@
           <v-toolbar-title>Usuarios</v-toolbar-title>
           <v-spacer />
           <v-btn
-            flat
             :to="{ name: 'sgcUsersCreate' }"
-            color="info"
+            color="success"
           >
-            Agregar Nuevo Usuario
+            Agregar Usuario
           </v-btn>
         </v-toolbar>
         <v-container
@@ -107,11 +106,13 @@
                         class="ma-0"
                         :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
                         small
-                        fab
+                        icon
                         flat
                         color="info"
                       >
-                        <v-icon>edit</v-icon>
+                        <v-icon small>
+                          edit
+                        </v-icon>
                       </v-btn>
                     </template>
                   </td>
