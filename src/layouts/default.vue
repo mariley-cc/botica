@@ -59,36 +59,33 @@ export default {
 }
 
 // upload images
-.avatar-uploader {
-  padding-top: 7px;
-  .el-upload {
-    border: 2px dashed #d9d9d9;
+.avatar-uploader{
+  background: white;
+    padding: 22px 0px;
+}
+ .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-
-    &:hover {
-    border-color: #409EFF;
-    }
   }
-}
-
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-
-.avatar {
-  width: auto;
-  max-width: 100%;
-  max-height: 178px;
-  display: block;
-}
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 // end upload images
 
   .scoped-list-tile {
