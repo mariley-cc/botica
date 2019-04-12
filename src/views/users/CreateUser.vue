@@ -13,186 +13,137 @@
           { name: 'Nuevo usuario' }
         ]"
       />
-
-      <v-card>
-        <v-toolbar
-          color="info"
-          dark
-          card
+      <v-layout
+        row
+        wrap
+        justify-center
+      >
+        <v-flex
+          md6
+          sm5
+          xs12
         >
-          <v-toolbar-title>Nuevo Usuario</v-toolbar-title>
-          <v-spacer />
-        </v-toolbar>
-        <v-card-text
-          class="pa-0"
-        >
-          <v-form
-            ref="form"
-            v-model="validForm"
-            lazy-validation
-            @submit.prevent="submitCreateUser"
-          >
-            <v-container
-              fluid
-              grid-list-lg
+          <v-card>
+            <v-card-title primary-title>
+              <span class="info--text font-weight-bold headline">Registrar Usuario</span>
+            </v-card-title>
+            <v-divider />
+            <v-card-text
+              class="pa-0"
             >
-              <v-layout
-                row
-                wrap
+              <v-form
+                ref="form"
+                v-model="validForm"
+                lazy-validation
+                @submit.prevent="submitCreateUser"
               >
-                <v-flex
-                  sm6
-                  xs12
+                <v-container
+                  fluid
+                  grid-list-lg
                 >
                   <v-text-field
                     v-model="form.username"
-                    box
                     label="Nombre de Usuario"
                   />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
                   <v-text-field
                     v-model="form.email"
-                    box
                     label="Email"
                   />
-                </v-flex>
-              </v-layout>
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
-                >
                   <v-text-field
                     v-model="form.name"
-                    box
                     label="Nombre"
                   />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
                   <v-text-field
                     v-model="form.last_name"
-                    box
                     label="Apellidos"
                   />
-                </v-flex>
-              </v-layout>
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-text-field
-                    v-model="form.dni"
-                    box
-                    label="N° de DNI"
-                  />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-text-field
-                    v-model="form.telephone"
-                    box
-                    label="Celular"
-                  />
-                </v-flex>
-              </v-layout>
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
-                >
                   <v-text-field
                     v-model="form.password"
-                    box
+                    type="password"
                     label="Contraseña"
+                    :rules="rules.password"
                   />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-text-field
-                    v-model="form.password2"
-                    box
-                    label="Repetir Contraseña"
-                  />
-                </v-flex>
-              </v-layout>
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-autocomplete
-                    v-model="form.type_user_id"
-                    :items="[]"
-                    box
-                    dense
-                    deletable-chips
-                    multiple
-                    small-chips
-                    label="Seleccionar tipo de usuario"
-                    item-text="name"
-                    item-value="id"
-                  />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-autocomplete
-                    v-model="form.place_id"
-                    :items="[]"
-                    box
-                    dense
-                    deletable-chips
-                    multiple
-                    small-chips
-                    label="Seleccionar lugar de Trabajo"
-                    item-text="name"
-                    item-value="id"
-                  />
-                </v-flex>
-              </v-layout>
-            </v-container>
-            <v-divider class="mb-3" />
-            <div class="text-xs-center mb-3">
-              <v-btn
-                type="submit"
-                color="success"
-                :disabled="!validForm || processingForm"
-                :loading="processingForm"
-              >
-                Guardar
-              </v-btn>
-              <v-btn @click="$router.push({ name: 'sgcUsersList' })">
-                Cancelar
-              </v-btn>
-            </div>
-          </v-form>
-        </v-card-text>
-      </v-card>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.dni"
+                        label="N° de DNI"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.telephone"
+                        label="Celular"
+                      />
+                    </v-flex>
+                  </v-layout>
+
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.type_user_id"
+                        :items="[]"
+                        dense
+                        deletable-chips
+                        multiple
+                        small-chips
+                        label="Seleccionar tipo de usuario"
+                        item-text="name"
+                        item-value="id"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.place_id"
+                        :items="[]"
+                        dense
+                        deletable-chips
+                        multiple
+                        small-chips
+                        label="Seleccionar lugar de Trabajo"
+                        item-text="name"
+                        item-value="id"
+                      />
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+                <v-divider class="mb-3" />
+                <div class="text-xs-center mb-3">
+                  <v-btn
+                    type="submit"
+                    color="success"
+                    :disabled="!validForm || processingForm"
+                    :loading="processingForm"
+                  >
+                    Guardar
+                  </v-btn>
+                  <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+                    Cancelar
+                  </v-btn>
+                </div>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </template>
   </v-container>
 </template>
@@ -230,7 +181,24 @@ export default {
       },
 
       validForm: true,
-      processingForm: false
+      processingForm: false,
+
+      rules: {
+        name: [
+          v => !!v || 'El nombre es requerido'
+        ],
+        email: [
+          v => !!v || 'El correo electrónico es requerido',
+          // eslint-disable-next-line no-useless-escape
+          v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
+        ],
+        password: [
+          v => !!v || 'La contraseña es requerida'
+        ],
+        password_confirmation: [
+          v => !!v || 'La  confirmación de la contraseña es requerida'
+        ]
+      }
     }
   },
 
@@ -242,12 +210,14 @@ export default {
 
   created () {
     if (!this.$can('create', 'Users')) return false
+    this.getTypeUsers()
   },
 
   methods: {
     ...mapActions({
       createUser: 'users/createUser',
-      replaceCurrentUser: 'users/replaceCurrentUser'
+      replaceCurrentUser: 'users/replaceCurrentUser',
+      getTypeUsers: 'typeUsers/getTypeUsers'
     }),
 
     submitCreateUser () {
