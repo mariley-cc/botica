@@ -1,6 +1,7 @@
 <template>
+  <v-app id="login" class="green lighten-2">
   <v-container
-    id="login" class="light-blue darken-1"
+    fluid fill-height
   >
     <template v-if="!authenticated">
       <v-layout
@@ -11,14 +12,11 @@
         >
           <v-card class="elevation-1 pa-3">
             <v-card-title
-              class="text-xs-center primary white--text title"
-              primary-title
             >
-              <v-spacer />
-              <span>
-                Iniciar Sesión
-              </span>
-              <v-spacer />
+              <div class="layout column align-center">
+                  <img src="@/assets/farmacia.png" alt="Farmacia" width="100" height="100">
+                  <h1 class="flex my-4 primary--text">Farmacia</h1>
+                </div>
             </v-card-title>
             <v-divider />
             <v-card-text
@@ -92,6 +90,7 @@
       </v-layout>
     </template>
   </v-container>
+  </v-app>
 </template>
 
 <script>

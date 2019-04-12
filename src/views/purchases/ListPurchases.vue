@@ -15,7 +15,7 @@
     />
     <v-card>
       <v-toolbar
-         color="info"
+        color="grey darken-4"
         dark
         card
       >
@@ -137,8 +137,6 @@ export default {
   },
 
   created () {
-    // if (!this.$can('list', 'Users')) return false
-
     this.getPurchases()
   },
 
