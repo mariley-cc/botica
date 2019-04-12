@@ -15,18 +15,17 @@
       />
       <v-card>
         <v-toolbar
-          color="info"
+          color="grey darken-4"
           dark
           card
         >
           <v-toolbar-title>Usuarios</v-toolbar-title>
           <v-spacer />
           <v-btn
-            flat
             :to="{ name: 'sgcUsersCreate' }"
-            color="info"
+            color="success"
           >
-            Agregar Nuevo Usuario
+            Agregar Usuario
           </v-btn>
         </v-toolbar>
         <v-container
@@ -55,7 +54,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Nombre', value: 'name' },
+                  
                   { text: 'Correo electrónico', value: 'email' },
                   { text: 'Tipo', value: 'typeUser' },
                   { text: 'Estado', value: 'state' },
@@ -70,9 +69,7 @@
                   slot="items"
                   slot-scope="props"
                 >
-                  <td class="px-3">
-                    {{ props.item.name }}
-                  </td>
+
                   <td class="px-3">
                     {{ props.item.email }}
                   </td>
@@ -107,11 +104,13 @@
                         class="ma-0"
                         :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
                         small
-                        fab
+                        icon
                         flat
                         color="info"
                       >
-                        <v-icon>edit</v-icon>
+                        <v-icon small>
+                          edit
+                        </v-icon>
                       </v-btn>
                     </template>
                   </td>
@@ -181,9 +180,6 @@ export default {
       this.replaceShowModalDeleteUser({ status: true })
     },
 
-    verifyUserAndWalletIsActive (item) {
-      return item.is_active === 'Si' && item.wallet.state === 'active'
-    }
   }
 }
 </script>

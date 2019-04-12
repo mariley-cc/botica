@@ -7,7 +7,7 @@
     <Breadcrumbs
       :routes="[
         { name: 'Inicio', to: { name: 'home' } },
-        { name: 'Products' },
+        { name: 'Productos' },
         { name: 'Listado' }
       ]"
     />
@@ -17,7 +17,7 @@
         dark
         card
       >
-        <v-toolbar-title>Products</v-toolbar-title>
+        <v-toolbar-title>Productos</v-toolbar-title>
         <v-spacer />
       </v-toolbar>
       <v-container
