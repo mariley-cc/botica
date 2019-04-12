@@ -48,8 +48,8 @@
               :headers="[
                 { text: 'bar', value: 'bar' },
                 { text: 'Stock', value: 'stock' },
-                { text: 'Condition', value: 'condition' },
-                { text: 'Group', value: 'grouped' }
+                { text: 'Condición', value: 'condition' },
+                { text: 'Grupo', value: 'grouped' }
               ]"
               :items="products"
               :search="searchProducts"
@@ -62,7 +62,8 @@
               >
                 <td>{{ props.item.bar }}</td>
                 <td>{{ props.item.stock }}</td>
-
+                <td>{{ props.item.condition }}</td>
+                <td>{{ props.item.grouped }}</td>
                 <td class="text-xs-right">
                   <template v-if="$can('update', 'Products')">
                     <v-btn

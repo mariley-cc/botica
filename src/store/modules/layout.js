@@ -61,12 +61,12 @@ export const getters = {
           // to: { name: 'sgcUserGameRoom' },
         },
         {
-          name: 'Proveedores'
-          // to: { name: 'sgcUserGameRoom' },
+          name: 'Proveedores',
+          to: { name: 'sgcProvidersList' },
         },
         {
-          name: 'Compras'
-          // to: { name: 'sgcUserGameRoom' },
+          name: 'Compras',
+          to: { name: 'sgcPurchasesList' },
         },
         {
           name: 'Ventas'

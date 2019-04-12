@@ -9,7 +9,7 @@
     <Breadcrumbs
       :routes="[
         { name: 'Inicio', to: { name: 'home' } },
-        { name: 'Usuarios' },
+        { name: 'Compras' },
         { name: 'Listado' }
       ]"
     />
@@ -19,7 +19,7 @@
         dark
         card
       >
-        <v-toolbar-title>Usuarios</v-toolbar-title>
+        <v-toolbar-title>Compras</v-toolbar-title>
         <v-spacer />
       </v-toolbar>
       <v-container
@@ -30,32 +30,13 @@
           row
           wrap
         >
-          <v-flex sm6>
-            <v-radio-group
-              v-model="radioFilterBy"
-              row
-            >
-              <v-radio
-                label="Ver todos"
-                value=""
-              />
-              <v-radio
-                label="Ver administradores"
-                value="admin"
-              />
-              <v-radio
-                label="ver clientes"
-                value="client"
-              />
-            </v-radio-group>
-          </v-flex>
           <v-flex
-            v-if="users.length"
+            v-if="purchases.length"
             sm6
           >
             <v-text-field
-              v-model="searchUsers"
-              :disabled="loadingUsers"
+              v-model="searchPurchases"
+              :disabled="loadingPurchases"
               box
               append-icon="search"
               label="Buscar"
@@ -66,68 +47,33 @@
           <v-flex xs12>
             <v-data-table
               :headers="[
-                { text: 'Nombre', value: 'name' },
-                { text: 'Correo electrónico', value: 'email' },
-                { text: 'Tipo', value: 'user_type' },
-                { text: 'Activo', value: 'is_active' },
-                { text: 'Plan', value: 'plan.name' },
-                { text: 'Créditos', value: '' },
-                { text: 'Acciones', align: 'center', sortable: false, width: '220' }
+                { text: 'Factura', value: 'invoice' },
+                { text: 'Condicion', value: 'condition' },
+                { text: 'Modalidad', value: 'modality' },
+                { text: 'Total', value: 'total' },
+                { text: 'Estado', value: 'state' },
+                { text: 'Proveedor', value: 'provider.name' },
               ]"
-              :items="users"
-              :search="searchUsers"
-              :loading="loadingUsers"
+              :items="purchases"
+              :search="searchPurchases"
+              :loading="loadingPurchases"
               class="elevation-1"
             >
               <tr
                 slot="items"
                 slot-scope="props"
               >
-                <td>{{ props.item.name }}</td>
-                <td>{{ props.item.email }}</td>
-                <td>
-                  <v-chip
-                    v-if="props.item.user_type === 'admin'"
-                    small
-                    color="primary"
-                    text-color="white"
-                  >
-                    {{ props.item.user_type }}
-                  </v-chip>
-                  <v-chip
-                    v-else-if="props.item.user_type === 'client'"
-                    small
-                  >
-                    Cliente
-                  </v-chip>
-                  <v-chip
-                    v-else
-                    small
-                  >
-                    ---
-                  </v-chip>
-                </td>
-                <td>
-                  <v-chip
-                    v-if="props.item.user_type === 'client'"
-                    dark
-                    :color="verifyUserAndWalletIsActive(props.item) ? 'success' : 'error'"
-                    small
-                  >
-                    {{ verifyUserAndWalletIsActive(props.item)? 'Si' : 'No' }}
-                  </v-chip>
-                </td>
-                <td>
-                  <span v-if="props.item.wallet">{{ props.item.wallet.plan ? props.item.wallet.plan.name : '' }}</span>
-                </td>
-                <td>
-                  <span v-if="props.item.wallet">{{ parseFloat(props.item.wallet.amount_credits) }}</span>
-                </td>
+                <td>{{ props.item.invoice }}</td>
+                <td>{{ props.item.condition }}</td>
+                <td>{{ props.item.modality }}</td>
+                <td>{{ props.item.total }}</td>
+                <td>{{ props.item.state }}</td>
+                <td>{{ props.item.provider.name }}</td>
                 <td class="text-xs-right">
-                  <template v-if="$can('update', 'Users')">
+                  <template v-if="$can('update', 'Purchases')">
                     <v-btn
                       class="ma-0"
-                      :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
+                      :to="{ name: 'sgcPurchasesEdit', params: { id: props.item.id } }"
                       small
                       fab
                       flat
@@ -135,34 +81,16 @@
                     >
                       <v-icon>edit</v-icon>
                     </v-btn>
-
-                    <v-tooltip
-                      v-if="props.item.user_type === 'client'"
-                      bottom
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="ma-0"
-                        small
-                        fab
-                        flat
-                        color="success"
-                        @click="openModalIncreaseDecreaseCreditsForUser(props.item)"
-                      >
-                        <v-icon>attach_money</v-icon>
-                      </v-btn>
-                      <span>Aumentar ó Reducir créditos</span>
-                    </v-tooltip>
                   </template>
 
                   <v-btn
-                    v-if="$can('delete', 'Users')"
+                    v-if="$can('delete', 'Purchases')"
                     class="ma-0"
                     small
                     fab
                     flat
                     color="error"
-                    @click="openModalDeleteUser(props.item)"
+                    @click="openModalDeletePurchase(props.item)"
                   >
                     <v-icon>delete</v-icon>
                   </v-btn>
@@ -174,7 +102,7 @@
       </v-container>
     </v-card>
 
-    <ModalDeleteUser />
+    <ModalDeletePurchase />
     <!-- </template> -->
   </v-container>
 </template>
@@ -186,69 +114,46 @@ export default {
   middleware: 'auth',
 
   metaInfo () {
-    return { title: 'Listado de Usuarios' }
+    return { title: 'Listado de compras' }
   },
 
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    ModalDeleteUser: () => import('@/views/users/ModalDeleteUser')
+    ModalDeletePurchase: () => import('@/views/purchases/ModalDeletePurchase')
   },
 
   data () {
     return {
-      searchUsers: '',
-      radioFilterBy: ''
+      searchPurchases: '',
     }
   },
 
   computed: {
     ...mapState({
-      users: state => state.users.users,
-      loadingUsers: state => state.users.loadingUsers
+      purchases: state => state.purchases.purchases,
+      loadingPurchases: state => state.purchases.loadingPurchases
     })
-  },
-
-  watch: {
-    radioFilterBy (newValue, oldValue) {
-      if (newValue === 'admin') {
-        this.getUsers({ params: { type: 'admin' } })
-      } else if (newValue === 'client') {
-        this.getUsers({ params: { type: 'client' } })
-      } else {
-        this.getUsers()
-      }
-    }
   },
 
   created () {
     // if (!this.$can('list', 'Users')) return false
 
-    this.getUsers()
+    this.getPurchases()
   },
 
   methods: {
     ...mapActions({
-      getUsers: 'users/getUsers',
-      replaceShowModalDeleteUser: 'users/replaceShowModalDeleteUser',
-      replaceShowModalIncreaseDecreaseCredits: 'credits/replaceShowModalIncreaseDecreaseCredits',
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      replaceUsers: 'users/replaceUsers'
+      getPurchases: 'purchases/getPurchases',
+      replaceShowModalDeletePurchase: 'purchases/replaceShowModalDeletePurchase',
+      replaceCurrentPurchase: 'purchases/replaceCurrentPurchase',
+      replacePurchases: 'purchases/replacePurchases'
     }),
 
-    openModalIncreaseDecreaseCreditsForUser (user) {
-      this.replaceCurrentUser({ user })
-      this.replaceShowModalIncreaseDecreaseCredits({ status: true })
+    openModalDeletePurchase (purchase) {
+      this.replaceCurrentPurchase({ purchase })
+      this.replaceShowModalDeletePurchase({ status: true })
     },
-
-    openModalDeleteUser (user) {
-      this.replaceCurrentUser({ user })
-      this.replaceShowModalDeleteUser({ status: true })
-    },
-
-    verifyUserAndWalletIsActive (item) {
-      return item.is_active === 'Si' && item.wallet.state === 'active'
-    }
   }
 }
 </script>

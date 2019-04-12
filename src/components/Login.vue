@@ -1,21 +1,15 @@
 <template>
   <v-container
-    fluid
-    grid-list-lg
+    id="login" class="light-blue darken-1"
   >
     <template v-if="!authenticated">
       <v-layout
-        row
-        wrap
+        align-center justify-center
       >
         <v-flex
-          xs12
-          sm6
-          md4
-          offset-sm3
-          offset-md4
+          xs12 sm8 md4 lg4
         >
-          <v-card>
+          <v-card class="elevation-1 pa-3">
             <v-card-title
               class="text-xs-center primary white--text title"
               primary-title
@@ -207,3 +201,14 @@ export default {
   }
 }
 </script>
+<style scoped lang="css">
+  #login {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    z-index: 0;
+  }
+</style>
