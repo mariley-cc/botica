@@ -22,7 +22,7 @@
         >
           <img
             style="max-height:30px;"
-            :src="require('@/assets/logo.png')"
+            :src="require('@/assets/farmacia.png')"
           >
         </v-btn>
       </v-toolbar-title>
