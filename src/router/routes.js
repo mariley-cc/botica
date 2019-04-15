@@ -45,6 +45,11 @@ export default [
     component: () => import('@/views/products/ListProducts.vue')
   },
   {
+    path: '/sgc/products/create',
+    name: 'sgcProductsCreate',
+    component: () => import('@/views/products/CreateProduct.vue')
+  },
+  {
     path: '/sgc/providers',
     name: 'sgcProvidersList',
     component: () => import('@/views/providers/ListProviders.vue')
