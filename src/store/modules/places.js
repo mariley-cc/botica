@@ -3,7 +3,10 @@ import placeAPI from '@/api/place'
 
 export const state = {
   places: [],
-  loadingPlaces: false
+  loadingPlaces: false,
+  currentPlace: null,
+  showModalEditPlace: false,
+  showModalCreatePlace: false
 }
 
 export const actions = {
@@ -59,6 +62,18 @@ export const actions = {
           reject(error)
         })
     })
+  },
+
+  replaceCurrentPlace ({ commit }, payload) {
+    commit(types.REPLACE_CURRENT_PLACE, payload)
+  },
+
+  replaceShowModalEditPlace ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_EDIT_PLACE, payload)
+  },
+
+  replaceShowModalCreatePlace ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_CREATE_PLACE, payload)
   }
 
 }
@@ -69,5 +84,14 @@ export const mutations = {
   },
   [types.REPLACE_PLACES] (state, { places }) {
     state.places = places
+  },
+  [types.REPLACE_CURRENT_PLACE] (state, { place }) {
+    state.currentPlace = place
+  },
+  [types.REPLACE_SHOW_MODAL_EDIT_PLACE] (state, { place }) {
+    state.showModalEditPlace = place
+  },
+  [types.REPLACE_SHOW_MODAL_CREATE_PLACE] (state, { place }) {
+    state.showModalCreatePlace = place
   }
 }

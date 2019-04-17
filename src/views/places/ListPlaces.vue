@@ -3,7 +3,7 @@
     fluid
     grid-list-lg
   >
-    <NotPermission v-if="!$can('list', 'Users')" />
+    <NotPermission v-if="!$can('list', 'Places')" />
 
     <template v-else>
       <Breadcrumbs
@@ -54,9 +54,10 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'Correo electrónico', value: 'email' },
-                  { text: 'Tipo', value: 'typeUser' },
-                  { text: 'Estado', value: 'state' },
+                  { text: 'Botica', value: 'name' },
+                  { text: 'Dirección', value: 'address' },
+                  { text: '# Personal', value: 'personal' },
+                  { text: 'Contacto', value: 'telephone' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
                 :items="users"
@@ -69,42 +70,26 @@
                   slot-scope="props"
                 >
                   <td class="px-3">
-                    {{ props.item.email }}
+                    {{ props.item.name }}
                   </td>
                   <td class="px-3">
-                    <v-chip
-                      v-if="props.item.typeUser.type === 'admin'"
-                      small
-                      color="primary"
-                      text-color="white"
-                    >
-                      {{ props.item.typeUser.type }}
-                    </v-chip>
-                    <v-chip
-                      v-else-if="props.item.typeUser.type === 'client'"
-                      small
-                    >
-                      Vendedor
-                    </v-chip>
-                    <v-chip
-                      v-else
-                      small
-                    >
-                      {{ props.item.typeUser.name }}
-                    </v-chip>
+                    {{ props.item.address }}
                   </td>
                   <td class="px-3">
-                    {{ props.item.state }}
+                    {{ props.item.personal }}
+                  </td>
+                  <td class="px-3">
+                    {{ props.item.telephone }}
                   </td>
                   <td class="text-xs-center px-3">
-                    <template v-if="$can('update', 'Users')">
+                    <template v-if="$can('list', 'Places')">
                       <v-btn
                         class="ma-0"
-                        :to="{ name: 'sgcUsersEdit', params: { id: props.item.id } }"
                         small
                         icon
                         flat
                         color="info"
+                        @click="onLoadModalEdit(props.item)"
                       >
                         <v-icon small>
                           edit
@@ -145,8 +130,8 @@ export default {
 
   computed: {
     ...mapState({
-      users: state => state.users.users,
-      loadingUsers: state => state.users.loadingUsers
+      places: state => state.places.places,
+      loadingPlaces: state => state.places.loadingPlaces
     })
   },
 
@@ -154,27 +139,24 @@ export default {
   },
 
   created () {
-    // if (!this.$can('list', 'Users')) return false
-
-    this.getUsers()
+    // if (!this.$can('list', 'Places')) return false
+    this.getPlaces()
   },
 
   methods: {
     ...mapActions({
-      getUsers: 'users/getUsers',
-      replaceShowModalDeleteUser: 'users/replaceShowModalDeleteUser',
-      replaceShowModalIncreaseDecreaseCredits: 'credits/replaceShowModalIncreaseDecreaseCredits',
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      replaceUsers: 'users/replaceUsers'
+      replaceShowModalEditPlace: 'places/replaceShowModalEditPlace',
+      replaceCurrenPlace: 'places/replaceCurrenPlace',
+      getPlaces: 'places/getPlaces'
     }),
 
-    openModalIncreaseDecreaseCreditsForUser (user) {
-      this.replaceCurrentUser({ user })
-      this.replaceShowModalIncreaseDecreaseCredits({ status: true })
+    onLoadModalEdit (place) {
+      this.replaceCurrenPlace({ place })
+      this.replaceShowModalEditPlace({ status: true })
     },
 
-    openModalDeleteUser (user) {
-      this.replaceCurrentUser({ user })
+    openModalDeleteUser (place) {
+      this.replaceCurrenPlace({ place })
       this.replaceShowModalDeleteUser({ status: true })
     }
 
