@@ -37,13 +37,13 @@
             wrap
           >
             <v-flex
-              v-if="users.length"
+              v-if="places.length"
               sm6
               offset-sm6
             >
               <v-text-field
                 v-model="searchUsers"
-                :disabled="loadingUsers"
+                :disabled="loadingPlaces"
                 box
                 append-icon="search"
                 label="Buscar"
@@ -60,9 +60,9 @@
                   { text: 'Contacto', value: 'telephone' },
                   { text: 'Acciones', align: 'center', sortable: false, width: '220' }
                 ]"
-                :items="users"
+                :items="places"
                 :search="searchUsers"
-                :loading="loadingUsers"
+                :loading="loadingPlaces"
                 class="elevation-1"
               >
                 <tr
