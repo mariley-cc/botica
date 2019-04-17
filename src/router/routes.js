@@ -40,6 +40,11 @@ export default [
     component: () => import('@/views/users/EditUser.vue')
   },
   {
+    path: '/sgc/places',
+    name: 'sgcPlacesList',
+    component: () => import('@/views/places/ListPlaces.vue')
+  },
+  {
     path: '/sgc/products',
     name: 'sgcProductsList',
     component: () => import('@/views/products/ListProducts.vue')
@@ -53,5 +58,5 @@ export default [
     path: '/sgc/purchases',
     name: 'sgcPurchasesList',
     component: () => import('@/views/purchases/ListPurchases.vue')
-  },
+  }
 ]
