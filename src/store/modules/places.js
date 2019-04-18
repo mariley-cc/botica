@@ -36,7 +36,7 @@ export const actions = {
         .then(response => {
           this._vm.$notify.success({
             title: 'Botica',
-            message: 'El Lugar ha sido agregado con éxito.'
+            message: 'La Botica ha sido agregado con éxito.'
           })
 
           resolve(response)
@@ -53,7 +53,7 @@ export const actions = {
         .then(response => {
           this._vm.$notify.success({
             title: 'Botica',
-            message: 'El usuario ha sido actualizado con éxito.'
+            message: 'La Botica ha sido actualizado con éxito.'
           })
 
           resolve(response)

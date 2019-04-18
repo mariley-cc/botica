@@ -19,7 +19,7 @@
           dark
           card
         >
-          <v-toolbar-title>Usuarios</v-toolbar-title>
+          <v-toolbar-title>Boticas</v-toolbar-title>
           <v-spacer />
           <v-btn
             color="success"
@@ -143,7 +143,7 @@ export default {
   },
 
   created () {
-    // if (!this.$can('list', 'Places')) return false
+    if (!this.$can('list', 'Places')) return false
     this.getPlaces()
   },
 
@@ -151,17 +151,17 @@ export default {
     ...mapActions({
       replaceShowModalEditPlace: 'places/replaceShowModalEditPlace',
       replaceShowModalCreatePlace: 'places/replaceShowModalCreatePlace',
-      replaceCurrenPlace: 'places/replaceCurrenPlace',
+      replaceCurrentPlace: 'places/replaceCurrentPlace',
       getPlaces: 'places/getPlaces'
     }),
 
     onLoadModalEdit (place) {
-      this.replaceCurrenPlace({ place })
+      this.replaceCurrentPlace({ place })
       this.replaceShowModalEditPlace({ status: true })
     },
 
     openModalDeleteUser (place) {
-      this.replaceCurrenPlace({ place })
+      this.replaceCurrentPlace({ place })
       this.replaceShowModalDeleteUser({ status: true })
     }
 

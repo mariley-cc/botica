@@ -11,7 +11,7 @@
         primary-title
         class="py-2"
       >
-        <span class="success--text font-weight-bold headline">Registrar Usuario</span>
+        <span class="success--text font-weight-bold headline">Registrar Botica</span>
         <v-spacer />
         <v-btn
           icon
@@ -163,8 +163,6 @@ export default {
 
   computed: {
     ...mapState({
-      places: state => state.places.places,
-      loadingPlaces: state => state.places.loadingPlaces,
       showModalCreatePlace: state => state.places.showModalCreatePlace
     })
   },
