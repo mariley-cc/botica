@@ -104,6 +104,7 @@
         </v-container>
       </v-card>
     </template>
+
     <ModalCreatePlace />
     <ModalEditPlace />
   </v-container>
@@ -122,8 +123,8 @@ export default {
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    ModalCreatePlace: () => import('@/views/places/ModalCreatePlace.vue'),
-    ModalEditPlace: () => import('@/views/places/ModalEditPlace.vue')
+    ModalCreatePlace: () => import('@/views/places/ModalCreatePlace'),
+    ModalEditPlace: () => import('@/views/places/ModalEditPlace')
   },
 
   data () {

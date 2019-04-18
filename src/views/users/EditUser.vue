@@ -241,7 +241,7 @@ export default {
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
     NotPermission: () => import('@/views/errors/NotPermission'),
-    ModalCreatePlace: () => import('@/views/places/ModalCreatePlace.vue')
+    ModalCreatePlace: () => import('@/views/places/ModalCreatePlace')
   },
 
   data () {
