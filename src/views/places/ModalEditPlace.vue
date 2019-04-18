@@ -191,8 +191,10 @@ export default {
     submitUpdatePlace () {
       if (!this.$refs.form.validate()) return false
 
+      const placeId = this.currentPlace.id
+
       this.processingForm = true
-      this.updatePlace({ data: this.form })
+      this.updatePlace({ placeId, data: this.form })
         .then(response => {
           this.processingForm = false
           this.replaceShowModalEditPlace({ status: false })
