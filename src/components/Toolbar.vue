@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar
-      height="78"
+      height="65"
       :clipped-left="primaryDrawer.clipped"
       app
       center
