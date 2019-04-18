@@ -32,7 +32,7 @@ export const getters = {
         },
         {
           name: 'Places',
-          // to: { name: 'sgcUserGameRoom' },
+          // to: { name: 'sgcPlacesList' },
           icon: 'person'
         },
         {
@@ -57,16 +57,16 @@ export const getters = {
           to: { name: 'sgcUsersList' }
         },
         {
-          name: 'Boticas'
-          // to: { name: 'sgcUserGameRoom' },
+          name: 'Boticas',
+          to: { name: 'sgcPlacesList' }
         },
         {
           name: 'Proveedores',
-          to: { name: 'sgcProvidersList' },
+          to: { name: 'sgcProvidersList' }
         },
         {
           name: 'Compras',
-          to: { name: 'sgcPurchasesList' },
+          to: { name: 'sgcPurchasesList' }
         },
         {
           name: 'Ventas'
@@ -74,7 +74,7 @@ export const getters = {
         },
         {
           name: 'Productos',
-          to: { name: 'sgcProductsList' },
+          to: { name: 'sgcProductsList' }
         },
         {
           name: 'Revista Kairos'
@@ -91,7 +91,7 @@ export const getters = {
         {
           name: 'Reportes'
           // to: { name: 'sgcUserGameRoom' },
-        },
+        }
       )
 
       return items

@@ -61,7 +61,7 @@ export default {
 // upload images
 .avatar-uploader{
   background: white;
-    padding: 22px 0px;
+    padding: 15px 0px;
 }
  .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
