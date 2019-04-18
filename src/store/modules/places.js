@@ -88,10 +88,10 @@ export const mutations = {
   [types.REPLACE_CURRENT_PLACE] (state, { place }) {
     state.currentPlace = place
   },
-  [types.REPLACE_SHOW_MODAL_EDIT_PLACE] (state, { place }) {
-    state.showModalEditPlace = place
+  [types.REPLACE_SHOW_MODAL_EDIT_PLACE] (state, { status }) {
+    state.showModalEditPlace = status
   },
-  [types.REPLACE_SHOW_MODAL_CREATE_PLACE] (state, { place }) {
-    state.showModalCreatePlace = place
+  [types.REPLACE_SHOW_MODAL_CREATE_PLACE] (state, { status }) {
+    state.showModalCreatePlace = status
   }
 }

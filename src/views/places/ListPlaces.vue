@@ -9,7 +9,7 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'home' } },
-          { name: 'Usuarios' },
+          { name: 'Boticas' },
           { name: 'Listado' }
         ]"
       />
@@ -22,10 +22,10 @@
           <v-toolbar-title>Usuarios</v-toolbar-title>
           <v-spacer />
           <v-btn
-            :to="{ name: 'sgcUsersCreate' }"
             color="success"
+            @click="replaceShowModalCreatePlace({ status: true })"
           >
-            Agregar Usuario
+            Agregar Botica
           </v-btn>
         </v-toolbar>
         <v-container
@@ -104,6 +104,8 @@
         </v-container>
       </v-card>
     </template>
+    <ModalCreatePlace />
+    <ModalEditPlace />
   </v-container>
 </template>
 
@@ -119,7 +121,9 @@ export default {
 
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    ModalCreatePlace: () => import('@/views/places/ModalCreatePlace.vue'),
+    ModalEditPlace: () => import('@/views/places/ModalEditPlace.vue')
   },
 
   data () {
@@ -146,6 +150,7 @@ export default {
   methods: {
     ...mapActions({
       replaceShowModalEditPlace: 'places/replaceShowModalEditPlace',
+      replaceShowModalCreatePlace: 'places/replaceShowModalCreatePlace',
       replaceCurrenPlace: 'places/replaceCurrenPlace',
       getPlaces: 'places/getPlaces'
     }),

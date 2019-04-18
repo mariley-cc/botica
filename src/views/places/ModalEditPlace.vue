@@ -1,18 +1,15 @@
 <template>
-  <v-container
-    fluid
-    grid-list-lg
+  <v-dialog
+    v-model="showModalEditPlace"
+    width="480px"
+    persistent
+    lazy
+    scrollable
   >
-    <NotPermission v-if="!$can('create', 'Users')" />
-
-    <template v-else>
-      <Breadcrumbs
-        :routes="[
-          { name: 'Inicio', to: { name: 'home' } },
-          { name: 'Users', to: { name: 'sgcUsersList' } },
-          { name: 'Nuevo usuario' }
-        ]"
-      />
+    <v-container
+      fluid
+      grid-list-lg
+    >
       <v-layout
         row
         wrap
@@ -48,7 +45,7 @@
         >
           <v-card>
             <v-card-title primary-title>
-              <span class="success--text font-weight-bold headline">Registrar Usuario</span>
+              <span class="success--text font-weight-bold headline">Editar Usuario</span>
             </v-card-title>
             <v-divider />
             <v-card-text
@@ -58,7 +55,7 @@
                 ref="form"
                 v-model="validForm"
                 lazy-validation
-                @submit.prevent="submitCreateUser"
+                @submit.prevent="submitUpdateUser"
               >
                 <v-container
                   fluid
@@ -107,19 +104,6 @@
                     @keyup="() => {
                       formErrors.last_name = undefined
                       delete formErrors.last_name
-                    }"
-                  />
-                  <v-text-field
-                    v-model="form.password"
-                    type="password"
-                    :disabled="processingForm"
-                    label="Contraseña"
-                    :rules="rules.password"
-                    :error="!!formErrors.password"
-                    :error-messages="formErrors.password"
-                    @keyup="() => {
-                      formErrors.password = undefined
-                      delete formErrors.password
                     }"
                   />
                   <v-layout
@@ -233,8 +217,8 @@
           </v-card>
         </v-flex>
       </v-layout>
-    </template>
-  </v-container>
+    </v-container>
+  </v-dialog>
 </template>
 
 <script>
@@ -244,29 +228,25 @@ export default {
   middleware: 'auth',
 
   metaInfo () {
-    return { title: 'Nuevo Usuario' }
-  },
-
-  components: {
-    Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    NotPermission: () => import('@/views/errors/NotPermission')
+    return { title: 'Editar Usuario' }
   },
 
   data () {
     return {
+
       imageUrl: '',
+
       formErrors: {},
 
       form: {
         email: '',
         username: '',
-        password: '',
         last_name: '',
         name: '',
         dni: '',
         telephone: '',
-        image: 'image_path_url_image',
-        image_path: 'image_path_url_image',
+        image: '',
+        image_path: '',
         state: 'activo',
         type_user_id: 0,
         place_id: 0
@@ -283,9 +263,6 @@ export default {
           v => !!v || 'El correo electrónico es requerido',
           // eslint-disable-next-line no-useless-escape
           v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
-        ],
-        password: [
-          v => !!v || 'La contraseña es requerida'
         ]
       }
     }
@@ -295,33 +272,45 @@ export default {
     ...mapState({
       currentUser: state => state.users.currentUser,
       places: state => state.places.places,
+      showModalEditPlace: state => state.places.showModalEditPlace,
       loadingPlaces: state => state.places.loadingPlaces,
       typeUsers: state => state.typeUsers.typeUsers,
       loadingTipeUsers: state => state.typeUsers.loadingTipeUsers
     })
   },
 
-  created () {
-    if (!this.$can('create', 'Users')) return false
-    this.getTypeUsers()
-    this.getPlaces()
-  },
-
   methods: {
     ...mapActions({
+      getUser: 'users/getUser',
+      updateUser: 'users/updateUser',
       replaceCurrentUser: 'users/replaceCurrentUser',
       getTypeUsers: 'typeUsers/getTypeUsers',
-      createUser: 'users/createUser',
-      getPlaces: 'places/getPlaces',
-      getUsers: 'users/getUsers'
+      getPlaces: 'places/getPlaces'
 
     }),
 
-    submitCreateUser () {
+    setForm (user) {
+      this.form.email = user.email
+      this.form.username = user.username
+      this.form.last_name = user.last_name
+      this.form.name = user.name
+      this.form.dni = user.dni
+      this.form.telephone = user.telephone
+      this.form.image = user.image || 'image_path_url_image'
+      this.form.image_path = user.image_path || 'image_path_url_image'
+      this.form.state = user.state
+      this.form.type_user_id = user.typeUser ? user.typeUser.id : ''
+      this.form.place_id = user.place ? user.place.id : ''
+    },
+
+    submitUpdateUser () {
       if (!this.$refs.form.validate()) return false
 
       this.processingForm = true
-      this.createUser({ data: this.form })
+      this.updateUser({
+        userId: this.$route.params.id,
+        data: this.form
+      })
         .then(response => {
           this.processingForm = false
           this.$router.push({ name: 'sgcUsersList' })
@@ -338,15 +327,15 @@ export default {
     beforeAvatarUpload (file) {
       const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png')
 
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt5M = file.size / 1024 / 1024 < 5
 
       if (!isJPG) {
         this.$message.error('La imagen debe estar en formato JPG!')
       }
-      if (!isLt2M) {
+      if (!isLt5M) {
         this.$message.error('La imagen excede los 2MB!')
       }
-      return isJPG && isLt2M
+      return isJPG && isLt5M
     }
   }
 
