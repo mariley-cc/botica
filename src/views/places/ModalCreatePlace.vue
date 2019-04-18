@@ -7,8 +7,19 @@
     scrollable
   >
     <v-card>
-      <v-card-title primary-title>
+      <v-card-title
+        primary-title
+        class="py-2"
+      >
         <span class="success--text font-weight-bold headline">Registrar Usuario</span>
+        <v-spacer />
+        <v-btn
+          icon
+          flat
+          @click="replaceShowModalCreatePlace({ status: false })"
+        >
+          <v-icon>close</v-icon>
+        </v-btn>
       </v-card-title>
       <v-divider />
       <v-card-text
@@ -54,6 +65,17 @@
                 delete formErrors.name
               }"
             />
+            <v-text-field
+              v-model="form.address"
+              :disabled="processingForm"
+              label="Dirección"
+              :error="!!formErrors.address"
+              :error-messages="formErrors.address"
+              @keyup="() => {
+                formErrors.address = undefined
+                delete formErrors.address
+              }"
+            />
             <v-layout
               row
               wrap
@@ -94,8 +116,8 @@
               </v-flex>
             </v-layout>
           </v-container>
-          <v-divider class="mb-3" />
-          <div class="text-xs-center pb-3">
+          <v-divider class="mb-2" />
+          <div class="text-xs-center pb-2">
             <v-btn
               type="submit"
               color="success"
@@ -104,7 +126,7 @@
             >
               Guardar
             </v-btn>
-            <v-btn @click="$router.push({ name: 'sgcUsersList' })">
+            <v-btn @click="replaceShowModalCreatePlace({ status: false })">
               Cancelar
             </v-btn>
           </div>
@@ -119,10 +141,6 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   middleware: 'auth',
-
-  metaInfo () {
-    return { title: 'Nuevo Usuario' }
-  },
 
   data () {
     return {
@@ -139,21 +157,7 @@ export default {
       },
 
       validForm: true,
-      processingForm: false,
-
-      rules: {
-        name: [
-          v => !!v || 'El nombre es requerido'
-        ],
-        email: [
-          v => !!v || 'El correo electrónico es requerido',
-          // eslint-disable-next-line no-useless-escape
-          v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'El correo electrónico debe ser válido'
-        ],
-        password: [
-          v => !!v || 'La contraseña es requerida'
-        ]
-      }
+      processingForm: false
     }
   },
 
@@ -163,6 +167,18 @@ export default {
       loadingPlaces: state => state.places.loadingPlaces,
       showModalCreatePlace: state => state.places.showModalCreatePlace
     })
+  },
+
+  watch: {
+    showModalCreatePlace: function (newState, OldState) {
+      if (!newState) return false
+      this.form.name = ''
+      this.form.address = ''
+      this.form.personal = 2
+      this.form.telephone = ''
+      this.form.image = 'string'
+      this.form.image_path = 'string'
+    }
   },
 
   methods: {
@@ -181,6 +197,7 @@ export default {
         .then(response => {
           this.processingForm = false
           this.replaceShowModalCreatePlace({ status: false })
+          this.getPlaces()
         })
         .catch((error) => {
           this.processingForm = false
