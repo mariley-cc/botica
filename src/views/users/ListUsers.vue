@@ -86,7 +86,7 @@
                       v-else-if="props.item.typeUser.name === 'client'"
                       small
                     >
-                      Vendedor
+                      {{ props.item.typeUser.name }}
                     </v-chip>
                     <v-chip
                       v-else

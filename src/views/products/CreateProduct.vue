@@ -18,8 +18,6 @@
         wrap
       >
         <v-flex
-          md6
-          sm6
           xs12
         >
           <v-card>

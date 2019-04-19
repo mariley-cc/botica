@@ -92,6 +92,22 @@ export const actions = {
           reject(error)
         })
     })
+  },
+  updateProduct ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      productAPI.put(payload)
+        .then(response => {
+          this._vm.$notify.success({
+            title: 'Botica',
+            message: 'El usuario ha sido actualizado con éxito.'
+          })
+
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 }
 
