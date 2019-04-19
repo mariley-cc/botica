@@ -16,31 +16,8 @@
       <v-layout
         row
         wrap
+        justify-center
       >
-        <v-flex
-          md4
-          sm4
-          xs12
-          class="text-xs-center"
-        >
-          <el-upload
-            class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img
-              v-if="imageUrl"
-              :src="imageUrl"
-              class="avatar"
-            >
-            <i
-              v-else
-              class="el-icon-plus avatar-uploader-icon"
-            />
-          </el-upload>
-        </v-flex>
         <v-flex
           md6
           sm6

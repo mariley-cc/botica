@@ -20,7 +20,9 @@
         >
           <span class="headline">Proveedores</span>
           <v-spacer />
-          <v-btn>
+          <v-btn
+            :to="{ name: 'sgcProvidersCreate' }"
+          >
             Agregar Proveedor
           </v-btn>
         </v-card-title>
