@@ -31,11 +31,11 @@ export default {
   },
 
   getById (payload = {}) {
-    const Id = payload.Id
+    const productId = payload.productId
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/products/${Id}`,
+        url: `${HOST}/products/${productId}`,
         method: 'get'
       })
         .then(response => resolve(response))
@@ -43,12 +43,12 @@ export default {
     })
   },
   put (payload = {}) {
-    const Id = payload.Id
+    const productId = payload.productId
     const data = payload.data || {}
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/products/${Id}`,
+        url: `${HOST}/products/${productId}`,
         method: 'put',
         data
       })

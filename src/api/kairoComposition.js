@@ -20,13 +20,10 @@ export default {
       },
 
     get (payload = {}) {
-        const params = payload.params || {}
-    
         return new Promise((resolve, reject) => {
           axios({
             url: `${HOST}/kairo-compositions`,
-            method: 'get',
-            params
+            method: 'get'
           })
             .then(response => resolve(response))
             .catch(error => reject(error))
