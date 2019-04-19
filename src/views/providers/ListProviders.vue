@@ -3,7 +3,7 @@
     fluid
     grid-list-lg
   >
-    <NotPermission v-if="!$can('list', 'Users')" />
+    <NotPermission v-if="!$can('list', 'Providers')" />
 
     <template v-else>
       <Breadcrumbs
@@ -107,9 +107,6 @@
     </template>
   </v-container>
 </template>
-  </v-container>
-</template>
-
 <script>
 import { mapState, mapActions } from 'vuex'
 
@@ -140,7 +137,7 @@ export default {
   },
 
   created () {
-    // if (!this.$can('list', 'Users')) return false
+    if (!this.$can('list', 'Providers')) return false
 
     this.getProviders()
   },
