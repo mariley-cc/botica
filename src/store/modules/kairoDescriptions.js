@@ -1,8 +1,6 @@
 import * as types from '../mutation-types'
 import kairodescriptionAPI from '@/api/kairoDescription'
 
-
-
 export const state = {
   kairodescriptions: [],
   loadingKairoDescriptions: false,
@@ -29,26 +27,26 @@ export const actions = {
   },
 
   getKairoDescriptions ({ commit }, payload) {
-    commit(types.REPLACE_LOADING_KAIRODESCRIPTIONS, { status: true })
+    commit(types.REPLACE_LOADING_KAIRO_DESCRIPTIONS, { status: true })
 
     return new Promise((resolve, reject) => {
       kairodescriptionAPI.get(payload)
         .then(response => {
-          const  kairodescriptions = response.data.data
-          commit(types.REPLACE_LOADING_KAIRODESCRIPTIONS, { status: false })
-          commit(types.REPLACE_KAIRODESCRIPTIONS, {  kairodescriptions })
+          const kairodescriptions = response.data.data
+          commit(types.REPLACE_LOADING_KAIRO_DESCRIPTIONS, { status: false })
+          commit(types.REPLACE_KAIRO_DESCRIPTIONS, {  kairodescriptions })
 
           resolve(response)
         })
         .catch(error => {
-          commit(types.REPLACE_LOADING_KAIRODESCRIPTIONS, { status: false })
+          commit(types.REPLACE_LOADING_KAIRO_DESCRIPTIONS, { status: false })
           reject(error)
         })
     })
   },
 
   replaceShowModalDeleteKairoDescription ({ commit }, payload) {
-    commit(types.REPLACE_SHOW_MODAL_DELETE_KAIRODESCRIPTION, payload)
+    commit(types.REPLACE_SHOW_MODAL_DELETE_KAIRO_DESCRIPTION, payload)
   },
 
   updateKairoDescription ({ commit }, payload) {
@@ -72,7 +70,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       kairodescriptionAPI.delete(payload)
         .then(response => {
-          commit(types.REPLACE_CURRENT_KAIRODESCRIPTION, { kairodescriptions: null })
+          commit(types.REPLACE_CURRENT_KAIRO_DESCRIPTION,{ kairodescriptions: null })
 
           this._vm.$notify.success({
             title: 'Farmacia',
@@ -88,25 +86,25 @@ export const actions = {
   },
 
   replaceCurrentKairoDescription ({ commit }, payload) {
-    commit(types.REPLACE_KAIRODESCRIPTIONS, payload)
+    commit(types.REPLACE_KAIRO_DESCRIPTIONS, payload)
   },
 
   getKairoDescription ({ commit }, payload) {
-    commit(types.REPLACE_LOADING_CURRENT_KAIRODESCRIPTION, { status: true })
-    commit(types.REPLACE_CURRENT_KAIRODESCRIPTION, { kairodescriptions: null })
+    commit(types.REPLACE_LOADING_CURRENT_KAIRO_DESCRIPTION, { status: true })
+    commit(types.REPLACE_CURRENT_KAIRO_DESCRIPTION, { kairodescriptions: null })
 
     return new Promise((resolve, reject) => {
       kairodescriptionAPI.getById(payload)
         .then(response => {
-          const kairodescriptions = response.data.data
+          const kairodescription = response.data.data
 
-          commit(types.REPLACE_LOADING_CURRENT_KAIRODESCRIPTION, { status: false })
-          commit(types.REPLACE_CURRENT_KAIRODESCRIPTION, { kairodescriptions })
+          commit(types.REPLACE_LOADING_CURRENT_KAIRO_DESCRIPTION, { status: false })
+          commit(types.REPLACE_CURRENT_KAIRO_DESCRIPTION, { kairodescription })
 
           resolve(response)
         })
         .catch(error => {
-          commit(types.REPLACE_LOADING_CURRENT_KAIRODESCRIPTION, { status: false })
+          commit(types.REPLACE_LOADING_CURRENT_KAIRO_DESCRIPTION, { status: false })
 
           reject(error)
         })
@@ -115,19 +113,19 @@ export const actions = {
 }
 
 export const mutations = {
-  [types.REPLACE_LOADING_KAIRODESCRIPTIONS] (state, { status }) {
+  [types.REPLACE_LOADING_KAIRO_DESCRIPTIONS] (state, { status }) {
     state.loadingKairoDescriptions = status
   },
-  [types.REPLACE_KAIRODESCRIPTIONS] (state, { kairodescriptions }) {
+  [types.REPLACE_KAIRO_DESCRIPTIONS] (state, { kairodescriptions }) {
     state.kairodescriptions = kairodescriptions
   },
-  [types.REPLACE_SHOW_MODAL_DELETE_KAIRODESCRIPTION] (state, { status }) {
-    state.replaceShowModalDeleteLaboratory = status
+  [types.REPLACE_SHOW_MODAL_DELETE_KAIRO_DESCRIPTION] (state, { status }) {
+    state.replaceShowModalDeleteDescriptions = status
   },
-  [types.REPLACE_CURRENT_KAIRODESCRIPTION] (state, { kairodescriptions }) {
+  [types.REPLACE_CURRENT_KAIRO_DESCRIPTION] (state, { kairodescriptions }) {
     state.currentKairoDescription = kairodescriptions
   },
-  [types.REPLACE_LOADING_CURRENT_KAIRODESCRIPTION] (state, { status }) {
+  [types.REPLACE_LOADING_CURRENT_KAIRO_DESCRIPTION] (state, { status }) {
     state.loadingCurrentKairoDescription = status
   }
 }

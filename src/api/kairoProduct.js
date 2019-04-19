@@ -20,13 +20,10 @@ export default {
       },
 
     get (payload = {}) {
-        const params = payload.params || {}
-    
         return new Promise((resolve, reject) => {
           axios({
             url: `${HOST}/kairo-products`,
-            method: 'get',
-            params
+            method: 'get'
           })
             .then(response => resolve(response))
             .catch(error => reject(error))
@@ -49,15 +46,15 @@ export default {
       },
       
     delete (payload = {}) {
-        const Id = payload.Id
+      const Id = payload.Id
     
-        return new Promise((resolve, reject) => {
-          axios({
-            url: `${HOST}/kairo-products/${Id}`,
-            method: 'delete'
-          })
-            .then(response => resolve(response))
-            .catch(error => reject(error))
+      return new Promise((resolve, reject) => {
+      axios({
+          url: `${HOST}/kairo-products/${Id}`,
+          method: 'delete'
         })
-      }
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+        })
+    }
 }

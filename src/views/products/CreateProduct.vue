@@ -95,14 +95,60 @@
                       xs12
                     >
                       <v-autocomplete
+                        v-model="form.kairo_laboratory_id"
+                        :items="laboratories"
+                        :loading="loadingLaboratories"
+                        dense
+                        clearable
+                        small-chips
+                        label="Seleccionar tipo de laboratorio"
+                        item-text="name"
+                        item-value="id"
+                        :disabled="processingForm"
+                        :error="!!formErrors.kairo_laboratory_id"
+                        :error-messages="formErrors.kairo_laboratory_id"
+                        @change="() => {
+                          formErrors.kairo_laboratory_id = undefined
+                          delete formErrors.kairo_laboratory_id
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.kairo_product_id"
+                        :items="kairoproducts"
+                        :loading="loadingKairoProducts"
+                        dense
+                        clearable
+                        small-chips
+                        label="Seleccionar kairo product"
+                        item-text="name"
+                        item-value="id"
+                        :disabled="processingForm"
+                        :error="!!formErrors.kairo_product_id"
+                        :error-messages="formErrors.kairo_product_id"
+                        @change="() => {
+                          formErrors.kairo_product_id = undefined
+                          delete formErrors.kairo_product_id
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
                         v-model="form.kairo_composition_id"
                         :items="kairocompositions"
                         :loading="loadingKairoCompositions"
                         dense
                         clearable
                         small-chips
-                        label="Seleccionar tipo de laboratorio"
-                        item-text="type"
+                        label="Seleccionar kairo product"
+                        item-text="name"
                         item-value="id"
                         :disabled="processingForm"
                         :error="!!formErrors.kairo_composition_id"
@@ -118,21 +164,21 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.kairo_product_id"
-                        :items="kairoproducts"
-                        :loading="loadingKairoProducts"
+                        v-model="form.kairo_description_id"
+                        :items="kairodescriptions"
+                        :loading="loadingKairoDescriptions"
                         dense
                         clearable
                         small-chips
-                        label="Seleccionar kairo producto"
-                        item-text="condition"
+                        label="Seleccionar kairo product"
+                        item-text="name"
                         item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.kairo_product_id"
-                        :error-messages="formErrors.kairo_product_id"
+                        :error="!!formErrors.kairo_description_id"
+                        :error-messages="formErrors.kairo_description_id"
                         @change="() => {
-                          formErrors.kairo_product_id = undefined
-                          delete formErrors.kairo_product_id
+                          formErrors.kairo_description_id = undefined
+                          delete formErrors.kairo_description_id
                         }"
                       />
                     </v-flex>
@@ -178,7 +224,9 @@ export default {
 
   data () {
     return {
+      imageUrl: '',
       formErrors: {},
+
       form: {
         bar: '',
         stock: 0,
@@ -202,6 +250,9 @@ export default {
         ],
         grouped: [
           v => !!v || 'El grupo es requerida'
+        ],
+        kairo_laboratory_id: [
+          v => !!v || 'El grupo es requerida'
         ]
       }
     }
@@ -210,14 +261,14 @@ export default {
   computed: {
     ...mapState({
       currentProduct: state => state.products.currentProduct,
-      kairoproducts: state => state.kairoproducts.kairoproducts,
-      loadingKairoProducts: state => state.kairoproducts.loadingKairoProducts,
-      kairodescriptions: state => state.kairodescriptions.kairodescriptions,
-      loadingKairoDescriptions: state => state.kairodescriptions.loadingKairoDescriptions,
-      kairocompositions: state => state.kairocompositions.kairocompositions,
-      loadingKairoCompositions: state => state.kairocompositions.loadingKairoCompositions,
-      laboratories: state => state.laboratories.laboratories,
-      loadingLaboratories: state => state.laboratories.loadingLaboratories
+      kairoproducts: state => state.kairoProducts.kairoproducts,
+      loadingKairoProducts: state => state.kairoProducts.loadingKairoProducts,
+      kairodescriptions: state => state.kairoDescriptions.kairodescriptions,
+      loadingKairoDescriptions: state => state.kairoDescriptions.loadingKairoDescriptions,
+      kairocompositions: state => state.kairoCompositions.kairocompositions,
+      loadingKairoCompositions: state => state.kairoCompositions.loadingKairoCompositions,
+      laboratories: state => state.kairoLaboratories.laboratories,
+      loadingLaboratories: state => state.kairoLaboratories.loadingLaboratories
     })
   },
 
@@ -234,9 +285,9 @@ export default {
       replaceCurrentProduct: 'products/replaceCurrentProduct',
       getLaboratories: 'kairoLaboratories/getLaboratories',
       createProduct: 'products/createProduct',
-      getkairoProducts: 'kairoProducts/getkairoProducts',
-      getkairoCompositions: 'kairoCompositions/getkairoCompositions',
-      getkairoDescriptions: 'kairoDescriptions/getkairoDescriptions',
+      getKairoProducts: 'kairoProducts/getKairoProducts',
+      getKairoCompositions: 'kairoCompositions/getKairoCompositions',
+      getKairoDescriptions: 'kairoDescriptions/getKairoDescriptions',
       getProducts: 'products/getProducts'
 
     }),
