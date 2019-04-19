@@ -1,7 +1,6 @@
 import * as types from '../mutation-types'
 import laboratoryAPI from '@/api/kairoLaboratories'
 
-
 export const state = {
   laboratories: [],
   loadingLaboratories: false,
@@ -33,9 +32,9 @@ export const actions = {
     return new Promise((resolve, reject) => {
       laboratoryAPI.get(payload)
         .then(response => {
-          const  laboratories = response.data.data
+          const laboratories = response.data.data
           commit(types.REPLACE_LOADING_LABORATORIES, { status: false })
-          commit(types.REPLACE_LABORATORIES, {  laboratories })
+          commit(types.REPLACE_LABORATORIES, { laboratories })
 
           resolve(response)
         })

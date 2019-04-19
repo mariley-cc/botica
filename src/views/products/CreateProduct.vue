@@ -36,7 +36,7 @@
                 lazy-validation
                 @submit.prevent="submitCreateProduct"
               >
-                <v-container
+              <v-container
                   fluid
                   grid-list-lg
                 >
@@ -95,21 +95,21 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.type_user_id"
-                        :items="typeUsers"
-                        :loading="loadingTipeUsers"
+                        v-model="form.kairo_composition_id"
+                        :items="kairocompositions"
+                        :loading="loadingKairoCompositions"
                         dense
                         clearable
                         small-chips
-                        label="Seleccionar tipo de usuario"
+                        label="Seleccionar tipo de laboratorio"
                         item-text="type"
                         item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.type_user_id"
-                        :error-messages="formErrors.type_user_id"
+                        :error="!!formErrors.kairo_composition_id"
+                        :error-messages="formErrors.kairo_composition_id"
                         @change="() => {
-                          formErrors.type_user_id = undefined
-                          delete formErrors.type_user_id
+                          formErrors.kairo_composition_id = undefined
+                          delete formErrors.kairo_composition_id
                         }"
                       />
                     </v-flex>
@@ -118,21 +118,21 @@
                       xs12
                     >
                       <v-autocomplete
-                        v-model="form.place_id"
-                        :items="places"
-                        :loading="loadingPlaces"
+                        v-model="form.kairo_product_id"
+                        :items="kairoproducts"
+                        :loading="loadingKairoProducts"
                         dense
                         clearable
                         small-chips
-                        label="Seleccionar lugar de Trabajo"
+                        label="Seleccionar kairo producto"
                         item-text="condition"
                         item-value="id"
                         :disabled="processingForm"
-                        :error="!!formErrors.place_id"
-                        :error-messages="formErrors.place_id"
+                        :error="!!formErrors.kairo_product_id"
+                        :error-messages="formErrors.kairo_product_id"
                         @change="() => {
-                          formErrors.place_id = undefined
-                          delete formErrors.place_id
+                          formErrors.kairo_product_id = undefined
+                          delete formErrors.kairo_product_id
                         }"
                       />
                     </v-flex>
@@ -187,7 +187,7 @@ export default {
         kairo_product_id: 0,
         kairo_composition_id: 0,
         kairo_description_id: 0,
-        kairo_laboratory_id:0,
+        kairo_laboratory_id: 0
       },
 
       validForm: true,
@@ -198,7 +198,7 @@ export default {
           v => !!v || 'El codigo de barras es requerido'
         ],
         condition: [
-          v => !!v || 'El condicion es requerido',
+          v => !!v || 'El condicion es requerido'
         ],
         grouped: [
           v => !!v || 'El grupo es requerida'
@@ -209,27 +209,35 @@ export default {
 
   computed: {
     ...mapState({
-      currentUser: state => state.users.currentUser,
-      places: state => state.places.places,
-      loadingPlaces: state => state.places.loadingPlaces,
-      typeUsers: state => state.typeUsers.typeUsers,
-      loadingTipeUsers: state => state.typeUsers.loadingTipeUsers
+      currentProduct: state => state.products.currentProduct,
+      kairoproducts: state => state.kairoproducts.kairoproducts,
+      loadingKairoProducts: state => state.kairoproducts.loadingKairoProducts,
+      kairodescriptions: state => state.kairodescriptions.kairodescriptions,
+      loadingKairoDescriptions: state => state.kairodescriptions.loadingKairoDescriptions,
+      kairocompositions: state => state.kairocompositions.kairocompositions,
+      loadingKairoCompositions: state => state.kairocompositions.loadingKairoCompositions,
+      laboratories: state => state.laboratories.laboratories,
+      loadingLaboratories: state => state.laboratories.loadingLaboratories
     })
   },
 
   created () {
-    if (!this.$can('create', 'Users')) return false
-    this.getTypeUsers()
-    this.getPlaces()
+    if (!this.$can('create', 'Products')) return false
+    this.getLaboratories()
+    this.getKairoProducts()
+    this.getKairoCompositions()
+    this.getKairoDescriptions()
   },
 
   methods: {
     ...mapActions({
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      getTypeUsers: 'typeUsers/getTypeUsers',
-      createUser: 'users/createUser',
-      getPlaces: 'places/getPlaces',
-      getUsers: 'users/getUsers'
+      replaceCurrentProduct: 'products/replaceCurrentProduct',
+      getLaboratories: 'kairoLaboratories/getLaboratories',
+      createProduct: 'products/createProduct',
+      getkairoProducts: 'kairoProducts/getkairoProducts',
+      getkairoCompositions: 'kairoCompositions/getkairoCompositions',
+      getkairoDescriptions: 'kairoDescriptions/getkairoDescriptions',
+      getProducts: 'products/getProducts'
 
     }),
 
@@ -237,16 +245,16 @@ export default {
       if (!this.$refs.form.validate()) return false
 
       this.processingForm = true
-      this.createUser({ data: this.form })
+      this.createProduct({ data: this.form })
         .then(response => {
           this.processingForm = false
-          this.$router.push({ condition: 'sgcUsersList' })
+          this.$router.push({ condition: 'sgcProductsList' })
         })
         .catch((error) => {
           this.processingForm = false
           this.formErrors = error.response.data.errors || {}
         })
-    },
+    }
   }
 
 }

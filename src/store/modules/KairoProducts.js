@@ -4,7 +4,7 @@ import kairoproductAPI from '@/api/kairoProduct'
 
 
 export const state = {
-  kairoproduct: [],
+  kairoproducts: [],
   loadingKairoProduct: false,
   showModalDeleteKairoProduct: false,
   currentKairoProduct: null,
@@ -34,9 +34,10 @@ export const actions = {
     return new Promise((resolve, reject) => {
       kairoproductAPI.get(payload)
         .then(response => {
-          const  kairoproduct = response.data.data
+          const kairoproducts = response.data.data
+          console.table(kairoproducts)
           commit(types.REPLACE_LOADING_KAIROPRODUCTS, { status: false })
-          commit(types.REPLACE_KAIROPRODUCTS, {  kairoproduct })
+          commit(types.REPLACE_KAIROPRODUCTS, {  kairoproducts })
 
           resolve(response)
         })
