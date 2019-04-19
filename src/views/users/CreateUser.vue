@@ -236,6 +236,7 @@
         </v-flex>
       </v-layout>
     </template>
+
     <ModalCreatePlace />
   </v-container>
 </template>

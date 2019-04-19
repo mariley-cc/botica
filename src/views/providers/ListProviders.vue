@@ -3,102 +3,110 @@
     fluid
     grid-list-lg
   >
-    <Breadcrumbs
-      :routes="[
-        { name: 'Inicio', to: { name: 'home' } },
-        { name: 'Proveedores' },
-        { name: 'Listado' }
-      ]"
-    />
-    <v-card>
-      <v-toolbar
-        color="grey darken-4"
-        dark
-        card
-      >
-        <v-toolbar-title>Proveedores</v-toolbar-title>
-        <v-spacer />
-      </v-toolbar>
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout
-          row
-          wrap
+    <NotPermission v-if="!$can('list', 'Users')" />
+
+    <template v-else>
+      <Breadcrumbs
+        :routes="[
+          { name: 'Inicio', to: { name: 'home' } },
+          { name: 'Proveedores' },
+          { name: 'Listado' }
+        ]"
+      />
+      <v-card>
+        <v-card-title
+          primary-title
+          class="info py-1 white--text"
         >
-          <v-flex
-            v-if="providers.length"
-            sm6
+          <span class="headline">Proveedores</span>
+          <v-spacer />
+          <v-btn>
+            Agregar Proveedor
+          </v-btn>
+        </v-card-title>
+
+        <v-container
+          fluid
+          grid-list-lg
+        >
+          <v-layout
+            row
+            wrap
           >
-            <v-text-field
-              v-model="searchProviders"
-              :disabled="loadingProviders"
-              box
-              append-icon="search"
-              label="Buscar"
-              clearable
-              hide-details
-            />
-          </v-flex>
-          <v-flex xs12>
-            <v-data-table
-              :headers="[
-                { text: 'Nombre', value: 'name' },
-                { text: 'Ruc', value: 'ruc' },
-                { text: 'contacto', value: 'mobile' },
-                { text: 'cuenta', value: 'account' },
-                { text: 'tipo', value: 'typeProvider.name' },
-              ]"
-              :items="providers"
-              :search="searchProviders"
-              :loading="loadingProviders"
-              class="elevation-1"
+            <v-flex
+              v-if="providers.length"
+              sm6
             >
-              <tr
-                slot="items"
-                slot-scope="props"
+              <v-text-field
+                v-model="searchProviders"
+                :disabled="loadingProviders"
+                box
+                append-icon="search"
+                label="Buscar"
+                clearable
+                hide-details
+              />
+            </v-flex>
+            <v-flex xs12>
+              <v-data-table
+                :headers="[
+                  { text: 'Nombre', value: 'name' },
+                  { text: 'Ruc', value: 'ruc' },
+                  { text: 'contacto', value: 'mobile' },
+                  { text: 'cuenta', value: 'account' },
+                  { text: 'tipo', value: 'typeProvider.name' },
+                ]"
+                :items="providers"
+                :search="searchProviders"
+                :loading="loadingProviders"
+                class="elevation-1"
               >
-                <td>{{ props.item.name }}</td>
-                <td>{{ props.item.ruc }}</td>
-                <td>{{ props.item.mobile}}</td>
-                <td>{{ props.item.account}}</td>
-                <td>{{ props.item.typeProvider.name}}</td>
-                <td class="text-xs-right">
-                  <template v-if="$can('update', 'Providers')">
+                <tr
+                  slot="items"
+                  slot-scope="props"
+                >
+                  <td>{{ props.item.name }}</td>
+                  <td>{{ props.item.ruc }}</td>
+                  <td>{{ props.item.mobile }}</td>
+                  <td>{{ props.item.account }}</td>
+                  <td>{{ props.item.typeProvider.name }}</td>
+                  <td class="text-xs-right">
+                    <template v-if="$can('update', 'Providers')">
+                      <v-btn
+                        class="ma-0"
+                        :to="{ name: 'sgcProviderEdit', params: { id: props.item.id } }"
+                        small
+                        fab
+                        flat
+                        color="info"
+                      >
+                        <v-icon>edit</v-icon>
+                      </v-btn>
+                    </template>
+
                     <v-btn
+                      v-if="$can('delete', 'Providers')"
                       class="ma-0"
-                      :to="{ name: 'sgcProviderEdit', params: { id: props.item.id } }"
                       small
                       fab
                       flat
-                      color="info"
+                      color="error"
+                      @click="openModalDeleteProvider(props.item)"
                     >
-                      <v-icon>edit</v-icon>
+                      <v-icon>delete</v-icon>
                     </v-btn>
-                  </template>
+                  </td>
+                </tr>
+              </v-data-table>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
 
-                  <v-btn
-                    v-if="$can('delete', 'Providers')"
-                    class="ma-0"
-                    small
-                    fab
-                    flat
-                    color="error"
-                    @click="openModalDeleteProvider(props.item)"
-                  >
-                    <v-icon>delete</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </v-data-table>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
-
-    <ModalDeleteUser />
-    <!-- </template> -->
+      <ModalDeleteProvider />
+    </template>
+  </v-container>
+</template>
   </v-container>
 </template>
 
@@ -120,7 +128,7 @@ export default {
 
   data () {
     return {
-      searchProviders: '',
+      searchProviders: ''
     }
   },
 
@@ -145,11 +153,10 @@ export default {
       replaceProviders: 'providers/replaceProviders'
     }),
 
-
     openModalDeleteProvider (provider) {
       this.replaceCurrentProvider({ provider })
       this.replaceShowModalDeleteProvider({ status: true })
-    },
+    }
   }
 }
 </script>
