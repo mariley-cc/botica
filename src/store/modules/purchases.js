@@ -10,7 +10,7 @@ export const state = {
 }
 
 export const actions = {
-  CreatePurchase ({ commit }, payload) {
+  createPurchase ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       purchaseAPI.post(payload)
         .then(response => {
