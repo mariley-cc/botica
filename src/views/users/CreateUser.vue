@@ -206,6 +206,8 @@
                         :disabled="processingForm"
                         :error="!!formErrors.place_id"
                         :error-messages="formErrors.place_id"
+                        append-outer-icon="add_circle"
+                        @click:append-outer="replaceShowModalCreatePlace({ status: true })"
                         @change="() => {
                           formErrors.place_id = undefined
                           delete formErrors.place_id
@@ -234,6 +236,7 @@
         </v-flex>
       </v-layout>
     </template>
+    <ModalCreatePlace />
   </v-container>
 </template>
 
@@ -249,7 +252,8 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    NotPermission: () => import('@/views/errors/NotPermission')
+    NotPermission: () => import('@/views/errors/NotPermission'),
+    ModalCreatePlace: () => import('@/views/places/ModalCreatePlace')
   },
 
   data () {
@@ -309,6 +313,7 @@ export default {
 
   methods: {
     ...mapActions({
+      replaceShowModalCreatePlace: 'places/replaceShowModalCreatePlace',
       replaceCurrentUser: 'users/replaceCurrentUser',
       getTypeUsers: 'typeUsers/getTypeUsers',
       createUser: 'users/createUser',

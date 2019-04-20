@@ -1,95 +1,109 @@
 <template>
-  <v-app id="login" class="green lighten-2">
-  <v-container
-    fluid fill-height
+  <v-app
+    id="login"
+    class="green lighten-2"
   >
-    <template v-if="!authenticated">
-      <v-layout
-        align-center justify-center
-      >
-        <v-flex
-          xs12 sm8 md4 lg4
+    <v-container
+      fluid
+      fill-height
+    >
+      <template v-if="!authenticated">
+        <v-layout
+          align-center
+          justify-center
         >
-          <v-card class="elevation-1 pa-3">
-            <v-card-title
-            >
-              <div class="layout column align-center">
-                  <img src="@/assets/farmacia.png" alt="Farmacia" width="100" height="100">
-                  <h1 class="flex my-4 primary--text">Farmacia</h1>
+          <v-flex
+            xs12
+            sm8
+            md4
+            lg4
+          >
+            <v-card class="elevation-1 pa-3">
+              <v-card-title>
+                <div class="layout column align-center">
+                  <img
+                    src="@/assets/farmacia.png"
+                    alt="Farmacia"
+                    width="100"
+                    height="100"
+                  >
+                  <h1 class="flex my-4 primary--text">
+                    Farmacia
+                  </h1>
                 </div>
-            </v-card-title>
-            <v-divider />
-            <v-card-text
-              class="pa-0"
-            >
-              <v-form
-                v-model="validForm"
-                lazy-validation
-                @submit.prevent="lauchLogin"
+              </v-card-title>
+              <v-divider />
+              <v-card-text
+                class="pa-0"
               >
-                <v-container
-                  fluid
-                  class="pb-0"
-                  grid-list-lg
+                <v-form
+                  v-model="validForm"
+                  lazy-validation
+                  @submit.prevent="lauchLogin"
                 >
-                  <v-text-field
-                    v-model="form.username"
-                    :disabled="processingForm"
-                    :error="!!validationErrors.username"
-                    :error-messages="validationErrors.username"
-                    autofocus
-                    outline
-                    prepend-inner-icon="email"
-                    label="Correo electrónico"
-                    @keyup="() => {
-                      validationErrors.username = undefined
-                      delete validationErrors.username
-                    }"
-                  />
+                  <v-container
+                    fluid
+                    class="pb-0"
+                    grid-list-lg
+                  >
+                    <v-text-field
+                      v-model="form.username"
+                      :disabled="processingForm"
+                      :error="!!validationErrors.username"
+                      :error-messages="validationErrors.username"
+                      autofocus
+                      outline
+                      prepend-inner-icon="email"
+                      label="Correo electrónico"
+                      @keyup="() => {
+                        validationErrors.username = undefined
+                        delete validationErrors.username
+                      }"
+                    />
 
-                  <v-text-field
-                    v-model="form.password"
-                    :disabled="processingForm"
-                    :error="!!validationErrors.password"
-                    :error-messages="validationErrors.password"
-                    type="password"
-                    outline
-                    prepend-inner-icon="lock"
-                    label="Contraseña"
-                    @keyup="() => {
-                      validationErrors.password = undefined
-                      delete validationErrors.password
-                    }"
-                  />
-                </v-container>
-                <v-divider />
-                <v-container
-                  fluid
-                  grid-list-lg
-                >
-                  <div class="text-xs-center ">
-                    <v-btn
-                      type="submit"
-                      color="primary"
-                      :disabled="!validForm || processingForm"
-                      :loading="processingForm"
-                    >
-                      Iniciar sesión
-                    </v-btn>
-                    <p class="mb-0">
-                      <a>
-                        ¿Olvidaste tu contraseña?
-                      </a>
-                    </p>
-                  </div>
-                </v-container>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </template>
-  </v-container>
+                    <v-text-field
+                      v-model="form.password"
+                      :disabled="processingForm"
+                      :error="!!validationErrors.password"
+                      :error-messages="validationErrors.password"
+                      type="password"
+                      outline
+                      prepend-inner-icon="lock"
+                      label="Contraseña"
+                      @keyup="() => {
+                        validationErrors.password = undefined
+                        delete validationErrors.password
+                      }"
+                    />
+                  </v-container>
+                  <v-divider />
+                  <v-container
+                    fluid
+                    grid-list-lg
+                  >
+                    <div class="text-xs-center ">
+                      <v-btn
+                        type="submit"
+                        color="primary"
+                        :disabled="!validForm || processingForm"
+                        :loading="processingForm"
+                      >
+                        Iniciar sesión
+                      </v-btn>
+                      <p class="mb-0">
+                        <a>
+                          ¿Olvidaste tu contraseña?
+                        </a>
+                      </p>
+                    </div>
+                  </v-container>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </template>
+    </v-container>
   </v-app>
 </template>
 
@@ -173,7 +187,7 @@ export default {
             .then(response => {
               this.processingForm = false
 
-              const roleType = response.data.data.user_type
+              const roleType = response.data.data.typeUser
               if (roleType === 'admin') {
                 this.$router.push({ name: 'dashboard' })
               } else {
