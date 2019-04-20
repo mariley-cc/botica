@@ -9,190 +9,202 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'home' } },
-          { name: 'Providers', to: { name: 'sgcProvidersList' } },
+          { name: 'Proveedores', to: { name: 'sgcProvidersList' } },
           { name: 'Editar Proveedor' }
         ]"
       />
-
-      <v-card>
-        <v-card-title
-          primary-title
-          class="py-2"
+      <v-layout
+        row
+        wrap
+        justify-center
+      >
+        <v-flex
+          md6
+          sm6
+          xs12
         >
-          <span class="success--text font-weight-bold headline">Editar Provider</span>
-        </v-card-title>
-        <v-divider />
-        <v-card-text
-          class="pa-0"
-        >
-          <v-form
-            ref="form"
-            v-model="validForm"
-            lazy-validation
-            @submit.prevent="submitUpdateProvider"
-          >
-            <v-container
-              fluid
-              grid-list-lg
+          <v-card>
+            <v-card-title primary-title>
+              <span class="success--text font-weight-bold headline">Registrar Provedor</span>
+            </v-card-title>
+            <v-divider />
+            <v-card-text
+              class="pa-0"
             >
-              <v-text-field
-                v-model="form.username"
-                :disabled="processingForm"
-                label="Nombre de Usuario"
-                :error="!!formErrors.username"
-                :error-messages="formErrors.username"
-                @keyup="() => {
-                  formErrors.username = undefined
-                  delete formErrors.username
-                }"
-              />
-              <v-text-field
-                v-model="form.email"
-                :disabled="processingForm"
-                label="Email"
-                :rules="rules.email"
-                :error="!!formErrors.email"
-                :error-messages="formErrors.email"
-                @keyup="() => {
-                  formErrors.email = undefined
-                  delete formErrors.email
-                }"
-              />
-              <v-text-field
-                v-model="form.name"
-                :disabled="processingForm"
-                label="Nombre"
-                :error="!!formErrors.name"
-                :error-messages="formErrors.name"
-                @keyup="() => {
-                  formErrors.name = undefined
-                  delete formErrors.name
-                }"
-              />
-              <v-text-field
-                v-model="form.last_name"
-                :disabled="processingForm"
-                label="Apellidos"
-                :error="!!formErrors.last_name"
-                :error-messages="formErrors.last_name"
-                @keyup="() => {
-                  formErrors.last_name = undefined
-                  delete formErrors.last_name
-                }"
-              />
-              <v-layout
-                row
-                wrap
+              <v-form
+                ref="form"
+                v-model="validForm"
+                lazy-validation
+                @submit.prevent="submitCreateProvider"
               >
-                <v-flex
-                  sm6
-                  xs12
+                <v-container
+                  fluid
+                  grid-list-lg
                 >
                   <v-text-field
-                    v-model="form.dni"
+                    v-model="form.name"
                     :disabled="processingForm"
-                    label="N° de DNI"
-                    mask="########"
-                    return-masked-value
-                    :error="!!formErrors.dni"
-                    :error-messages="formErrors.dni"
+                    label="Nombre / Razon Social"
+                    :error="!!formErrors.name"
+                    :error-messages="formErrors.name"
                     @keyup="() => {
-                      formErrors.dni = undefined
-                      delete formErrors.dni
+                      formErrors.name = undefined
+                      delete formErrors.name
                     }"
                   />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
                   <v-text-field
-                    v-model="form.telephone"
+                    v-model="form.ruc"
                     :disabled="processingForm"
-                    label="Celular"
-                    :error="!!formErrors.telephone"
-                    :error-messages="formErrors.telephone"
+                    label="R.U.C."
+                    :error="!!formErrors.ruc"
+                    :error-messages="formErrors.ruc"
                     @keyup="() => {
-                      formErrors.telephone = undefined
-                      delete formErrors.telephone
+                      formErrors.ruc = undefined
+                      delete formErrors.ruc
                     }"
                   />
-                </v-flex>
-              </v-layout>
+                  <v-text-field
+                    v-model="form.account"
+                    :disabled="processingForm"
+                    label="Cuenta"
+                    :error="!!formErrors.account"
+                    :error-messages="formErrors.account"
+                    @keyup="() => {
+                      formErrors.account = undefined
+                      delete formErrors.account
+                    }"
+                  />
+                  <v-text-field
+                    v-model="form.address"
+                    :disabled="processingForm"
+                    label="Dirección"
+                    :error="!!formErrors.address"
+                    :error-messages="formErrors.address"
+                    @keyup="() => {
+                      formErrors.address = undefined
+                      delete formErrors.address
+                    }"
+                  />
+                  <v-text-field
+                    v-model="form.email"
+                    :disabled="processingForm"
+                    :rules="rules.email"
+                    label="Correo Electrónico"
+                    :error="!!formErrors.email"
+                    :error-messages="formErrors.email"
+                    @keyup="() => {
+                      formErrors.email = undefined
+                      delete formErrors.email
+                    }"
+                  />
 
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-autocomplete
-                    v-model="form.type_user_id"
-                    :items="typeUsers"
-                    :loading="loadingTipeUsers"
-                    dense
-                    clearable
-                    small-chips
-                    label="Seleccionar tipo de usuario"
-                    item-text="type"
-                    item-value="id"
-                    :disabled="processingForm"
-                    :error="!!formErrors.type_user_id"
-                    :error-messages="formErrors.type_user_id"
-                    @change="() => {
-                      formErrors.type_user_id = undefined
-                      delete formErrors.type_user_id
-                    }"
-                  />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-autocomplete
-                    v-model="form.place_id"
-                    :items="places"
-                    :loading="loadingPlaces"
-                    dense
-                    clearable
-                    small-chips
-                    label="Seleccionar lugar de Trabajo"
-                    item-text="name"
-                    item-value="id"
-                    :disabled="processingForm"
-                    :error="!!formErrors.place_id"
-                    :error-messages="formErrors.place_id"
-                    append-outer-icon="add_circle"
-                    @click:append-outer="replaceShowModalCreatePlace({ status: true })"
-                    @change="() => {
-                      formErrors.place_id = undefined
-                      delete formErrors.place_id
-                    }"
-                  />
-                </v-flex>
-              </v-layout>
-            </v-container>
-            <v-divider class="mb-3" />
-            <div class="text-xs-center pb-3">
-              <v-btn
-                type="submit"
-                color="success"
-                :disabled="!validForm || processingForm"
-                :loading="processingForm"
-              >
-                Guardar
-              </v-btn>
-              <v-btn @click="$router.push({ name: 'sgcUsersList' })">
-                Cancelar
-              </v-btn>
-            </div>
-          </v-form>
-        </v-card-text>
-      </v-card>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.mobile"
+                        :disabled="processingForm"
+                        label="Telefono"
+                        mask="########"
+                        return-masked-value
+                        :error="!!formErrors.mobile"
+                        :error-messages="formErrors.mobile"
+                        @keyup="() => {
+                          formErrors.mobile = undefined
+                          delete formErrors.mobile
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.telephone"
+                        :disabled="processingForm"
+                        label="Celular"
+                        :error="!!formErrors.telephone"
+                        :error-messages="formErrors.telephone"
+                        @keyup="() => {
+                          formErrors.telephone = undefined
+                          delete formErrors.telephone
+                        }"
+                      />
+                    </v-flex>
+                  </v-layout>
+
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.contact"
+                        :disabled="processingForm"
+                        label="Contacto"
+                        :rules="rules.contact"
+                        :error="!!formErrors.contact"
+                        :error-messages="formErrors.contact"
+                        @keyup="() => {
+                          formErrors.contact = undefined
+                          delete formErrors.contact
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.type_provider_id"
+                        :items="[]"
+                        dense
+                        clearable
+                        small-chips
+                        label="Tipo de proveedor"
+                        item-text="type"
+                        item-value="id"
+                        :disabled="processingForm"
+                        :error="!!formErrors.type_provider_id"
+                        :error-messages="formErrors.type_provider_id"
+                        append-outer-icon="add_circle"
+                        @click:append-outer="{}"
+                        @change="() => {
+                          formErrors.type_provider_id = undefined
+                          delete formErrors.type_provider_id
+                        }"
+                      />
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+                <v-divider class="mb-3" />
+                <div class="text-xs-center pb-3">
+                  <v-btn
+                    type="submit"
+                    color="success"
+                    :disabled="!validForm || processingForm"
+                    :loading="processingForm"
+                  >
+                    Guardar
+                  </v-btn>
+                  <v-btn @click="$router.push({ name: 'sgcProvidersList' })">
+                    Cancelar
+                  </v-btn>
+                </div>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </template>
-
     <ModalCreatePlace />
   </v-container>
 </template>
@@ -204,7 +216,7 @@ export default {
   middleware: 'auth',
 
   metaInfo () {
-    return { title: 'Editar Usuario' }
+    return { title: 'Nuevo Usuario' }
   },
 
   components: {
@@ -215,9 +227,7 @@ export default {
 
   data () {
     return {
-
       imageUrl: '',
-
       formErrors: {},
 
       form: {
@@ -250,87 +260,34 @@ export default {
 
   computed: {
     ...mapState({
-      currentUser: state => state.users.currentUser,
-      places: state => state.places.places,
-      loadingPlaces: state => state.places.loadingPlaces,
-      typeUsers: state => state.typeUsers.typeUsers,
-      loadingTipeUsers: state => state.typeUsers.loadingTipeUsers
     })
   },
 
   created () {
     if (!this.$can('update', 'Providers')) return false
-
-    this.getTypeUsers()
-    this.getPlaces()
-
-    this.getUser({ userId: this.$route.params.id })
-      .then(response => {
-        const userInfo = response.data.data
-        this.setForm(userInfo)
-      })
   },
 
   methods: {
     ...mapActions({
-      replaceShowModalCreatePlace: 'places/replaceShowModalCreatePlace',
-      replaceCurrentUser: 'users/replaceCurrentUser',
-      getTypeUsers: 'typeUsers/getTypeUsers',
-      updateUser: 'users/updateUser',
-      getPlaces: 'places/getPlaces',
-      getUser: 'users/getUser'
-
+      createProvider: 'providers/createProvider',
+      getProviders: 'providers/getProviders',
+      getProvider: 'providers/getProvider'
     }),
 
-    setForm (user) {
-      this.form.email = user.email
-      this.form.username = user.username
-      this.form.last_name = user.last_name
-      this.form.name = user.name
-      this.form.dni = user.dni
-      this.form.telephone = user.telephone
-      this.form.image = user.image || 'image_path_url_image'
-      this.form.image_path = user.image_path || 'image_path_url_image'
-      this.form.state = user.state
-      this.form.type_user_id = user.typeUser ? user.typeUser.id : ''
-      this.form.place_id = user.place ? user.place.id : ''
-    },
-
-    submitUpdateProvider () {
+    submitCreateProvider () {
       if (!this.$refs.form.validate()) return false
 
       this.processingForm = true
-      this.updateUser({
-        userId: this.$route.params.id,
-        data: this.form
-      })
+      this.createProvider({ data: this.form })
         .then(response => {
           this.processingForm = false
-          this.$router.push({ name: 'sgcUsersList' })
+          this.$router.push({ name: 'sgcProvidersList' })
         })
         .catch((error) => {
           this.processingForm = false
           this.formErrors = error.response.data.errors || {}
         })
-    },
-
-    handleAvatarSuccess (res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload (file) {
-      const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png')
-
-      const isLt5M = file.size / 1024 / 1024 < 5
-
-      if (!isJPG) {
-        this.$message.error('La imagen debe estar en formato JPG!')
-      }
-      if (!isLt5M) {
-        this.$message.error('La imagen excede los 2MB!')
-      }
-      return isJPG && isLt5M
     }
   }
-
 }
 </script>
