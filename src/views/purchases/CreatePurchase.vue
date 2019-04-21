@@ -18,6 +18,7 @@
         wrap
       >
         <v-flex
+          sm12
           xs12
         >
           <v-card>
@@ -73,39 +74,96 @@
                       delete formErrors.modality
                     }"
                   />
-                  <v-text-field
-                    v-model="form.issue_date"
-                    :disabled="processingForm"
-                    label="fecha de compra"
-                    :error="!!formErrors.issue_date"
-                    :error-messages="formErrors.issue_date"
-                    @keyup="() => {
-                      formErrors.issue_date = undefined
-                      delete formErrors.issue_date
-                    }"
-                  />
-                  <v-text-field
-                    v-model="form.expiration_date"
-                    :disabled="processingForm"
-                    label="fecha de vencimiento"
-                    :error="!!formErrors.expiration_date"
-                    :error-messages="formErrors.expiration_date"
-                    @keyup="() => {
-                      formErrors.expiration_date = undefined
-                      delete formErrors.expiration_date
-                    }"
-                  />
-                  <v-text-field
-                    v-model="form.purchase_date"
-                    :disabled="processingForm"
-                    label="fecha de compras "
-                    :error="!!formErrors.purchase_date"
-                    :error-messages="formErrors.purchase_date"
-                    @keyup="() => {
-                      formErrors.purchase_date = undefined
-                      delete formErrors.purchase_date
-                    }"
-                  />
+            <v-flex 
+              sm4
+              xs12
+              >
+              <v-menu
+                v-model="form.targetExpirationDate"
+                :close-on-content-click="false"
+                lazy
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  :value="formatDate(form.expiration_date)"
+                  :rules="rules.expiration_date"
+                  readonly
+                  box
+                  hint="Formato DD/MM/AAAA"
+                  persistent-hint
+                  label="Fecha de expiracion de la compra"
+                  append-icon="event"
+                />
+                <v-date-picker
+                  v-model="form.expiration_date"
+                  locale="es-pe"
+                  @input="form.targetExpirationDate = false"
+                />
+              </v-menu>
+            </v-flex>
+            <v-flex 
+              sm4
+              xs12
+              >
+              <v-menu
+                v-model="form.targetIssueDate"
+                :close-on-content-click="false"
+                lazy
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  :value="formatDate(form.issue_date)"
+                  :rules="rules.issue_date"
+                  readonly
+                  box
+                  hint="Formato DD/MM/AAAA"
+                  persistent-hint
+                  label="Fecha de Asunto"
+                  append-icon="event"
+                />
+                <v-date-picker
+                  v-model="form.issue_date"
+                  locale="es-pe"
+                  @input="form.targetIssueDate = false"
+                />
+              </v-menu>
+            </v-flex>
+            <v-flex 
+              sm4
+              xs12
+              >
+              <v-menu
+                v-model="form.targetPurchaseDate"
+                :close-on-content-click="false"
+                lazy
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <v-text-field
+                  slot="activator"
+                  :value="formatDate(form.purchase_date)"
+                  :rules="rules.purchase_date"
+                  readonly
+                  box
+                  hint="Formato DD/MM/AAAA"
+                  persistent-hint
+                  label="Fecha de compra"
+                  append-icon="event"
+                />
+                <v-date-picker
+                  v-model="form.purchase_date"
+                  locale="es-pe"
+                  @input="form.targetPurchaseDate = false"
+                />
+              </v-menu>
+            </v-flex>
                   <v-text-field
                     v-model="form.advance"
                     :disabled="processingForm"
@@ -219,21 +277,23 @@ export default {
 
   data () {
     return {
+      targetPurchaseDate: false,
+      targetIssueDate: false,
+      targetExpirationDate: false,
       imageUrl: '',
       formErrors: {},
-
       form: {
         invoice: '',
         condition: 'contado',
         modality: 'deposito',
-        issue_date: 0,
-        expiration_date: 0,
-        purchase_date: 0,
+        issue_date: '',
+        expiration_date: '',
+        purchase_date: '',
         advance: 0,
         total: 0,
         state:'cancelado',
         observation: '',
-        provider_id:0
+        provider_id: 0
       },
 
       validForm: true,
@@ -275,8 +335,13 @@ export default {
       createPurchase: 'purchases/createPurchase',
       getProviders: 'providers/getProviders',
       getPurchases: 'purchases/getPurchases'
-
     }),
+
+    formatDate (date) {
+      if (!date) return null
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
 
     submitCreatePurchase () {
       if (!this.$refs.form.validate()) return false

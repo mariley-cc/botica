@@ -10,7 +10,7 @@ export const state = {
 }
 
 export const actions = {
-  providerSave ({ commit }, payload) {
+  createProvider ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       providerAPI.post(payload)
         .then(response => {
