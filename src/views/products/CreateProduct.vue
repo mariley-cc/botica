@@ -34,11 +34,11 @@
                 lazy-validation
                 @submit.prevent="submitCreateProduct"
               >
-              <v-container
+                <v-container
                   fluid
                   grid-list-lg
                 >
-                   <v-text-field
+                  <v-text-field
                     v-model="form.bar"
                     :disabled="processingForm"
                     label="Codigo de barras"

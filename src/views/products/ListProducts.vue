@@ -20,12 +20,12 @@
       >
         <v-toolbar-title>Productos</v-toolbar-title>
         <v-spacer />
-          <v-btn
-            :to="{ name: 'sgcProductsCreate' }"
-            color="success"
-          >
-            Agregar Producto
-          </v-btn>
+        <v-btn
+          :to="{ name: 'sgcProductsCreate' }"
+          color="success"
+        >
+          Agregar Producto
+        </v-btn>
       </v-toolbar>
       <v-container
         fluid

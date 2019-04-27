@@ -1,10 +1,8 @@
 import * as types from '../mutation-types'
 import kairocompositionAPI from '@/api/kairoComposition'
 
-
-
 export const state = {
-  kairocompositions:[],
+  kairocompositions: [],
   KairoCompositiongKairoCompositions: false,
   showModalDeleteKairoComposition: false,
   currentKairoComposition: null,
@@ -34,9 +32,9 @@ export const actions = {
     return new Promise((resolve, reject) => {
       kairocompositionAPI.get(payload)
         .then(response => {
-          const  kairocompositions = response.data.data
+          const kairocompositions = response.data.data
           commit(types.REPLACE_LOADING_KAIRO_COMPOSITIONS, { status: false })
-          commit(types.REPLACE_KAIRO_COMPOSITIONS, {  kairocompositions })
+          commit(types.REPLACE_KAIRO_COMPOSITIONS, { kairocompositions })
 
           resolve(response)
         })
@@ -68,7 +66,7 @@ export const actions = {
     })
   },
 
-  deleteKairoComposition({ commit }, payload) {
+  deleteKairoComposition ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       kairocompositionAPI.delete(payload)
         .then(response => {
@@ -87,7 +85,7 @@ export const actions = {
     })
   },
 
-  replaceCurrentKairoComposition({ commit }, payload) {
+  replaceCurrentKairoComposition ({ commit }, payload) {
     commit(types.REPLACE_KAIRO_COMPOSITIONS, payload)
   },
 

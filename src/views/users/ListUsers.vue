@@ -54,7 +54,6 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  
                   { text: 'Correo electrónico', value: 'email' },
                   { text: 'Tipo', value: 'typeUser' },
                   { text: 'Estado', value: 'state' },
@@ -69,7 +68,6 @@
                   slot="items"
                   slot-scope="props"
                 >
-
                   <td class="px-3">
                     {{ props.item.email }}
                   </td>
@@ -178,7 +176,7 @@ export default {
     openModalDeleteUser (user) {
       this.replaceCurrentUser({ user })
       this.replaceShowModalDeleteUser({ status: true })
-    },
+    }
 
   }
 }

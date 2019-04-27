@@ -126,6 +126,6 @@ export const mutations = {
     state.currentPurchase = purchase
   },
   [types.REPLACE_LOADING_CURRENT_PURCHASE] (state, { status }) {
-    state.loadingCurrentCreatePurchase = sPurchases
+    state.loadingCurrentCreatePurchase = status
   }
 }
