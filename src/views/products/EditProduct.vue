@@ -262,14 +262,14 @@ export default {
   computed: {
     ...mapState({
       currentProduct: state => state.products.currentProduct,
-      kairoproducts: state => state.kairoProducts.kairoproducts,
-      loadingKairoProducts: state => state.kairoProducts.loadingKairoProducts,
+      kairoproducts: state => state.KairoProducts.kairoproducts,
+      loadingKairoProducts: state => state.KairoProducts.loadingKairoProducts,
       kairodescriptions: state => state.kairoDescriptions.kairodescriptions,
       loadingKairoDescriptions: state => state.kairoDescriptions.loadingKairoDescriptions,
       kairocompositions: state => state.kairoCompositions.kairocompositions,
       loadingKairoCompositions: state => state.kairoCompositions.loadingKairoCompositions,
-      laboratories: state => state.kairoLaboratories.laboratories,
-      loadingLaboratories: state => state.kairoLaboratories.loadingLaboratories
+      laboratories: state => state.KairoLaboratories.laboratories,
+      loadingLaboratories: state => state.KairoLaboratories.loadingLaboratories
     })
   },
 
@@ -293,9 +293,9 @@ export default {
       getProduct: 'products/getProduct',
       updateProduct: 'products/updateProduct',
       replaceCurrentProduct: 'products/replaceCurrentProduct',
-      getLaboratories: 'kairoLaboratories/getLaboratories',
+      getLaboratories: 'KairoLaboratories/getLaboratories',
       createProduct: 'products/createProduct',
-      getKairoProducts: 'kairoProducts/getKairoProducts',
+      getKairoProducts: 'KairoProducts/getKairoProducts',
       getKairoCompositions: 'kairoCompositions/getKairoCompositions',
       getKairoDescriptions: 'kairoDescriptions/getKairoDescriptions',
       getProducts: 'products/getProducts'

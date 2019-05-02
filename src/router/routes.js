@@ -78,5 +78,15 @@ export default [
     path: '/sgc/purchases',
     name: 'sgcPurchasesList',
     component: () => import('@/views/purchases/ListPurchases.vue')
-  }
+  },
+  {
+    path: '/sgc/purchases/create',
+    name: 'sgcPurchasesCreate',
+    component: () => import('@/views/purchases/CreatePurchase.vue')
+  },
+  {
+    path: '/sgc/purchases/:id',
+    name: 'sgcPurchasesEdit',
+    component: () => import('@/views/purchases/EditPurchase.vue')
+  },
 ]

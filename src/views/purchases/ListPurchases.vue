@@ -21,6 +21,12 @@
       >
         <v-toolbar-title>Compras</v-toolbar-title>
         <v-spacer />
+          <v-btn
+            :to="{ name: 'sgcPurchasesCreate' }"
+            color="success"
+          >
+            Registrar Compra
+          </v-btn>
       </v-toolbar>
       <v-container
         fluid
