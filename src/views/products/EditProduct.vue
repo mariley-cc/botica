@@ -39,7 +39,7 @@
                   fluid
                   grid-list-lg
                 >
-                   <v-text-field
+                  <v-text-field
                     v-model="form.bar"
                     :disabled="processingForm"
                     label="Codigo de barras"
@@ -242,7 +242,7 @@ export default {
       validForm: true,
       processingForm: false,
 
-       rules: {
+      rules: {
         bar: [
           v => !!v || 'El codigo de barras es requerido'
         ],
@@ -329,7 +329,7 @@ export default {
           this.processingForm = false
           this.formErrors = error.response.data.errors || {}
         })
-    },
+    }
   }
 
 }

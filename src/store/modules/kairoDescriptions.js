@@ -34,7 +34,7 @@ export const actions = {
         .then(response => {
           const kairodescriptions = response.data.data
           commit(types.REPLACE_LOADING_KAIRO_DESCRIPTIONS, { status: false })
-          commit(types.REPLACE_KAIRO_DESCRIPTIONS, {  kairodescriptions })
+          commit(types.REPLACE_KAIRO_DESCRIPTIONS, { kairodescriptions })
 
           resolve(response)
         })
@@ -66,11 +66,11 @@ export const actions = {
     })
   },
 
-  deleteKairoDescription({ commit }, payload) {
+  deleteKairoDescription ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       kairodescriptionAPI.delete(payload)
         .then(response => {
-          commit(types.REPLACE_CURRENT_KAIRO_DESCRIPTION,{ kairodescriptions: null })
+          commit(types.REPLACE_CURRENT_KAIRO_DESCRIPTION, { kairodescriptions: null })
 
           this._vm.$notify.success({
             title: 'Farmacia',

@@ -131,7 +131,7 @@ export default {
 
   data () {
     return {
-      searchPurchases: '',
+      searchPurchases: ''
     }
   },
 
@@ -157,7 +157,7 @@ export default {
     openModalDeletePurchase (purchase) {
       this.replaceCurrentPurchase({ purchase })
       this.replaceShowModalDeletePurchase({ status: true })
-    },
+    }
   }
 }
 </script>

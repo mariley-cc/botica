@@ -5,46 +5,46 @@ const HOST = baseUrlAPI
 
 export default {
 
-    post (payload = {}) {
-        const data = payload.data || {}
-    
-        return new Promise((resolve, reject) => {
-          axios({
-            url: `${HOST}/detail-sales`,
-            method: 'post',
-            data
-          })
-            .then(response => resolve(response))
-            .catch(error => reject(error))
-        })
-      },
+  post (payload = {}) {
+    const data = payload.data || {}
 
-    get (payload = {}) {
-        const params = payload.params || {}
-    
-        return new Promise((resolve, reject) => {
-          axios({
-            url: `${HOST}/detail-sales`,
-            method: 'get',
-            params
-          })
-            .then(response => resolve(response))
-            .catch(error => reject(error))
-        })
-      },
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/detail-sales`,
+        method: 'post',
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 
-      put (payload = {}) {
-        const Id = payload.Id
-        const data = payload.data || {}
-    
-        return new Promise((resolve, reject) => {
-          axios({
-            url: `${HOST}/detail-sales/${Id}`,
-            method: 'put',
-            data
-          })
-            .then(response => resolve(response))
-            .catch(error => reject(error))
-        })
-      }
+  get (payload = {}) {
+    const params = payload.params || {}
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/detail-sales`,
+        method: 'get',
+        params
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+
+  put (payload = {}) {
+    const Id = payload.Id
+    const data = payload.data || {}
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/detail-sales/${Id}`,
+        method: 'put',
+        data
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  }
 }
