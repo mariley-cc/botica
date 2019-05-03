@@ -80,6 +80,16 @@ export default [
     component: () => import('@/views/purchases/ListPurchases.vue')
   },
   {
+    path: '/sgc/purchases/create',
+    name: 'sgcPurchasesCreate',
+    component: () => import('@/views/purchases/CreatePurchase.vue')
+  },
+  {
+    path: '/sgc/purchases/:id',
+    name: 'sgcPurchasesEdit',
+    component: () => import('@/views/purchases/EditPurchase.vue')
+  },
+  {
     path: '/sgc/sales',
     name: 'sgcSalesList',
     component: () => import('@/views/sales/ListSales.vue')
@@ -89,4 +99,5 @@ export default [
     name: 'sgcSalesCreate',
     component: () => import('@/views/sales/CreateSale.vue')
   }
+
 ]

@@ -3,14 +3,14 @@ import purchaseAPI from '@/api/purchase'
 
 export const state = {
   purchases: [],
-  loadingPurchase: false,
+  loadingPurchases: false,
   showModalDeletePurchase: false,
   currentPurchase: null,
   loadingCurrentPurchase: false
 }
 
 export const actions = {
-  CreatePurchase ({ commit }, payload) {
+  createPurchase ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       purchaseAPI.post(payload)
         .then(response => {
@@ -49,7 +49,7 @@ export const actions = {
     commit(types.REPLACE_SHOW_MODAL_DELETE_PURCHASE, payload)
   },
 
-  updateBoxe ({ commit }, payload) {
+  updatePurchase ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       purchaseAPI.put(payload)
         .then(response => {
@@ -66,7 +66,7 @@ export const actions = {
     })
   },
 
-  deleteBoxe ({ commit }, payload) {
+  deletePurchase ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       purchaseAPI.delete(payload)
         .then(response => {
@@ -89,7 +89,7 @@ export const actions = {
     commit(types.REPLACE_PURCHASES, payload)
   },
 
-  getBoxe ({ commit }, payload) {
+  getPurchase ({ commit }, payload) {
     commit(types.REPLACE_LOADING_CURRENT_PURCHASE, { status: true })
     commit(types.REPLACE_CURRENT_PURCHASE, { purchase: null })
 
@@ -114,7 +114,7 @@ export const actions = {
 
 export const mutations = {
   [types.REPLACE_LOADING_PURCHASES] (state, { status }) {
-    state.loadingPurchase = status
+    state.loadingPurchases = status
   },
   [types.REPLACE_PURCHASES] (state, { purchases }) {
     state.purchases = purchases
@@ -126,6 +126,6 @@ export const mutations = {
     state.currentPurchase = purchase
   },
   [types.REPLACE_LOADING_CURRENT_PURCHASE] (state, { status }) {
-    state.loadingCurrentCreatePurchase = status
+    state.loadingCurrentCreatePurchase = state
   }
 }
