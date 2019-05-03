@@ -89,4 +89,9 @@ export default [
     name: 'sgcPurchasesEdit',
     component: () => import('@/views/purchases/EditPurchase.vue')
   },
+  {
+    path: '/sgc/kairos',
+    name: 'sgcKairos',
+    component: () => import('@/views/kairos/Index.vue')
+  },
 ]
