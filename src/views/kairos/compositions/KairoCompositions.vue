@@ -10,7 +10,12 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on">Agregar Nuevo</v-btn>
+          <v-btn 
+            color="primary"
+            dark
+            class="mb-2" 
+            v-on="on"
+          >Agregar Nuevo</v-btn>
         </template>
         <v-card>
           <v-card-title>
@@ -21,10 +26,10 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                  <v-text-field v-model="editedItem.name" label="Nombre"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.state" label="State"></v-text-field>
+                  <v-text-field v-model="editedItem.state" label="Estado"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -32,15 +37,15 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+            <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">Guardar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-toolbar>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="kairocompositions"
       class="elevation-1"
     >
       <template v-slot:items="props">
@@ -63,23 +68,24 @@
         </td>
       </template>
       <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+        <v-btn color="primary">Reset</v-btn>
       </template>
     </v-data-table>
   </div>
 </template>
 <script>
-  export default {
+import { mapActions, mapState } from 'vuex'
+export default {
     data: () => ({
       dialog: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          text: 'Nombre',
           align: 'left',
           sortable: false,
           value: 'name'
         },
-        { text: 'State', value: 'state' },
+        { text: 'Estado', value: 'state' },
         { text: 'Actions', value: 'name', sortable: false }
       ],
       desserts: [],
@@ -95,8 +101,12 @@
     }),
 
     computed: {
+      ...mapState({
+        kairocompositions: state => state.kairoCompositions.kairocompositions,
+        loadingKairoCompositions: state => state.kairoCompositions.loadingKairoCompositions
+      }),
       formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedIndex === -1 ? 'Nuevo Kairo-Composición' : 'Editar Kairo-Composición'
       }
     },
 
@@ -107,27 +117,13 @@
     },
 
     created () {
-      this.initialize()
+      this.getKairoCompositions()
     },
 
     methods: {
-      initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            state: 159,
-          },
-          {
-            name: 'Ice cream sandwich',
-            state: 237,
-          },
-
-          {
-            name: 'KitKat',
-            state: 518,
-          }
-        ]
-      },
+      ...mapActions({
+        getKairoCompositions: 'kairoCompositions/getKairoCompositions'
+      }),
 
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
@@ -157,5 +153,5 @@
         this.close()
       }
     }
-  }
+}
 </script>
