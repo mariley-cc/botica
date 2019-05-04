@@ -39,7 +39,7 @@
                 >
                   <v-text-field
                     v-model="editedItem.name"
-                    label="Dessert name"
+                    label="Nombre"
                   />
                 </v-flex>
                 <v-flex
@@ -49,7 +49,7 @@
                 >
                   <v-text-field
                     v-model="editedItem.state"
-                    label="State"
+                    label="Estado"
                   />
                 </v-flex>
               </v-layout>
@@ -122,12 +122,12 @@ export default {
     dialog: false,
     headers: [
       {
-        text: 'Dessert (100g serving)',
+        text: 'Nombre',
         align: 'left',
         sortable: false,
         value: 'name'
       },
-      { text: 'State', value: 'state' },
+      { text: 'Estado', value: 'state' },
       { text: 'Actions', value: 'name', sortable: false }
     ],
     desserts: [],
@@ -144,11 +144,11 @@ export default {
 
   computed: {
     ...mapState({
-        kairocompositions: state => state.kairoCompositions.kairocompositions,
-        loadingKairoCompositions: state => state.kairoCompositions.loadingKairoCompositions
+      kairocompositions: state => state.kairoCompositions.kairocompositions,
+      loadingKairoCompositions: state => state.kairoCompositions.loadingKairoCompositions
     }),
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? 'Crear Kairo Composición' : 'Editar Kairo Composición'
     }
   },
 
