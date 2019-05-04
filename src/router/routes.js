@@ -98,6 +98,10 @@ export default [
     path: '/sgc/sales/create',
     name: 'sgcSalesCreate',
     component: () => import('@/views/sales/CreateSale.vue')
+  },
+  {
+    path: '/sgc/kairos',
+    name: 'sgcKairos',
+    component: () => import('@/views/kairos/Index.vue')
   }
-
 ]

@@ -121,7 +121,7 @@ export default {
       validForm: true,
       processingForm: false,
       form: {
-        username: 'mariley@idw.com.pe',
+        username: 'Mariley@idw.com.pe',
         password: '123456'
       },
       validationErrors: {},
@@ -191,7 +191,7 @@ export default {
               if (roleType === 'admin') {
                 this.$router.push({ name: 'dashboard' })
               } else {
-                this.$router.push({ name: 'home' })
+                this.$router.push({ name: 'dashboard' })
               }
             })
             .catch(error => {

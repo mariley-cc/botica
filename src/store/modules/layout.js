@@ -77,8 +77,8 @@ export const getters = {
           to: { name: 'sgcProductsList' }
         },
         {
-          name: 'Revista Kairos'
-          // to: { name: 'sgcUserGameRoom' },
+          name: 'Revista Kairos',
+          to: { name: 'sgcKairos' },
         },
         {
           name: 'Almacen'
