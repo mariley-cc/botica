@@ -33,7 +33,7 @@ export const getters = {
         {
           name: 'Ventas',
           to: { name: 'sgcSalesList' },
-          icon: 'sale'
+          icon: 'add_shopping_cart'
         },
         {
           name: 'Perfil',

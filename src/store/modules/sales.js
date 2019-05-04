@@ -6,7 +6,8 @@ export const state = {
   loadingSales: false,
   showModalDeleteSale: false,
   currentSale: null,
-  loadingCurrentSale: false
+  loadingCurrentSale: false,
+  showModalDetailSale: false
 }
 
 export const actions = {
@@ -47,6 +48,10 @@ export const actions = {
 
   replaceShowModalDeleteSale ({ commit }, payload) {
     commit(types.REPLACE_SHOW_MODAL_DELETE_SALE, payload)
+  },
+
+  replaceShowModalDetailSale ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_DETAIL_SALE, payload)
   },
 
   updateSale ({ commit }, payload) {
@@ -120,7 +125,10 @@ export const mutations = {
     state.sales = sales
   },
   [types.REPLACE_SHOW_MODAL_DELETE_SALE] (state, { status }) {
-    state.replaceShowModalDeleteSale = status
+    state.showModalDeleteSale = status
+  },
+  [types.REPLACE_SHOW_MODAL_DETAIL_SALE] (state, { status }) {
+    state.showModalDetailSale = status
   },
   [types.REPLACE_CURRENT_SALE] (state, { sale }) {
     state.currentSale = sale

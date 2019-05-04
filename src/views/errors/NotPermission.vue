@@ -7,7 +7,7 @@
       Usted no tiene permisos suficientes para estar en esta sección
     </h2>
     <v-btn
-      :to="{ name: 'home' }"
+      :to="{ name: 'welcome' }"
       color="primary"
     >
       <v-icon
