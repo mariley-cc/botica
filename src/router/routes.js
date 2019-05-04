@@ -90,8 +90,18 @@ export default [
     component: () => import('@/views/purchases/EditPurchase.vue')
   },
   {
+    path: '/sgc/sales',
+    name: 'sgcSalesList',
+    component: () => import('@/views/sales/ListSales.vue')
+  },
+  {
+    path: '/sgc/sales/create',
+    name: 'sgcSalesCreate',
+    component: () => import('@/views/sales/CreateSale.vue')
+  },
+  {
     path: '/sgc/kairos',
     name: 'sgcKairos',
     component: () => import('@/views/kairos/Index.vue')
-  },
+  }
 ]

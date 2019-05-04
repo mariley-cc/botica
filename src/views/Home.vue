@@ -20,13 +20,9 @@
       >
         <v-toolbar-title>Ventas</v-toolbar-title>
       </v-toolbar>
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <p>data</p>
-        <!--  -->
-      </v-container>
+      <v-card-text>
+        <FormSale />
+      </v-card-text>
     </v-card>
     <!-- </template> -->
   </v-container>
@@ -40,7 +36,9 @@ export default {
 
   components: {
     NotPermission: () => import('@/views/errors/NotPermission'),
-    Breadcrumbs: () => import('@/components/Breadcrumbs')
+    Breadcrumbs: () => import('@/components/Breadcrumbs'),
+    FormSale: () => import('@/components/FormSale')
+
   },
 
   data: () => ({

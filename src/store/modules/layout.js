@@ -31,9 +31,9 @@ export const getters = {
           icon: 'person'
         },
         {
-          name: 'Places',
-          // to: { name: 'sgcPlacesList' },
-          icon: 'person'
+          name: 'Ventas',
+          to: { name: 'sgcSalesList' },
+          icon: 'add_shopping_cart'
         },
         {
           name: 'Perfil',

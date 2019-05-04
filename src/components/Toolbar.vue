@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-toolbar
+      v-if="authenticated"
       height="65"
       :clipped-left="primaryDrawer.clipped"
       app
