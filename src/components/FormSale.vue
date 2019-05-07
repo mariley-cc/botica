@@ -9,27 +9,15 @@
         wrap
       >
         <v-flex
+          v-if="user"
           sm6
           xs12
         >
-          <v-autocomplete
-            v-model="form.user_id"
-            :items="[]"
-            dense
-            clearable
-            small-chips
-            label="Nombre/DNI de Usuario"
-            item-text="type"
-            item-value="id"
-            :disabled="processingForm"
-            :error="!!formErrors.user_id"
-            :error-messages="formErrors.user_id"
-            append-outer-icon="add_circle"
-            @click:append-outer="{}"
-            @change="() => {
-              formErrors.user_id = undefined
-              delete formErrors.user_id
-            }"
+          <v-text-field
+            v-model="user.name"
+            label="Usuario (vendedor)"
+            readonly
+            hide-details
           />
         </v-flex>
         <v-flex
@@ -42,6 +30,7 @@
             label="Fecha actual"
             prepend-icon="event"
             readonly
+            hide-details
           />
         </v-flex>
       </v-layout>
@@ -235,6 +224,7 @@ export default {
 
   computed: {
     ...mapState({
+      user: state => state.auth.user,
       products: state => state.products.products,
       loadingProducts: state => state.products.loadingProducts
     })

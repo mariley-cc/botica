@@ -20,7 +20,7 @@
       >
         <v-toolbar-title>Ventas</v-toolbar-title>
       </v-toolbar>
-      <v-card-text>
+      <v-card-text class="pa-0">
         <FormSale />
       </v-card-text>
     </v-card>
