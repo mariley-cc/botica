@@ -6,11 +6,13 @@ export const state = {
   KairoCompositiongKairoCompositions: false,
   showModalDeleteKairoComposition: false,
   currentKairoComposition: null,
-  loadingCurrentKairoComposition: false
+  loadingCurrentKairoComposition: false,
+  showModalEditKairoComposition: false,
+  showModalCreateKairoComposition: false
 }
 
 export const actions = {
-  kairoCompositionCreate ({ commit }, payload) {
+  createKairoComposition ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       kairocompositionAPI.post(payload)
         .then(response => {
@@ -86,7 +88,7 @@ export const actions = {
   },
 
   replaceCurrentKairoComposition ({ commit }, payload) {
-    commit(types.REPLACE_KAIRO_COMPOSITIONS, payload)
+    commit(types.REPLACE_CURRENT_KAIRO_COMPOSITION, payload)
   },
 
   getKairoComposition ({ commit }, payload) {
@@ -109,6 +111,13 @@ export const actions = {
           reject(error)
         })
     })
+  },
+  replaceShowModalEditKairoComposition ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_EDIT_KAIRO_COMPOSITION, payload)
+  },
+
+  replaceShowModalCreateKairoComposition ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_CREATE_KAIRO_COMPOSITION, payload)
   }
 }
 
@@ -127,5 +136,11 @@ export const mutations = {
   },
   [types.REPLACE_LOADING_CURRENT_KAIRO_COMPOSITION] (state, { status }) {
     state.loadingCurrentKairoComposition = status
+  },
+  [types.REPLACE_SHOW_MODAL_EDIT_KAIRO_COMPOSITION] (state, { status }) {
+    state.showModalEditKairoComposition = status
+  },
+  [types.REPLACE_SHOW_MODAL_CREATE_KAIRO_COMPOSITION] (state, { status }) {
+    state.showModalCreateKairoComposition = status
   }
 }

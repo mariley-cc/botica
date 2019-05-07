@@ -6,11 +6,13 @@ export const state = {
   loadingLaboratories: false,
   showModalDeleteLaboratory: false,
   currentLaboratory: null,
-  loadingCurrentLaboratory: false
+  loadingCurrentLaboratory: false,
+  showModalEditKairoLaboratory: false,
+  showModalCreateKairoLaboratory: false
 }
 
 export const actions = {
-  laboratoryCreate ({ commit }, payload) {
+  CreateKairoLaboratory ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       laboratoryAPI.post(payload)
         .then(response => {
@@ -86,7 +88,7 @@ export const actions = {
   },
 
   replaceCurrentLaboratory ({ commit }, payload) {
-    commit(types.REPLACE_LABORATORIES, payload)
+    commit(types.REPLACE_CURRENT_LABORATORY, payload)
   },
 
   getLaboratory ({ commit }, payload) {
@@ -109,6 +111,13 @@ export const actions = {
           reject(error)
         })
     })
+  },
+  replaceShowModalEditKairoLaboratory ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_EDIT_KAIRO_LABORATORY, payload)
+  },
+
+  replaceShowModalCreateKairoLaboratory ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_CREATE_KAIRO_LABORATORY, payload)
   }
 }
 
@@ -127,5 +136,11 @@ export const mutations = {
   },
   [types.REPLACE_LOADING_CURRENT_LABORATORY] (state, { status }) {
     state.loadingCurrentLaboratory = status
+  },
+  [types.REPLACE_SHOW_MODAL_EDIT_KAIRO_LABORATORY] (state, { status }) {
+    state.showModalEditKairoLaboratory = status
+  },
+  [types.REPLACE_SHOW_MODAL_CREATE_KAIRO_LABORATORY] (state, { status }) {
+    state.showModalCreateKairoLaboratory = status
   }
 }
