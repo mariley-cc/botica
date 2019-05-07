@@ -100,37 +100,36 @@ export default {
 
   computed: {
     ...mapState({
-      currentKairoLaboratory: state => state.kairoLaboratories.currentKairoLaboratory,
-      showModalEditKairoLaboratory: state => state.kairoLaboratories.showModalEditKairoLaboratory
+      currentLaboratory: state => state.KairoLaboratories.currentLaboratory,
+      showModalEditKairoLaboratory: state => state.KairoLaboratories.showModalEditKairoLaboratory
     })
   },
 
   watch: {
     showModalEditKairoLaboratory: function (newState, OldState) {
       if (!newState) return false
-      this.form.name = this.currentKairoLaboratory.name
-      this.form.state = this.currentKairoLaboratory.state
+      this.form.name = this.currentLaboratory.name
+      this.form.state = this.currentLaboratory.state
     }
   },
 
   methods: {
     ...mapActions({
-      replaceShowModalEditKairoLaboratory: 'kairoLaboratories/replaceShowModalEditKairoLaboratory',
-      updateKairoLaboratory: 'kairoLaboratories/updateKairoLaboratory',
-      getKairoLaboratories: 'kairoLaboratories/getKairoLaboratories'
+      replaceShowModalEditKairoLaboratory: 'KairoLaboratories/replaceShowModalEditKairoLaboratory',
+      updateLaboratory: 'KairoLaboratories/updateLaboratory',
+      getLaboratories: 'KairoLaboratories/getLaboratories'
     }),
 
     submitUpdateKairoLaboratory () {
       if (!this.$refs.form.validate()) return false
 
-      const kairoLaboratoryId = this.currentKairoLaboratory.id
-
+      const kairoLaboratoryId = this.currentLaboratory.id
       this.processingForm = true
-      this.updateKairoLaboratory({ kairoLaboratoryId, data: this.form })
+      this.updateLaboratory({ kairoLaboratoryId, data: this.form })
         .then(response => {
           this.processingForm = false
           this.replaceShowModalEditKairoLaboratory({ status: false })
-          this.getKairoLaboratories()
+          this.getLaboratories()
         })
         .catch((error) => {
           this.processingForm = false

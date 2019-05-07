@@ -29,7 +29,7 @@
           ref="form"
           v-model="validForm"
           lazy-validation
-          @submit.prevent="submitUpdateKairoDescription"
+          @submit.prevent="submitUpdateKairoComposition"
         >
           <v-container
             fluid

@@ -101,7 +101,7 @@ export default {
 
   computed: {
     ...mapState({
-      showModalCreateKairoProduct: state => state.kairoProducts.showModalCreateKairoProduct
+      showModalCreateKairoProduct: state => state.KairoProducts.showModalCreateKairoProduct
     })
   },
 
@@ -115,9 +115,9 @@ export default {
 
   methods: {
     ...mapActions({
-      replaceShowModalCreateKairoProduct: 'kairoProducts/replaceShowModalCreateKairoProduct',
-      createKairoProduct: 'kairoProducts/createKairoProduct',
-      getKairoProducts: 'kairoProducts/getKairoProducts'
+      replaceShowModalCreateKairoProduct: 'KairoProducts/replaceShowModalCreateKairoProduct',
+      createKairoProduct: 'KairoProducts/createKairoProduct',
+      getKairoProducts: 'KairoProducts/getKairoProducts'
     }),
 
     submitCreateKairoProduct () {

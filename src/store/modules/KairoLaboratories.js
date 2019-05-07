@@ -12,7 +12,7 @@ export const state = {
 }
 
 export const actions = {
-  CreateKairoLaboratory ({ commit }, payload) {
+  createKairoLaboratory ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       laboratoryAPI.post(payload)
         .then(response => {

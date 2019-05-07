@@ -101,7 +101,7 @@ export default {
 
   computed: {
     ...mapState({
-      showModalCreateKairoLaboratory: state => state.kairoLaboratories.showModalCreateKairoLaboratory
+      showModalCreateKairoLaboratory: state => state.KairoLaboratories.showModalCreateKairoLaboratory
     })
   },
 
@@ -115,9 +115,9 @@ export default {
 
   methods: {
     ...mapActions({
-      replaceShowModalCreateKairoLaboratory: 'kairoLaboratories/replaceShowModalCreateKairoLaboratory',
-      createKairoLaboratory: 'kairoLaboratories/createKairoLaboratory',
-      getKairoLaboratories: 'kairoLaboratories/getKairoLaboratories'
+      replaceShowModalCreateKairoLaboratory: 'KairoLaboratories/replaceShowModalCreateKairoLaboratory',
+      createKairoLaboratory: 'KairoLaboratories/createKairoLaboratory',
+      getLaboratories: 'KairoLaboratories/getLaboratories'
     }),
 
     submitCreateKairoLaboratory () {
@@ -128,7 +128,7 @@ export default {
         .then(response => {
           this.processingForm = false
           this.replaceShowModalCreateKairoLaboratory({ status: false })
-          this.getKairoLaboratories()
+          this.getLaboratories()
         })
         .catch((error) => {
           this.processingForm = false
