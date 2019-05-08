@@ -69,6 +69,7 @@
             xs12
           >
             <v-autocomplete
+              v-model="productSelected"
               :items="detailProducts"
               :loading="loadingDetailProducts"
               :disabled="processingFormDetailSale"
@@ -95,7 +96,7 @@
             { text: 'P.Total', value: '', sortable:false },
             { text: 'Eliminar', value: '', sortable:false, class:['px-1'] },
           ]"
-          :items="productSelected"
+          :items="productsSelected"
           class="elevation-1"
         >
           <template
@@ -180,7 +181,7 @@
                 </v-edit-dialog>
               </td>
               <td>{{ props.item.detailPurchase.cost }}</td>
-              <td>{{ props.item.detailPurchase.cost * props.item.quantity }}</td>
+              <td>{{ (props.item.detailPurchase.cost * props.item.quantity).toFixed(2) }}</td>
               <td class="text-xs-center px-1">
                 <v-btn
                   class="ma-0"
@@ -220,7 +221,7 @@
         <v-btn
           type="submit"
           color="success"
-          :disabled="!validForm || processingForm || !productSelected.length"
+          :disabled="!validForm || processingForm || !productsSelected.length"
           :loading="processingForm"
         >
           Registrar Venta
@@ -277,7 +278,8 @@ export default {
       validForm: true,
       processingForm: false,
 
-      productSelected: [],
+      productsSelected: [],
+      productSelected: null,
 
       formDetailSale: {
         quantity: 0,
@@ -316,12 +318,12 @@ export default {
 
     totalOfSale: function () {
       let total = 0
-      this.productSelected.forEach(item => {
-        item.price = item.detailPurchase.cost * item.quantity
-        total += item.price
+      this.productsSelected.forEach(item => {
+        let subTotal = item.detailPurchase.cost * item.quantity
+        total += subTotal
       })
 
-      return total
+      return total.toFixed(2)
     }
   },
 
@@ -338,7 +340,7 @@ export default {
       replaceProducts: 'products/replaceProducts',
       getDetailPurchases: 'detailPurchases/getDetailPurchases',
       saleSave: 'sales/saleSave',
-      createDetailSale: 'detailSales/saleSave'
+      createDetailSale: 'detailSales/createDetailSale'
     }),
 
     addDetailSale () {
@@ -354,8 +356,8 @@ export default {
     },
 
     removeDetailSale (item) {
-      const index = this.productSelected.indexOf(item)
-      this.productSelected.splice(index, 1)
+      const index = this.productsSelected.indexOf(item)
+      this.productsSelected.splice(index, 1)
     },
 
     onChangeProduct (item) {
@@ -371,7 +373,7 @@ export default {
       */
 
       if (!item) return false
-      this.productSelected.push({
+      this.productsSelected.push({
         quantity: 1,
         price: item.detailPurchase.cost,
         box: 'unidades',
@@ -388,7 +390,22 @@ export default {
 
       this.saleSave({ data: this.form })
         .then(response => {
-          console.log(response)
+          const sale_id = response.data.id
+          console.log('data')
+          this.productsSelected.map(product => {
+            const data = {
+              quantity: product.quantity,
+              price: product.price,
+              box: product.box,
+              sale_id,
+              product_id: product.product_id,
+              detail_product_id: product.id
+            }
+            console.log('data', data)
+            this.createDetailSale({ data }).then(response => {
+              console.log('detail', response.data)
+            })
+          })
         })
     },
 
@@ -397,18 +414,11 @@ export default {
       this.snackColor = 'success'
       this.snackText = 'Data saved'
     },
+
     cancel () {
       this.snack = true
       this.snackColor = 'error'
       this.snackText = 'Canceled'
-    },
-    open () {
-      this.snack = true
-      this.snackColor = 'info'
-      this.snackText = 'Dialog opened'
-    },
-    close () {
-      console.log('Dialog closed')
     }
   }
 
