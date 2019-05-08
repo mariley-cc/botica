@@ -6,17 +6,19 @@ export const state = {
   loadingKairoDescriptions: false,
   showModalDeleteKairoDescription: false,
   currentKairoDescription: null,
-  loadingCurrentKairoDescription: false
+  loadingCurrentKairoDescription: false,
+  showModalEditKairoDescription: false,
+  showModalCreateKairoDescription: false
 }
 
 export const actions = {
-  kairoDescriptionCreate ({ commit }, payload) {
+  createKairoDescription ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       kairodescriptionAPI.post(payload)
         .then(response => {
           this._vm.$notify.success({
             title: 'Farmacia',
-            message: 'El boxe ha sido registrado con éxito.'
+            message: 'ha sido registrado con éxito.'
           })
           resolve(response)
         })
@@ -48,14 +50,13 @@ export const actions = {
   replaceShowModalDeleteKairoDescription ({ commit }, payload) {
     commit(types.REPLACE_SHOW_MODAL_DELETE_KAIRO_DESCRIPTION, payload)
   },
-
   updateKairoDescription ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       kairodescriptionAPI.put(payload)
         .then(response => {
           this._vm.$notify.success({
             title: 'Botica',
-            message: 'El boxe ha sido actualizado con éxito.'
+            message: 'El ha sido actualizado con éxito.'
           })
 
           resolve(response)
@@ -86,7 +87,7 @@ export const actions = {
   },
 
   replaceCurrentKairoDescription ({ commit }, payload) {
-    commit(types.REPLACE_KAIRO_DESCRIPTIONS, payload)
+    commit(types.REPLACE_CURRENT_KAIRO_DESCRIPTION, payload)
   },
 
   getKairoDescription ({ commit }, payload) {
@@ -109,6 +110,14 @@ export const actions = {
           reject(error)
         })
     })
+  },
+
+  replaceShowModalEditKairoDescription ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_EDIT_KAIRO_DESCRIPTION, payload)
+  },
+
+  replaceShowModalCreateKairoDescription ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_CREATE_KAIRO_DESCRIPTION, payload)
   }
 }
 
@@ -122,10 +131,16 @@ export const mutations = {
   [types.REPLACE_SHOW_MODAL_DELETE_KAIRO_DESCRIPTION] (state, { status }) {
     state.replaceShowModalDeleteDescriptions = status
   },
-  [types.REPLACE_CURRENT_KAIRO_DESCRIPTION] (state, { kairodescriptions }) {
-    state.currentKairoDescription = kairodescriptions
+  [types.REPLACE_CURRENT_KAIRO_DESCRIPTION] (state, { kairodescription }) {
+    state.currentKairoDescription = kairodescription
   },
   [types.REPLACE_LOADING_CURRENT_KAIRO_DESCRIPTION] (state, { status }) {
     state.loadingCurrentKairoDescription = status
+  },
+  [types.REPLACE_SHOW_MODAL_EDIT_KAIRO_DESCRIPTION] (state, { status }) {
+    state.showModalEditKairoDescription = status
+  },
+  [types.REPLACE_SHOW_MODAL_CREATE_KAIRO_DESCRIPTION] (state, { status }) {
+    state.showModalCreateKairoDescription = status
   }
 }
