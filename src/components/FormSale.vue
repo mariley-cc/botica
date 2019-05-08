@@ -134,30 +134,32 @@
                 {{ props.item.product.kairoProduct.name }}
               </td>
               <td>
-                <!-- <v-edit-dialog
-              :return-value.sync="props.item.lot_id"
-              lazy
-              @save="save"
-              @cancel="cancel"
-            > -->
-                {{ props.item.detailPurchase.lot }}
-                <!-- <template v-slot:input>
-                <v-autocomplete
-                  slot="input"
-                  v-model="props.item.lot_id"
-                  style="max-width: 120px"
-                  :items="lots"
-                  hide-no-data
-                  item-text="value"
-                  item-value="id"
-                  dense
-                  small-chips
-                  label="Tipo"
-                  persistent-hint
-                  hint="ENTER para Guardar"
-                />
-              </template>
-            </v-edit-dialog> -->
+                <v-edit-dialog
+                  :return-value.sync="props.item.lot_id"
+                  lazy
+                  @save="save"
+                  @cancel="cancel"
+                  @open="getCostProductByLots({ productId: props.item.product_id })"
+                >
+                  {{ props.item.detailPurchase.lot }}
+                  <template v-slot:input>
+                    <v-autocomplete
+                      slot="input"
+                      v-model="props.item.lot_id"
+                      style="max-width: 120px"
+                      :items="lots"
+                      :loading="true"
+                      hide-no-data
+                      item-text="value"
+                      item-value="id"
+                      dense
+                      small-chips
+                      label="Lotes"
+                      persistent-hint
+                      hint="ENTER para Guardar"
+                    />
+                  </template>
+                </v-edit-dialog>
               </td>
               <td>
                 <v-edit-dialog
@@ -313,7 +315,9 @@ export default {
     ...mapState({
       user: state => state.auth.user,
       detailProducts: state => state.detailProducts.detailProducts,
-      loadingDetailProducts: state => state.detailProducts.loadingDetailProducts
+      loadingDetailProducts: state => state.detailProducts.loadingDetailProducts,
+      costProductByLots: state => state.products.costProductByLots,
+      loadingCostProductsByLots: state => state.products.loadingCostProductsByLots
     }),
 
     totalOfSale: function () {
@@ -338,6 +342,7 @@ export default {
       replaceShowModalDeleteProduct: 'products/replaceShowModalDeleteProduct',
       replaceCurrentProduct: 'products/replaceCurrentProduct',
       replaceProducts: 'products/replaceProducts',
+      getCostProductByLots: 'products/getCostProductByLots',
       getDetailPurchases: 'detailPurchases/getDetailPurchases',
       saleSave: 'sales/saleSave',
       createDetailSale: 'detailSales/createDetailSale'
@@ -361,17 +366,6 @@ export default {
     },
 
     onChangeProduct (item) {
-      /*
-      {
-        box: 'unidades',
-        product_id: 1
-        lote_id: 0,
-        unit_price: 0,
-        quantity: 0,
-        price: '5',
-      }
-      */
-
       if (!item) return false
       this.productsSelected.push({
         quantity: 1,
