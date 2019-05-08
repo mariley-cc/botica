@@ -17,7 +17,7 @@ export const actions = {
         .then(response => {
           this._vm.$notify.success({
             title: 'Farmacia',
-            message: 'El sale ha sido registrado con éxito.'
+            message: 'La venta ha sido registrado con éxito.'
           })
           resolve(response)
         })

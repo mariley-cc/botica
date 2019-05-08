@@ -34,13 +34,7 @@ export const getters = {
           name: 'Ventas',
           to: { name: 'sgcSalesList' },
           icon: 'add_shopping_cart'
-        },
-        {
-          name: 'Perfil',
-          // to: { name: 'sgcUserGameRoom' },
-          icon: 'person'
         }
-
       )
 
       return items
@@ -78,7 +72,7 @@ export const getters = {
         },
         {
           name: 'Revista Kairos',
-          to: { name: 'sgcKairos' },
+          to: { name: 'sgcKairos' }
         },
         {
           name: 'Almacen'

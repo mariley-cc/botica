@@ -191,7 +191,7 @@ export default {
               if (roleType === 'admin') {
                 this.$router.push({ name: 'dashboard' })
               } else {
-                this.$router.push({ name: 'dashboard' })
+                this.$router.push({ name: 'home' })
               }
             })
             .catch(error => {

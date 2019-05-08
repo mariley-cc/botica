@@ -4,6 +4,8 @@ import productAPI from '@/api/product'
 export const state = {
   products: [],
   loadingProducts: false,
+  costProductByLots: [],
+  loadingCostProductsByLots: false,
   showModalDeleteProduct: false,
   currentProduct: null,
   loadingCurrentProduct: false
@@ -40,6 +42,25 @@ export const actions = {
         })
         .catch(error => {
           commit(types.REPLACE_LOADING_PRODUCTS, { status: false })
+          reject(error)
+        })
+    })
+  },
+
+  getCostProductByLots ({ commit }, payload) {
+    commit(types.REPLACE_LOADING_COST_PRODUCT_BY_LOTS, { status: true })
+
+    return new Promise((resolve, reject) => {
+      productAPI.getCostByLot(payload)
+        .then(response => {
+          const products = response.data.data
+          commit(types.REPLACE_LOADING_COST_PRODUCT_BY_LOTS, { status: false })
+          commit(types.REPLACE_COST_PRODUCTS_BY_LOTS, { products })
+
+          resolve(response)
+        })
+        .catch(error => {
+          commit(types.REPLACE_LOADING_COST_PRODUCT_BY_LOTS, { status: false })
           reject(error)
         })
     })
@@ -117,6 +138,12 @@ export const mutations = {
   },
   [types.REPLACE_PRODUCTS] (state, { products }) {
     state.products = products
+  },
+  [types.REPLACE_LOADING_COST_PRODUCT_BY_LOTS] (state, { status }) {
+    state.loadingCostProductsByLots = status
+  },
+  [types.REPLACE_COST_PRODUCTS_BY_LOTS] (state, { products }) {
+    state.costProductsByLots = products
   },
   [types.REPLACE_SHOW_MODAL_DELETE_PRODUCT] (state, { status }) {
     state.replaceShowModalDeleteProduct = status

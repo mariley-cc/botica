@@ -30,6 +30,19 @@ export default {
     })
   },
 
+  getCostByLot (payload = {}) {
+    const productId = payload.productId
+
+    return new Promise((resolve, reject) => {
+      axios({
+        url: `${HOST}/products/${productId}/cost`,
+        method: 'get'
+      })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+
   getById (payload = {}) {
     const productId = payload.productId
 
