@@ -337,7 +337,8 @@ export default {
       replaceCurrentProduct: 'products/replaceCurrentProduct',
       replaceProducts: 'products/replaceProducts',
       getDetailPurchases: 'detailPurchases/getDetailPurchases',
-      saleSave: 'sales/saleSave'
+      saleSave: 'sales/saleSave',
+      createDetailSale: 'detailSales/saleSave'
     }),
 
     addDetailSale () {
@@ -387,7 +388,7 @@ export default {
 
       this.saleSave({ data: this.form })
         .then(response => {
-
+          console.log(response)
         })
     },
 
