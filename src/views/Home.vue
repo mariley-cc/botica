@@ -3,33 +3,33 @@
     fluid
     grid-list-lg
   >
-    <!-- <NotPermission v-if="!$can('update', 'Profile')" /> -->
-    <!-- <template v-else> -->
-    <Breadcrumbs
-      :routes="[
-        { name: 'Inicio', to: { name: 'home' } },
-        { name: 'Ventas ' },
-      ]"
-    />
+    <NotPermission v-if="!$can('create', 'Sales')" />
+    <template v-else>
+      <Breadcrumbs
+        :routes="[
+          { name: 'Inicio', to: { name: 'home' } },
+          { name: 'Ventas ' },
+        ]"
+      />
 
-    <v-card>
-      <v-toolbar
-        color="info"
-        dark
-        card
-      >
-        <v-toolbar-title>Ventas</v-toolbar-title>
-      </v-toolbar>
-      <v-card-text class="pa-0">
-        <FormSale />
-      </v-card-text>
-    </v-card>
-    <!-- </template> -->
+      <v-card>
+        <v-toolbar
+          color="info"
+          dark
+          card
+        >
+          <v-toolbar-title>Ventas</v-toolbar-title>
+        </v-toolbar>
+        <v-card-text class="pa-0">
+          <FormSale />
+        </v-card-text>
+      </v-card>
+    </template>
   </v-container>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   middleware: 'auth',
@@ -50,9 +50,6 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      //  showModalLogin: state => state.auth.showModalLogin,
-    }),
     ...mapGetters({
       authenticated: 'auth/check'
     })
@@ -64,14 +61,11 @@ export default {
   },
 
   created () {
-    if (!this.$can('update', 'Profile')) return false
-    // this.getPlans()
-    // const url =
+    if (!this.$can('create', 'Sales')) return false
   },
 
   methods: {
     ...mapActions({
-      // getPlans: 'plans/getPlans'
     })
   }
 }

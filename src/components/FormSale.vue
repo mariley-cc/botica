@@ -62,64 +62,25 @@
           justify-center
         >
           <v-flex
-            md3
-            sm3
+            md6
+            sm6
             xs12
           >
             <v-autocomplete
-              v-model="formDetailSale.product_id"
-              :items="products"
-              :loading="loadingProducts"
+              :items="detailProducts"
+              :loading="loadingDetailProducts"
               :disabled="processingFormDetailSale"
-              item-text="name"
-              item-value="product_id"
+              :item-text="item => `${item.bar} ${item.kairoProduct.name}`"
               dense
+              return-object
               small-chips
+              append-outer-icon="search"
               :rules="rules.product_id"
               clearable
               box
               label="Productos"
+              @change="onChangeProduct"
             />
-          </v-flex>
-          <v-flex
-            md3
-            sm3
-            xs12
-          >
-            <v-text-field
-              v-model="formDetailSale.price"
-              disabled
-
-              box
-              label="Precio"
-            />
-          </v-flex>
-          <v-flex
-            md3
-            sm3
-            xs12
-          >
-            <v-text-field
-              v-model="formDetailSale.box"
-              :disabled="processingFormDetailSale"
-              box
-              :rules="rules.box"
-              label="Unidades"
-            />
-          </v-flex>
-          <v-flex md1>
-            <v-btn
-              :disabled="!validFormDetailSale || processingFormDetailSale"
-              :loading="processingFormDetailSale"
-              type="submit"
-              fab
-              small
-              color="success"
-            >
-              <v-icon>
-                add
-              </v-icon>
-            </v-btn>
           </v-flex>
         </v-layout>
       </v-form>
@@ -133,18 +94,18 @@
           { text: 'SubTotal', value: 'total' },
           { text: 'Acciones', value: '' },
         ]"
-        :items="salesDetail"
+        :items="productSelected"
         class="elevation-1"
       >
         <tr
           slot="items"
           slot-scope="props"
         >
-          <td>{{ props.item.invoice }}</td>
-          <td>{{ props.item.condition }}</td>
-          <td>{{ props.item.modality }}</td>
-          <td>{{ props.item.total }}</td>
-          <td>{{ props.item.total }}</td>
+          <td>{{ props.item.kairoProduct.name }}</td>
+          <td>{{ props.item.price }}</td>
+          <td>{{ props.item.quantity }}</td>
+          <td>{{ props.item.box }}</td>
+          <td>{{ props.item.price * props.item.quantity }}</td>
           <td class="text-xs-right">
             <v-btn
               class="ma-0"
@@ -194,6 +155,8 @@ export default {
       validForm: true,
       processingForm: false,
 
+      productSelected: [],
+
       formDetailSale: {
         quantity: 0,
         price: '5',
@@ -225,18 +188,18 @@ export default {
   computed: {
     ...mapState({
       user: state => state.auth.user,
-      products: state => state.products.products,
-      loadingProducts: state => state.products.loadingProducts
+      detailProducts: state => state.detailProducts.detailProducts,
+      loadingDetailProducts: state => state.detailProducts.loadingDetailProducts
     })
   },
 
   created () {
-    this.getProducts()
+    this.getDetailProducts()
   },
 
   methods: {
     ...mapActions({
-      getProducts: 'products/getProducts',
+      getDetailProducts: 'detailProducts/getDetailProducts',
       replaceShowModalDeleteProduct: 'products/replaceShowModalDeleteProduct',
       replaceCurrentProduct: 'products/replaceCurrentProduct',
       replaceProducts: 'products/replaceProducts'
@@ -255,7 +218,19 @@ export default {
     },
 
     removeDetailSale (item) {
-      console.log('remove')
+      const index = this.productSelected.indexOf(item)
+      this.productSelected.splice(index, 1)
+    },
+
+    onChangeProduct (item) {
+      if (!item) return false
+      this.productSelected.push({
+        quantity: 1,
+        price: '5',
+        box: 'unidades',
+
+        ...item
+      })
     }
   }
 
