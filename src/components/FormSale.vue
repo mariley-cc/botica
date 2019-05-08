@@ -53,6 +53,7 @@
               v-model="form.invoice"
               label="Nro de Factura"
               :rules="rules.invoice"
+              :disabled="processingForm"
             />
           </v-flex>
         </v-layout>
@@ -72,7 +73,7 @@
               v-model="productSelected"
               :items="detailProducts"
               :loading="loadingDetailProducts"
-              :disabled="processingFormDetailSale"
+              :disabled="processingForm"
               :item-text="item => `${item.product.bar} ${item.product.kairoProduct.name}`"
               dense
               return-object
@@ -106,28 +107,27 @@
             <tr>
               <td>
                 <v-edit-dialog
-                  :return-value.sync="props.item.box"
+                  :return-value="props.item.box"
                   lazy
                   @save="save"
                   @cancel="cancel"
                 >
                   {{ props.item.box }}
-                  <template v-slot:input>
-                    <v-autocomplete
-                      slot="input"
-                      v-model="props.item.box"
-                      style="max-width: 120px"
-                      :items="types"
-                      hide-no-data
-                      item-text="short_name"
-                      item-value="value"
-                      dense
-                      small-chips
-                      label="Tipo"
-                      persistent-hint
-                      hint="ENTER para Guardar"
-                    />
-                  </template>
+                  <v-autocomplete
+                    slot="input"
+                    v-model="props.item.box"
+                    style="max-width: 120px"
+                    :items="types"
+                    hide-no-data
+                    item-text="short_name"
+                    item-value="value"
+                    dense
+                    small-chips
+                    label="Tipo"
+                    persistent-hint
+                    hint="ENTER para Guardar"
+                    @change="onChangeBox(props.item)"
+                  />
                 </v-edit-dialog>
               </td>
               <td editable>
@@ -182,8 +182,8 @@
                   </template>
                 </v-edit-dialog>
               </td>
-              <td>{{ props.item.detailPurchase.cost }}</td>
-              <td>{{ (props.item.detailPurchase.cost * props.item.quantity).toFixed(2) }}</td>
+              <td>{{ props.item.price }}</td>
+              <td>{{ (props.item.price * props.item.quantity).toFixed(2) }}</td>
               <td class="text-xs-center px-1">
                 <v-btn
                   class="ma-0"
@@ -283,20 +283,7 @@ export default {
       productsSelected: [],
       productSelected: null,
 
-      formDetailSale: {
-        quantity: 0,
-        price: '5',
-        box: 'unidades',
-        sale_id: 0,
-        product_id: 1
-      },
-
-      validFormDetailSale: true,
-      processingFormDetailSale: false,
-
       formErrors: {},
-
-      salesDetail: [],
 
       rules: {
         invoice: [
@@ -323,7 +310,7 @@ export default {
     totalOfSale: function () {
       let total = 0
       this.productsSelected.forEach(item => {
-        let subTotal = item.detailPurchase.cost * item.quantity
+        let subTotal = item.price * item.quantity
         total += subTotal
       })
 
@@ -348,18 +335,6 @@ export default {
       createDetailSale: 'detailSales/createDetailSale'
     }),
 
-    addDetailSale () {
-      if (!this.$refs.formDetailSale.validate()) return false
-
-      this.salesDetail.push(this.formDetailSale)
-
-      this.formDetailSale.quantity = 1
-      this.formDetailSale.price = ''
-      this.formDetailSale.box = ''
-      this.formDetailSale.sale_id = ''
-      this.formDetailSale.product_id = ''
-    },
-
     removeDetailSale (item) {
       const index = this.productsSelected.indexOf(item)
       this.productsSelected.splice(index, 1)
@@ -375,6 +350,19 @@ export default {
 
         ...item
       })
+    },
+
+    onChangeBox (item) {
+      if (!item) return false
+
+      switch (item.box) {
+        case 'unidades':
+          item.price = item.detailPurchase.cost
+          break
+        case 'caja':
+          item.price = (item.detailPurchase.cost * item.product.grouped).toFixed(2)
+          break
+      }
     },
 
     submitCreateSale () {
@@ -404,6 +392,7 @@ export default {
     },
 
     save () {
+      console.log('save')
       this.snack = true
       this.snackColor = 'success'
       this.snackText = 'Data saved'
