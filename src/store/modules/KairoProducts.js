@@ -6,11 +6,13 @@ export const state = {
   loadingKairoProducts: false,
   showModalDeleteKairoProduct: false,
   currentKairoProduct: null,
-  loadingCurrentKairoProduct: false
+  loadingCurrentKairoProduct: false,
+  showModalCreateKairoProduct: false,
+  showModalEditKairoProduct: false
 }
 
 export const actions = {
-  kairoProductCreate ({ commit }, payload) {
+  createKairoProduct ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       kairoproductAPI.post(payload)
         .then(response => {
@@ -86,7 +88,7 @@ export const actions = {
   },
 
   replaceCurrentKairoProduct ({ commit }, payload) {
-    commit(types.REPLACE_KAIRO_PRODUCTS, payload)
+    commit(types.REPLACE_CURRENT_KAIRO_PRODUCT, payload)
   },
 
   getKairoProduct ({ commit }, payload) {
@@ -109,6 +111,13 @@ export const actions = {
           reject(error)
         })
     })
+  },
+  replaceShowModalEditKairoProduct ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_EDIT_KAIRO_PRODUCT, payload)
+  },
+
+  replaceShowModalCreateKairoProduct ({ commit }, payload) {
+    commit(types.REPLACE_SHOW_MODAL_CREATE_KAIRO_PRODUCT, payload)
   }
 }
 
@@ -127,5 +136,11 @@ export const mutations = {
   },
   [types.REPLACE_LOADING_CURRENT_KAIRO_PRODUCT] (state, { status }) {
     state.loadingCurrentKairoProduct = status
+  },
+  [types.REPLACE_SHOW_MODAL_EDIT_KAIRO_PRODUCT] (state, { status }) {
+    state.showModalEditKairoProduct = status
+  },
+  [types.REPLACE_SHOW_MODAL_CREATE_KAIRO_PRODUCT] (state, { status }) {
+    state.showModalCreateKairoProduct = status
   }
 }

@@ -31,12 +31,12 @@ export default {
   },
 
   put (payload = {}) {
-    const Id = payload.Id
+    const kairoLaboratoryId = payload.kairoLaboratoryId
     const data = payload.data || {}
 
     return new Promise((resolve, reject) => {
       axios({
-        url: `${HOST}/kairo-laboratories/${Id}`,
+        url: `${HOST}/kairo-laboratories/${kairoLaboratoryId}`,
         method: 'put',
         data
       })
