@@ -39,6 +39,7 @@
             <v-flex
               v-if="sales.length"
               sm6
+              offset-sm6
             >
               <v-text-field
                 v-model="searchSales"
@@ -54,11 +55,9 @@
               <v-data-table
                 :headers="[
                   { text: 'Factura', value: 'invoice' },
-                  { text: 'Condicion', value: 'condition' },
-                  { text: 'Modalidad', value: 'modality' },
-                  { text: 'Total', value: 'total' },
                   { text: 'Estado', value: 'state' },
-                  { text: 'Proveedor', value: 'provider.name' },
+                  { text: 'Total', value: 'total' },
+                  { text: 'Acción', value: '', align:'center' },
                 ]"
                 :items="sales"
                 :search="searchSales"
@@ -70,16 +69,12 @@
                   slot-scope="props"
                 >
                   <td>{{ props.item.invoice }}</td>
-                  <td>{{ props.item.condition }}</td>
-                  <td>{{ props.item.modality }}</td>
-                  <td>{{ props.item.total }}</td>
                   <td>{{ props.item.state }}</td>
-                  <td>{{ props.item.provider.name }}</td>
-                  <td class="text-xs-right">
+                  <td>{{ props.item.total }}</td>
+                  <td class="text-xs-center">
                     <template v-if="$can('update', 'Sales')">
                       <v-btn
                         class="ma-0"
-                        :to="{ name: 'sgcPurchasesEdit', params: { id: props.item.id } }"
                         small
                         fab
                         flat
