@@ -8,7 +8,7 @@
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'home' } },
-          { name: 'Ventas ' },
+          { name: 'Registra tu Venta ' },
         ]"
       />
 
@@ -18,7 +18,7 @@
           dark
           card
         >
-          <v-toolbar-title>Ventas</v-toolbar-title>
+          <v-toolbar-title>Nueva Venta</v-toolbar-title>
         </v-toolbar>
         <v-card-text class="pa-0">
           <FormSale />
