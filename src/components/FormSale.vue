@@ -230,7 +230,23 @@
         </v-btn>
       </div>
     </v-form>
+    <div class="text-xs-center pb-3">
+      <v-btn
+        type="submit"
+        color="success"
+        :disabled="!validForm || processingForm || !productsSelected.length"
+        @click="print"
+      >
+        Imprimir Boleta
+      </v-btn>
+    </div>
+    <pre>
+      import Printd from 'printd'
 
+      const p: Printd = new Printd()
+
+      p.print(this.$el, `.my_style { color: blue; }`)
+    </pre>
     <v-snackbar
       v-model="snack"
       :timeout="3000"
@@ -249,12 +265,10 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
 export default {
 
   data () {
     return {
-
       snack: false,
       snackColor: '',
       snackText: '',
@@ -297,7 +311,6 @@ export default {
       }
     }
   },
-
   computed: {
     ...mapState({
       user: state => state.auth.user,
@@ -351,7 +364,9 @@ export default {
         ...item
       })
     },
-
+    print () {
+      this.d.print(this.form.total)
+    },
     onChangeBox (item) {
       if (!item) return false
 
@@ -372,14 +387,14 @@ export default {
 
       this.saleSave({ data: this.form })
         .then(response => {
-          const sale_id = response.data.id
+          const saleId = response.data.id
           console.log('data')
           this.productsSelected.map(product => {
             const data = {
               quantity: product.quantity,
               price: product.price,
               box: product.box,
-              sale_id,
+              saleId,
               product_id: product.product_id,
               detail_product_id: product.id
             }
@@ -390,7 +405,6 @@ export default {
           })
         })
     },
-
     save () {
       console.log('save')
       this.snack = true

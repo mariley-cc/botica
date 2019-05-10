@@ -26,11 +26,6 @@ export const getters = {
           icon: 'home'
         },
         {
-          name: 'Perfil',
-          // to: { name: 'sgcUserGameRoom' },
-          icon: 'person'
-        },
-        {
           name: 'Ventas',
           to: { name: 'sgcSalesList' },
           icon: 'add_shopping_cart'
