@@ -63,16 +63,16 @@
                       sm6
                       xs12
                     >
-                      <v-select
+                      <v-text-field
                         v-model="form.condition"
-                        :hint="`${form.condition.name}`"
-                        :items="form.conditions"
-                        item-text="name"
-                        item-value="name"
-                        label="Select"
-                        persistent-hint
-                        return-object
-                        single-line
+                        :disabled="processingForm"
+                        label="Condición"
+                        :error="!!formErrors.condition"
+                        :error-messages="formErrors.condition"
+                        @keyup="() => {
+                          formErrors.condition = undefined
+                          delete formErrors.condition
+                        }"
                       />
                     </v-flex>
                   </v-layout>
@@ -339,12 +339,8 @@ export default {
       formErrors: {},
       form: {
         invoice: '',
-        condition: { name: 'contado' },
-        conditions: [
-          { name: 'contado' },
-          { name: 'crédito' }
-        ],
-        modality: 'deposito',
+        condition: 'contado',
+        modality: 'efectivo',
         issue_date: '',
         expiration_date: '',
         purchase_date: '',
