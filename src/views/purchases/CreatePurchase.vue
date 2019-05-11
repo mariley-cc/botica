@@ -3,9 +3,8 @@
     fluid
     grid-list-lg
   >
-  <NotPermission v-if="!$can('create', 'Purchases')" />
-
-  <template v-else>
+    <NotPermission v-if="!$can('create', 'Purchases')" />
+    <template v-else>
       <Breadcrumbs
         :routes="[
           { name: 'Inicio', to: { name: 'home' } },
@@ -35,264 +34,263 @@
                 lazy-validation
                 @submit.prevent="submitCreatePurchase"
               >
-              <v-container
+                <v-container
                   fluid
                   grid-list-lg
-              >
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
                 >
-                  <v-text-field
-                    v-model="form.invoice"
-                    :disabled="processingForm"
-                    label="Codido de Factura"
-                    :rules="rules.invoice"
-                    :error="!!formErrors.invoice"
-                    :error-messages="formErrors.invoice"
-                    @keyup="() => {
-                      formErrors.invoice = undefined
-                      delete formErrors.invoice
-                    }"
-                  />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  
-                  <v-select
-                      v-model="form.condition"
-                      :hint="`${form.condition.name}`"
-                      :items="form.conditions"
-                      item-text="name"
-                      item-value="name"
-                      label="Select"
-                      persistent-hint
-                      return-object
-                      single-line
-                  ></v-select>
-                </v-flex>
-              </v-layout>
-              <v-layout
-                row
-                wrap
-              >
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-text-field
-                    v-model="form.modality"
-                    :disabled="processingForm"
-                    label="Modalidad de pago"
-                    :error="!!formErrors.modality"
-                    :error-messages="formErrors.modality"
-                    @keyup="() => {
-                      formErrors.modality = undefined
-                      delete formErrors.modality
-                    }"
-                  />
-                </v-flex>
-                <v-flex
-                  sm6
-                  xs12
-                >
-                  <v-menu
-                    v-model="form.targetPurchaseDate"
-                    :close-on-content-click="false"
-                    lazy
-                    offset-y
-                    full-width
-                    min-width="290px"
+                  <v-layout
+                    row
+                    wrap
                   >
-                  <v-text-field
-                    slot="activator"
-                    :value="formatDate(form.purchase_date)"
-                    :rules="rules.purchase_date"
-                    readonly
-                    box
-                    hint="Formato DD/MM/AAAA"
-                    persistent-hint
-                    label="Fecha de compra"
-                    append-icon="event"
-                  />
-                  <v-date-picker
-                    v-model="form.purchase_date"
-                    locale="es-pe"
-                    @input="form.targetPurchaseDate = false"
-                  />
-                </v-menu>
-              </v-flex>
-            </v-layout>
-            <v-layout
-              row
-              wrap
-            >
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-menu
-                v-model="form.targetExpirationDate"
-                :close-on-content-click="false"
-                lazy
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <v-text-field
-                  slot="activator"
-                  :value="formatDate(form.expiration_date)"
-                  :rules="rules.expiration_date"
-                  readonly
-                  box
-                  hint="Formato DD/MM/AAAA"
-                  persistent-hint
-                  label="Fecha de expiracion de la compra"
-                  append-icon="event"
-                />
-                <v-date-picker
-                  v-model="form.expiration_date"
-                  locale="es-pe"
-                  @input="form.targetExpirationDate = false"
-                />
-              </v-menu>
-            </v-flex>
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-menu
-                v-model="form.targetIssueDate"
-                :close-on-content-click="false"
-                lazy
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <v-text-field
-                  slot="activator"
-                  :value="formatDate(form.issue_date)"
-                  :rules="rules.issue_date"
-                  readonly
-                  box
-                  hint="Formato DD/MM/AAAA"
-                  persistent-hint
-                  label="Fecha de Asunto"
-                  append-icon="event"
-                />
-                <v-date-picker
-                  v-model="form.issue_date"
-                  locale="es-pe"
-                  @input="form.targetIssueDate = false"
-                />
-              </v-menu>
-            </v-flex>
-          </v-layout>
-          <v-layout
-            row
-            wrap
-          >
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
-                v-model="form.advance"
-                :disabled="processingForm"
-                label="advance"
-                :error="!!formErrors.advance"
-                :error-messages="formErrors.advance"
-                @keyup="() => {
-                formErrors.advance = undefined
-                delete formErrors.advance
-                }"
-              />
-            </v-flex>
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
-                v-model="form.total"
-                :disabled="processingForm"
-                label="total "
-                :error="!!formErrors.total"
-                :error-messages="formErrors.total"
-                @keyup="() => {
-                formErrors.total = undefined
-                delete formErrors.total
-                }"
-              />
-            </v-flex>
-          </v-layout>
-        <v-layout
-          row
-          wrap
-        >
-          <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
-                v-model="form.state"
-                :disabled="processingForm"
-                label="estado de la compra"
-                :error="!!formErrors.state"
-                :error-messages="formErrors.state"
-                @keyup="() => {
-                formErrors.state = undefined
-                  delete formErrors.state
-                }"
-              />
-            </v-flex>
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-autocomplete
-                v-model="form.provider_id"
-                :items="providers"
-                :loading="loadingProviders"
-                dense
-                clearable
-                small-chips
-                label="Seleccionar Proveedor"
-                item-text="name"
-                item-value="id"
-                :disabled="processingForm"
-                :error="!!formErrors.provider_id"
-                :error-messages="formErrors.provider_id"
-                @change="() => {
-                formErrors.provider_id = undefined
-                delete formErrors.provider_id
-                }"
-              />
-            </v-flex>
-          </v-layout>
-            <v-flex
-              sm6
-              xs12
-            >
-              <v-text-field
-                v-model="form.observation"
-                :disabled="processingForm"
-                label="observacion"
-                :error="!!formErrors.observation"
-                :error-messages="formErrors.observation"
-                @keyup="() => {
-                formErrors.observation = undefined
-                delete formErrors.observation
-                }"
-              />
-            </v-flex>
-          </v-container>
-            <v-divider class="mb-3" />
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.invoice"
+                        :disabled="processingForm"
+                        label="Codido de Factura"
+                        :rules="rules.invoice"
+                        :error="!!formErrors.invoice"
+                        :error-messages="formErrors.invoice"
+                        @keyup="() => {
+                          formErrors.invoice = undefined
+                          delete formErrors.invoice
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-select
+                        v-model="form.condition"
+                        :hint="`${form.condition.name}`"
+                        :items="form.conditions"
+                        item-text="name"
+                        item-value="name"
+                        label="Select"
+                        persistent-hint
+                        return-object
+                        single-line
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.modality"
+                        :disabled="processingForm"
+                        label="Modalidad de pago"
+                        :error="!!formErrors.modality"
+                        :error-messages="formErrors.modality"
+                        @keyup="() => {
+                          formErrors.modality = undefined
+                          delete formErrors.modality
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-menu
+                        v-model="form.targetPurchaseDate"
+                        :close-on-content-click="false"
+                        lazy
+                        offset-y
+                        full-width
+                        min-width="290px"
+                      >
+                        <v-text-field
+                          slot="activator"
+                          :value="formatDate(form.purchase_date)"
+                          :rules="rules.purchase_date"
+                          readonly
+                          box
+                          hint="Formato DD/MM/AAAA"
+                          persistent-hint
+                          label="Fecha de compra"
+                          append-icon="event"
+                        />
+                        <v-date-picker
+                          v-model="form.purchase_date"
+                          locale="es-pe"
+                          @input="form.targetPurchaseDate = false"
+                        />
+                      </v-menu>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-menu
+                        v-model="form.targetExpirationDate"
+                        :close-on-content-click="false"
+                        lazy
+                        offset-y
+                        full-width
+                        min-width="290px"
+                      >
+                        <v-text-field
+                          slot="activator"
+                          :value="formatDate(form.expiration_date)"
+                          :rules="rules.expiration_date"
+                          readonly
+                          box
+                          hint="Formato DD/MM/AAAA"
+                          persistent-hint
+                          label="Fecha de expiracion de la compra"
+                          append-icon="event"
+                        />
+                        <v-date-picker
+                          v-model="form.expiration_date"
+                          locale="es-pe"
+                          @input="form.targetExpirationDate = false"
+                        />
+                      </v-menu>
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-menu
+                        v-model="form.targetIssueDate"
+                        :close-on-content-click="false"
+                        lazy
+                        offset-y
+                        full-width
+                        min-width="290px"
+                      >
+                        <v-text-field
+                          slot="activator"
+                          :value="formatDate(form.issue_date)"
+                          :rules="rules.issue_date"
+                          readonly
+                          box
+                          hint="Formato DD/MM/AAAA"
+                          persistent-hint
+                          label="Fecha de Asunto"
+                          append-icon="event"
+                        />
+                        <v-date-picker
+                          v-model="form.issue_date"
+                          locale="es-pe"
+                          @input="form.targetIssueDate = false"
+                        />
+                      </v-menu>
+                    </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.advance"
+                        :disabled="processingForm"
+                        label="advance"
+                        :error="!!formErrors.advance"
+                        :error-messages="formErrors.advance"
+                        @keyup="() => {
+                          formErrors.advance = undefined
+                          delete formErrors.advance
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.total"
+                        :disabled="processingForm"
+                        label="total "
+                        :error="!!formErrors.total"
+                        :error-messages="formErrors.total"
+                        @keyup="() => {
+                          formErrors.total = undefined
+                          delete formErrors.total
+                        }"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout
+                    row
+                    wrap
+                  >
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-text-field
+                        v-model="form.state"
+                        :disabled="processingForm"
+                        label="estado de la compra"
+                        :error="!!formErrors.state"
+                        :error-messages="formErrors.state"
+                        @keyup="() => {
+                          formErrors.state = undefined
+                          delete formErrors.state
+                        }"
+                      />
+                    </v-flex>
+                    <v-flex
+                      sm6
+                      xs12
+                    >
+                      <v-autocomplete
+                        v-model="form.provider_id"
+                        :items="providers"
+                        :loading="loadingProviders"
+                        dense
+                        clearable
+                        small-chips
+                        label="Seleccionar Proveedor"
+                        item-text="name"
+                        item-value="id"
+                        :disabled="processingForm"
+                        :error="!!formErrors.provider_id"
+                        :error-messages="formErrors.provider_id"
+                        @change="() => {
+                          formErrors.provider_id = undefined
+                          delete formErrors.provider_id
+                        }"
+                      />
+                    </v-flex>
+                  </v-layout>
+                  <v-flex
+                    sm6
+                    xs12
+                  >
+                    <v-text-field
+                      v-model="form.observation"
+                      :disabled="processingForm"
+                      label="observacion"
+                      :error="!!formErrors.observation"
+                      :error-messages="formErrors.observation"
+                      @keyup="() => {
+                        formErrors.observation = undefined
+                        delete formErrors.observation
+                      }"
+                    />
+                  </v-flex>
+                </v-container>
+                <v-divider class="mb-3" />
                 <div class="text-xs-center pb-3">
                   <v-btn
                     type="submit"
@@ -312,6 +310,7 @@
         </v-flex>
       </v-layout>
     </template>
+    <DetailPurchase />
   </v-container>
 </template>
 
@@ -327,7 +326,8 @@ export default {
 
   components: {
     Breadcrumbs: () => import('@/components/Breadcrumbs'),
-    NotPermission: () => import('@/views/errors/NotPermission')
+    NotPermission: () => import('@/views/errors/NotPermission'),
+    DetailPurchase: () => import('@/views/purchases/DetailPurchase')
   },
 
   data () {
@@ -339,10 +339,10 @@ export default {
       formErrors: {},
       form: {
         invoice: '',
-        condition: {name: 'contado'},
+        condition: { name: 'contado' },
         conditions: [
-        { name: 'contado'},
-        { name: 'crédito'}
+          { name: 'contado' },
+          { name: 'crédito' }
         ],
         modality: 'deposito',
         issue_date: '',

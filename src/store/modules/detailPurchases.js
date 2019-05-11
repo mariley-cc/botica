@@ -64,7 +64,7 @@ export const mutations = {
   [types.REPLACE_LOADING_DETAIL_PURCHASES] (state, { status }) {
     state.loadingDetailPurchases = status
   },
-  [types.REPLACE_DETAIL_PURCHASES] (state, { purchase }) {
-    state.detailPurchases = purchase
+  [types.REPLACE_DETAIL_PURCHASES] (state, { detailPurchases }) {
+    state.detailPurchases = detailPurchases
   }
 }
