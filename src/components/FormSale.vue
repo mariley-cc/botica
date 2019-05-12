@@ -230,7 +230,17 @@
         </v-btn>
       </div>
     </v-form>
-    <div class="text-xs-center pb-3">
+    <div
+      id="el"
+      class="text-xs-center pb-3 "
+    >
+      <pre align="center">
+        <h2>Boleta Nª 0001</h2>
+        <h3>fecha: 11/05/2019</h3>
+        <li>Producto 1   S/. 3.40</li>
+        <li>Producto 1   S/. 3.40</li>
+        <li>Producto 1   S/. 3.40</li>
+      </pre>
       <v-btn
         type="submit"
         color="success"
@@ -240,13 +250,6 @@
         Imprimir Boleta
       </v-btn>
     </div>
-    <pre>
-      import Printd from 'printd'
-
-      const p: Printd = new Printd()
-
-      p.print(this.$el, `.my_style { color: blue; }`)
-    </pre>
     <v-snackbar
       v-model="snack"
       :timeout="3000"
@@ -265,14 +268,17 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+// https://github.com/joseluisq/printd falta importar
 export default {
 
   data () {
     return {
+      cssText: ` pre {
+        color: black;
+      }`,
       snack: false,
       snackColor: '',
       snackText: '',
-
       types: [
         { value: 'unidades', short_name: 'Unid.' },
         { value: 'caja', short_name: 'Caj.' }
@@ -330,7 +336,6 @@ export default {
       return total.toFixed(2)
     }
   },
-
   created () {
     this.getDetailProducts()
     this.form.user_id = this.user.id
@@ -365,7 +370,7 @@ export default {
       })
     },
     print () {
-      this.d.print(this.form.total)
+      this.d.print(document.getElementById('el'), [this.cssText])
     },
     onChangeBox (item) {
       if (!item) return false
@@ -417,6 +422,17 @@ export default {
       this.snackColor = 'error'
       this.snackText = 'Canceled'
     }
+  },
+  mounted () {
+    const { Printd } = window.printd
+    this.d = new Printd()
+    const { contentWindow } = this.d.getIFrame()
+    contentWindow.addEventListener(
+      'beforeprint', () => console.log('before print event!')
+    )
+    contentWindow.addEventListener(
+      'afterprint', () => console.log('after print event!')
+    )
   }
 
 }
