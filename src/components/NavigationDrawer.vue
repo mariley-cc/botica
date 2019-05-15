@@ -105,8 +105,8 @@
         </v-list-tile>
       </template>
       <v-img
-        :src="require('@/assets/farmacia.png')"
-        :lazy-src="require('@/assets/farmacia.png')"
+        :src="require('@/assets/botica.jpeg')"
+        :lazy-src="require('@/assets/botica.jpeg')"
         contain
         max-height="31"
         class="mt-5"

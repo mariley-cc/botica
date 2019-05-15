@@ -46,6 +46,10 @@ export function defineAbilitiesFor (user = {}) {
         {
           subject: 'Providers',
           actions: ['list', 'create', 'update', 'delete']
+        },
+        {
+          subject: 'Sales',
+          actions: ['list', 'create', 'update', 'delete']
         }
       ]
 

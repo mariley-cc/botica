@@ -145,7 +145,7 @@
                         dense
                         clearable
                         small-chips
-                        label="Seleccionar kairo product"
+                        label="Seleccionar kairo composicion"
                         item-text="name"
                         item-value="id"
                         :disabled="processingForm"
@@ -168,7 +168,7 @@
                         dense
                         clearable
                         small-chips
-                        label="Seleccionar kairo product"
+                        label="Seleccionar kairo descripcion"
                         item-text="name"
                         item-value="id"
                         :disabled="processingForm"

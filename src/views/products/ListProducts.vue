@@ -53,7 +53,7 @@
             <v-flex xs12>
               <v-data-table
                 :headers="[
-                  { text: 'bar', value: 'bar' },
+                  { text: 'nombre', value: 'name' },
                   { text: 'Stock', value: 'stock' },
                   { text: 'Condición', value: 'condition' },
                   { text: 'Grupo', value: 'grouped' }
@@ -67,7 +67,7 @@
                   slot="items"
                   slot-scope="props"
                 >
-                  <td>{{ props.item.bar }}</td>
+                  <td>{{ props.item.kairoProduct.name }}</td>
                   <td>{{ props.item.stock }}</td>
                   <td>{{ props.item.condition }}</td>
                   <td>{{ props.item.grouped }}</td>

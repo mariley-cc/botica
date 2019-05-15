@@ -74,7 +74,7 @@
               :items="detailProducts"
               :loading="loadingDetailProducts"
               :disabled="processingForm"
-              :item-text="item => `${item.product.bar} ${item.product.kairoProduct.name}`"
+              :item-text="item => `${item.product.kairoProduct.name}`"
               dense
               return-object
               small-chips
@@ -392,14 +392,14 @@ export default {
 
       this.saleSave({ data: this.form })
         .then(response => {
-          const saleId = response.data.id
+          const sale_id = response.data.id
           console.log('data')
           this.productsSelected.map(product => {
             const data = {
               quantity: product.quantity,
               price: product.price,
               box: product.box,
-              saleId,
+              sale_id,
               product_id: product.product_id,
               detail_product_id: product.id
             }

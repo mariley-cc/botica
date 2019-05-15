@@ -22,8 +22,8 @@
           :ripple="false"
         >
           <img
-            style="max-height:30px;"
-            :src="require('@/assets/farmacia.png')"
+            style="max-height:50px;width:250px;"
+            :src="require('@/assets/botica.jpeg')"
           >
         </v-btn>
       </v-toolbar-title>

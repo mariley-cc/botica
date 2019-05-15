@@ -109,7 +109,7 @@ export default {
     showModalCreateKairoProduct: function (newState, OldState) {
       if (!newState) return false
       this.form.name = ''
-      this.form.state = ''
+      this.form.state = 'activo'
     }
   },
 

@@ -58,8 +58,9 @@ export const getters = {
           to: { name: 'sgcPurchasesList' }
         },
         {
-          name: 'Ventas'
-          // to: { name: 'sgcUserGameRoom' },
+          name: 'Ventas',
+          to: { name: 'sgcSalesList' },
+          icon: 'add_shopping_cart'
         },
         {
           name: 'Productos',

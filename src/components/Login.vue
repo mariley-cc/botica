@@ -1,7 +1,7 @@
 <template>
   <v-app
     id="login"
-    class="green lighten-2"
+    class="yellow lighten-2"
   >
     <v-container
       fluid
@@ -22,10 +22,10 @@
               <v-card-title>
                 <div class="layout column align-center">
                   <img
-                    src="@/assets/farmacia.png"
+                    src="@/assets/botica.jpeg"
                     alt="Farmacia"
-                    width="100"
-                    height="100"
+                    width="200"
+                    height="200"
                   >
                   <h1 class="flex my-4 primary--text">
                     Farmacia

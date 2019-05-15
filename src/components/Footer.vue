@@ -47,7 +47,7 @@
             fill-height
           >
             <div>
-              <img :src="require('@/assets/Farmacia.png')">
+              <img :src="require('@/assets/botica.jpeg')">
             </div>
             <div>
               <p class="caption">
