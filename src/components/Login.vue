@@ -121,7 +121,7 @@ export default {
       validForm: true,
       processingForm: false,
       form: {
-        username: 'Mariley@idw.com.pe',
+        username: 'Admin@gmail.com',
         password: '123456'
       },
       validationErrors: {},

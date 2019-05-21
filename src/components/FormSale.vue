@@ -90,8 +90,8 @@
         <v-data-table
           :headers="[
             { text: 'Tipo', value: '', sortable:false },
-            { text: 'Descripción', value: '', sortable:false },
-            { text: 'Lote/Vencimiento', value: '', sortable:false },
+            { text: 'Producto', value: '', sortable:false },
+            { text: 'accion', value: '', sortable:false },
             { text: 'Cantidad ', value: '', sortable:false },
             { text: 'P.Unitario', value: '', sortable:false },
             { text: 'P.Total', value: '', sortable:false },
@@ -132,6 +132,9 @@
               </td>
               <td editable>
                 {{ props.item.product.kairoProduct.name }}
+              </td>
+              <td editable>
+                {{ props.item.product.kairoDescription.name }}
               </td>
               <td>
                 <v-edit-dialog
