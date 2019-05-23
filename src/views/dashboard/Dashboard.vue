@@ -64,7 +64,7 @@
                 </div>
                 <br>
                 <div class="font-weight-bold display-1">
-                  340
+                  {{ dashboard.totalProducts }}
                 </div>
               </div>
             </v-card-title>
@@ -290,10 +290,10 @@ export default {
   metaInfo () {
     return { title: 'Dashboard' }
   },
-
   computed: {
     ...mapState({
-      //  showModalLogin: state => state.auth.showModalLogin,
+      dashboard: state => state.dashboard.dashboard,
+      loadingDashboard: state => state.dashboard.loadingDashboard
     })
 
   },
@@ -304,18 +304,13 @@ export default {
 
   created () {
     if (!this.$can('list', 'Dashboard')) return false
-    // this.getPlans()
-    // const url =
+    this.getDashboard()
   },
 
   methods: {
     ...mapActions({
-      // getPlans: 'plans/getPlans'
+      getDashboard: 'dashboard/getDashboard'
     })
   }
 }
 </script>
-
-<style scoped>
-
-</style>
