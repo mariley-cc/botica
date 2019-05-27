@@ -33,7 +33,7 @@
                 </div>
                 <br>
                 <div class="font-weight-bold display-1">
-                  5
+                  {{ dashboard.totalUsers }}
                 </div>
               </div>
             </v-card-title>
@@ -98,7 +98,7 @@
                 </div>
                 <br>
                 <div class="font-weight-bold display-1">
-                  43
+                  {{ dashboard.totalPurchases }}
                 </div>
               </div>
             </v-card-title>
@@ -129,7 +129,7 @@
                 </div>
                 <br>
                 <div class="font-weight-bold display-1">
-                  34
+                  {{ dashboard.totalSales }}
                 </div>
               </div>
             </v-card-title>

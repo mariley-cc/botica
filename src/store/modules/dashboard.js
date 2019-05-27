@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 import dashboardAPI from '@/api/dashboard'
 
 export const state = {
-  dashboard: [],
+  dashboard: {},
   loadingDashboard: false
 }
 
@@ -13,8 +13,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       dashboardAPI.get(payload)
         .then(response => {
-          const dashboard = response.data.data
-
+          const dashboard = response.data
           commit(types.REPLACE_LOADING_DASHBOARD, { status: false })
           commit(types.REPLACE_DASHBOARD, { dashboard })
 

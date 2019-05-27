@@ -270,8 +270,8 @@ export default {
         name: '',
         dni: '',
         telephone: '',
-        image: 'image_path_url_image',
-        image_path: 'image_path_url_image',
+        image: 'https://gitlab.com/uploads/-/system/user/avatar/3322211/avatar.png?width=400',
+        image_path: 'https://gitlab.com/uploads/-/system/user/avatar/3322211/avatar.png?width=400',
         state: 'activo',
         type_user_id: 0,
         place_id: 0

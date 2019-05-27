@@ -323,8 +323,8 @@ export default {
       this.form.name = user.name
       this.form.dni = user.dni
       this.form.telephone = user.telephone
-      this.form.image = user.image || 'image_path_url_image'
-      this.form.image_path = user.image_path || 'image_path_url_image'
+      this.form.image = user.image || 'https://gitlab.com/uploads/-/system/user/avatar/3322211/avatar.png?width=400'
+      this.form.image_path = user.image_path || 'https://gitlab.com/uploads/-/system/user/avatar/3322211/avatar.png?width=400'
       this.form.state = user.state
       this.form.type_user_id = user.typeUser ? user.typeUser.id : ''
       this.form.place_id = user.place ? user.place.id : ''
