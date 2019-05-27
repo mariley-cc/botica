@@ -5,6 +5,7 @@ export const state = {
   dashboard: [],
   loadingDashboard: false
 }
+
 export const actions = {
   getDashboard ({ commit }, payload) {
     commit(types.REPLACE_LOADING_DASHBOARD, { status: true })
@@ -13,6 +14,7 @@ export const actions = {
       dashboardAPI.get(payload)
         .then(response => {
           const dashboard = response.data.data
+
           commit(types.REPLACE_LOADING_DASHBOARD, { status: false })
           commit(types.REPLACE_DASHBOARD, { dashboard })
 
@@ -24,9 +26,10 @@ export const actions = {
         })
     })
   }
+
 }
 
-export const mutation = {
+export const mutations = {
   [types.REPLACE_LOADING_DASHBOARD] (state, { status }) {
     state.loadingDashboard = status
   },
