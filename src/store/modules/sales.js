@@ -34,6 +34,7 @@ export const actions = {
       saleAPI.get(payload)
         .then(response => {
           const sales = response.data.data
+          console.log(sales)
           commit(types.REPLACE_LOADING_SALES, { status: false })
           commit(types.REPLACE_SALES, { sales })
 
