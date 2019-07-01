@@ -1,50 +1,23 @@
 <template>
   <div>
     <v-toolbar
-      v-if="authenticated"
       height="65"
       :clipped-left="primaryDrawer.clipped"
       app
       center
+      class="teal lighten-1 "
     >
-      <v-toolbar-side-icon
-        v-if="authenticated && primaryDrawer.type !== 'permanent'"
-        @click.stop="replacePrimaryDrawerModel"
-      />
-
       <v-spacer />
 
-      <v-toolbar-title class="scoped-toolbar-title ma-0 pa-0">
-        <v-btn
-          flat
-          depressed
-          class="transparent "
-          :ripple="false"
+      <v-toolbar-title class="scoped-toolbar-title ma-0 pa-0 ">
+        <img
+          style="max-height:45px;width:100px;"
+          :src="require('@/assets/uniq.png')"
         >
-          <img
-            style="max-height:50px;width:250px;"
-            :src="require('@/assets/botica.jpeg')"
-          >
-        </v-btn>
+        <h2>UNIVERSIDAD NACIONAL INTERCULTURAL DE QUILLABAMBA</h2>
       </v-toolbar-title>
 
       <v-spacer />
-
-      <v-toolbar-items class="scoped-toolbar-items hidden-sm-and-down">
-        <template v-if="authenticated">
-          <v-btn
-            depressed
-            class=" transparent scoped-toolbar-item"
-            active-class="scoped-btn-active"
-            :ripple="false"
-            @click="logout({ router: $router })"
-          >
-            <v-icon left>
-              power_settings_new
-            </v-icon>Cerrar sesión
-          </v-btn>
-        </template>
-      </v-toolbar-items>
     </v-toolbar>
   </div>
 </template>

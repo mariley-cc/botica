@@ -33,7 +33,7 @@ export default {
   el: '#app',
 
   metaInfo () {
-    const appName = 'Botica'
+    const appName = 'UNIQ'
 
     return {
       title: appName,

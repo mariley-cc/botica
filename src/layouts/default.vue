@@ -1,7 +1,7 @@
 <template>
   <v-app :dark="dark">
     <Toolbar />
-    <NavigationDrawer v-if="$vuetify.breakpoint.smAndDown || authenticated" />
+    <NavigationDrawer />
 
     <v-content>
       <transition
