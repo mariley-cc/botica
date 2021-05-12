@@ -13,7 +13,7 @@
     "@casl/ability": "^3.0.1",
     "@casl/vue": "^0.5.1",
     "axios": "^0.18.0",
-    "chart.js": "^2.7.3",
+    "chart.js": "^2.9.4",
     "element-ui": "^2.5.4",
     "js-cookie": "^2.2.0",
     "material-design-icons-iconfont": "^3.0.3",
